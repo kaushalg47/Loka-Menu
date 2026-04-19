@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Verdant Resort</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ============================================================
+       🌿 CUSTOMIZE YOUR RESORT HERE
+       ============================================================ */
+    :root {
+      --resort-name: "LOKAVANA";          /* Your resort name */
+      --resort-tagline: "A place to unwind"; /* Tagline under logo */
+
+      /* COLORS */
+      --sap-green:   #3b5e45;
+      --green-dark:  #2a4332;
+      --green-light: #4e7a5c;
+      --beige:       #f2ead8;
+      --beige-dark:  #e0d3b8;
+      --beige-card:  #faf6ed;
+      --black:       #1a1a18;
+      --accent:      #c8a96e;
+
+      /* FONTS */
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'Jost', sans-serif;
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--green-dark);
+      color: var(--beige);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* ============================================================
+       SCREENS
+       ============================================================ */
+    .screen {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 48px;
+      animation: fadeIn 0.35s ease;
+    }
+    .screen.active { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ============================================================
+       HEADER / LOGO BAR
+       ============================================================ */
+    .logo-bar {
+      width: 100%;
+      background: var(--green-dark);
+      border-bottom: 1px solid rgba(200,169,110,0.25);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 24px 28px;
+      gap: 6px;
+    }
+
+    .logo-icon {
+      width: 64px; height: 64px;
+      margin-bottom: 8px;
+    }
+
+    .logo-name {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 7vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--beige);
+      text-transform: uppercase;
+    }
+
+    .logo-tagline {
+      font-size: 0.72rem;
+      letter-spacing: 0.28em;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    /* ============================================================
+       HOME — 2×2 GRID BUTTONS
+       ============================================================ */
+    .home-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 40px 24px 0;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .grid-btn {
+      background: var(--beige-card);
+      border: 1.5px solid var(--beige-dark);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 36px 20px;
+      cursor: pointer;
+      transition: all 0.22s ease;
+      text-decoration: none;
+      color: var(--black);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .grid-btn:active,
+    .grid-btn:hover {
+      background: var(--sap-green);
+      border-color: var(--sap-green);
+      color: var(--beige);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(42,67,50,0.45);
+    }
+
+    .grid-btn:active .btn-icon,
+    .grid-btn:hover .btn-icon {
+      color: var(--accent);
+    }
+
+    .btn-icon {
+      font-size: 2.2rem;
+      line-height: 1;
+      transition: color 0.22s;
+      color: var(--sap-green);
+    }
+
+    .btn-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* ============================================================
+       BACK BUTTON
+       ============================================================ */
+    .back-bar {
+      width: 100%;
+      max-width: 480px;
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: var(--font-body);
+      font-weight: 400;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ============================================================
+       MENU SCREEN
+       ============================================================ */
+    .menu-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 6vw, 2.2rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--beige);
+      padding: 24px 24px 4px;
+      text-align: center;
+      width: 100%;
+      max-width: 480px;
+    }
+
+    .menu-subtitle {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      text-transform: uppercase;
+      text-align: center;
+      padding-bottom: 24px;
+    }
+
+    .divider {
+      width: 48px; height: 1px;
+      background: var(--accent);
+      margin: 0 auto 28px;
+      opacity: 0.6;
+    }
+
+    .menu-section {
+      width: 100%;
+      max-width: 480px;
+      padding: 0 24px;
+    }
+
+    .section-header {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 28px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(200,169,110,0.2);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(242,234,216,0.08);
+      gap: 16px;
+    }
+    .menu-item:last-child { border-bottom: none; }
+
+    .item-info { flex: 1; }
+
+    .item-name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--beige);
+      line-height: 1.3;
+    }
+
+    .item-desc {
+      font-size: 0.72rem;
+      color: rgba(242,234,216,0.5);
+      margin-top: 3px;
+      line-height: 1.4;
+      letter-spacing: 0.02em;
+    }
+
+    .item-price {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--accent);
+      white-space: nowrap;
+      padding-top: 2px;
+    }
+
+    /* ============================================================
+       CONTACT SCREEN
+       ============================================================ */
+    .contact-wrap {
+      width: 100%;
+      max-width: 480px;
+      padding: 8px 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 22px 24px;
+      border-radius: 14px;
+      border: 1.5px solid;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: var(--font-body);
+      transition: all 0.22s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .contact-btn.whatsapp {
+      background: rgba(37,211,102,0.08);
+      border-color: rgba(37,211,102,0.3);
+      color: #4cd97b;
+    }
+    .contact-btn.whatsapp:hover,
+    .contact-btn.whatsapp:active {
+      background: rgba(37,211,102,0.18);
+      transform: translateY(-2px);
+    }
+
+    .contact-btn.call {
+      background: rgba(200,169,110,0.08);
+      border-color: rgba(200,169,110,0.3);
+      color: var(--accent);
+    }
+    .contact-btn.call:hover,
+    .contact-btn.call:active {
+      background: rgba(200,169,110,0.18);
+      transform: translateY(-2px);
+    }
+
+    .contact-icon { font-size: 1.8rem; }
+
+    .contact-text { display: flex; flex-direction: column; gap: 2px; }
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+    .contact-value {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+    }
+
+    /* ============================================================
+       WIFI POPUP / MODAL
+       ============================================================ */
+    .overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(26,26,24,0.75);
+      backdrop-filter: blur(6px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      animation: fadeIn 0.2s ease;
+    }
+    .overlay.active { display: flex; }
+
+    .modal {
+      background: var(--green-dark);
+      border: 1px solid rgba(200,169,110,0.3);
+      border-radius: 20px;
+      padding: 40px 32px 36px;
+      width: 100%;
+      max-width: 340px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 18px;
+      font-size: 1.4rem;
+      color: rgba(242,234,216,0.4);
+      cursor: pointer;
+      background: none;
+      border: none;
+      line-height: 1;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .modal-close:hover { color: var(--beige); }
+
+    .modal-icon { font-size: 2.8rem; margin-bottom: 16px; }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      color: var(--beige);
+      margin-bottom: 28px;
+    }
+
+    .wifi-row {
+      background: rgba(242,234,216,0.06);
+      border: 1px solid rgba(242,234,216,0.1);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      text-align: left;
+    }
+
+    .wifi-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .wifi-value {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      color: var(--beige);
+      word-break: break-all;
+    }
+
+    /* ============================================================
+       FOOTER MARK
+       ============================================================ */
+    .footer-mark {
+      width: 100%;
+      text-align: center;
+      padding: 40px 24px 0;
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(242,234,216,0.2);
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     🌿 CUSTOMIZE: Edit these values to match your resort
+     ============================================================ -->
+<script>
+  const CONFIG = {
+    // Resort identity
+    resortName:    "The Verdant",
+    resortTagline: "A place to unwind",
+
+    // WiFi
+    wifiName:      "Verdant_Guest",
+    wifiPassword:  "welcome2025",
+
+    // Contact — replace with your actual numbers
+    phoneNumber:   "+919876543210",    // E.164 format
+    whatsappNumber:"919876543210",     // No + sign, with country code
+
+    // ── MAIN MENU ─────────────────────────────────────────────
+    mainMenu: [
+      {
+        section: "Starters",
+        items: [
+          { name: "Forest Mushroom Soup",    desc: "Wild mushrooms, truffle oil, sourdough crisp",  price: "₹320" },
+          { name: "Tandoori Platter",        desc: "Paneer tikka, seekh kebab, mint chutney",        price: "₹480" },
+          { name: "Avocado Toast",           desc: "Multigrain, cherry tomato, micro greens",        price: "₹290" },
+        ]
+      },
+      {
+        section: "Mains",
+        items: [
+          { name: "Dal Makhani",             desc: "Slow-cooked black lentils, butter naan",        price: "₹380" },
+          { name: "Grilled Bhetki",          desc: "Herb butter, lemon rice, seasonal greens",      price: "₹620" },
+          { name: "Garden Pasta",            desc: "Basil pesto, cherry tomato, parmesan",          price: "₹390" },
+          { name: "Chicken Chettinad",       desc: "Aromatic spices, steamed rice, raita",          price: "₹520" },
+        ]
+      },
+      {
+        section: "Desserts",
+        items: [
+          { name: "Gulab Jamun",             desc: "Warm, rose syrup, vanilla ice cream",           price: "₹180" },
+          { name: "Belgian Chocolate Mousse",desc: "Dark chocolate, hazelnut praline",              price: "₹250" },
+        ]
+      },
+      {
+        section: "Beverages",
+        items: [
+          { name: "Verdant Green Tea",       desc: "House blend, honey & lemon",                    price: "₹120" },
+          { name: "Fresh Coconut Water",     desc: "Served chilled, straight from the shell",       price: "₹90"  },
+          { name: "Mango Lassi",             desc: "Alphonso mango, chilled yogurt, cardamom",      price: "₹160" },
+        ]
+      }
+    ],
+
+    // ── DINNER MENU ───────────────────────────────────────────
+    dinnerMenu: [
+      {
+        section: "Starters",
+        items: [
+          { name: "Smoked Salmon Blini",     desc: "Cream cheese, capers, dill",                   price: "₹580" },
+          { name: "Crispy Calamari",         desc: "Saffron aioli, lemon wedge",                   price: "₹420" },
+          { name: "Bruschetta Trio",         desc: "Tomato, olive tapenade, goat cheese",           price: "₹340" },
+        ]
+      },
+      {
+        section: "Mains",
+        items: [
+          { name: "Grilled Lamb Chops",      desc: "Rosemary jus, roasted vegetables, dauphinoise",price: "₹980" },
+          { name: "Lobster Thermidor",       desc: "Gruyère, cognac cream, pilaf rice",             price: "₹1450"},
+          { name: "Paneer Shashlik",         desc: "Bell peppers, saffron rice, mint raita",        price: "₹560" },
+          { name: "Seabass en Papillote",    desc: "Fennel, lemon, capers, herb butter",            price: "₹850" },
+        ]
+      },
+      {
+        section: "Desserts",
+        items: [
+          { name: "Crème Brûlée",            desc: "Madagascan vanilla, seasonal berries",          price: "₹320" },
+          { name: "Dark Chocolate Fondant",  desc: "Salted caramel, vanilla bean ice cream",        price: "₹380" },
+          { name: "Mango Pannacotta",        desc: "Alphonso mango coulis, toasted coconut",        price: "₹280" },
+        ]
+      },
+      {
+        section: "Mocktails & Beverages",
+        items: [
+          { name: "Sunset Spritzer",         desc: "Passion fruit, hibiscus, sparkling water",      price: "₹220" },
+          { name: "Verdant Garden",          desc: "Cucumber, basil, lime, ginger ale",             price: "₹200" },
+          { name: "Still / Sparkling Water", desc: "750ml bottle",                                  price: "₹80"  },
+        ]
+      }
+    ]
+  };
+</script>
+
+<!-- ============================================================
+     HOME SCREEN
+     ============================================================ -->
+<div id="home" class="screen active">
+  <div class="logo-bar">
+    <!-- Leaf SVG logo — replace <img> tag below with your logo if you have one -->
+    <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="32" cy="28" rx="20" ry="24" fill="#3b5e45" opacity="0.3"/>
+      <path d="M32 56 C32 56 12 38 14 22 C16 8 32 6 32 6 C32 6 48 8 50 22 C52 38 32 56 32 56Z"
+            fill="#3b5e45" stroke="#c8a96e" stroke-width="1.2"/>
+      <path d="M32 14 C32 14 22 26 24 38" stroke="#c8a96e" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <path d="M32 14 C32 14 42 26 40 38" stroke="#c8a96e" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <line x1="32" y1="10" x2="32" y2="56" stroke="#c8a96e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+    </svg>
+    <div class="logo-name" id="home-resort-name"></div>
+    <div class="logo-tagline" id="home-resort-tagline"></div>
+  </div>
+
+  <div class="home-grid">
+    <button class="grid-btn" onclick="showScreen('menu')">
+      <span class="btn-icon">🍽️</span>
+      <span class="btn-label">Menu</span>
+    </button>
+    <button class="grid-btn" onclick="showScreen('dinner')">
+      <span class="btn-icon">🕯️</span>
+      <span class="btn-label">Dinner Menu</span>
+    </button>
+    <button class="grid-btn" onclick="showWifi()">
+      <span class="btn-icon">📶</span>
+      <span class="btn-label">WiFi</span>
+    </button>
+    <button class="grid-btn" onclick="showScreen('contact')">
+      <span class="btn-icon">☎️</span>
+      <span class="btn-label">Contact</span>
+    </button>
+  </div>
+
+  <div class="footer-mark" id="footer-mark"></div>
+</div>
+
+<!-- ============================================================
+     MENU SCREEN
+     ============================================================ -->
+<div id="menu" class="screen">
+  <div class="logo-bar" style="padding:20px 24px 16px;">
+    <div class="logo-name" id="menu-resort-name" style="font-size:1.3rem;"></div>
+  </div>
+  <div class="back-bar">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+  </div>
+  <div class="menu-title">Our Menu</div>
+  <div class="menu-subtitle">All Day Dining</div>
+  <div class="divider"></div>
+  <div id="main-menu-content" class="menu-section"></div>
+  <div class="footer-mark" style="margin-top:24px;" id="footer-mark2"></div>
+</div>
+
+<!-- ============================================================
+     DINNER MENU SCREEN
+     ============================================================ -->
+<div id="dinner" class="screen">
+  <div class="logo-bar" style="padding:20px 24px 16px;">
+    <div class="logo-name" id="dinner-resort-name" style="font-size:1.3rem;"></div>
+  </div>
+  <div class="back-bar">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+  </div>
+  <div class="menu-title">Dinner Menu</div>
+  <div class="menu-subtitle">Order before 6, timings: · 7 PM – 9 PM</div>
+  <div class="divider"></div>
+  <div id="dinner-menu-content" class="menu-section"></div>
+  <div class="footer-mark" style="margin-top:24px;" id="footer-mark3"></div>
+</div>
+
+<!-- ============================================================
+     CONTACT SCREEN
+     ============================================================ -->
+<div id="contact" class="screen">
+  <div class="logo-bar" style="padding:20px 24px 16px;">
+    <div class="logo-name" id="contact-resort-name" style="font-size:1.3rem;"></div>
+  </div>
+  <div class="back-bar">
+    <button class="back-btn" onclick="showScreen('home')">← Back</button>
+  </div>
+  <div class="menu-title">Contact Us</div>
+  <div class="menu-subtitle">We're here to help</div>
+  <div class="divider"></div>
+  <div class="contact-wrap">
+    <a id="whatsapp-link" class="contact-btn whatsapp" target="_blank" rel="noopener">
+      <span class="contact-icon">💬</span>
+      <div class="contact-text">
+        <span class="contact-label">Message us on</span>
+        <span class="contact-value">WhatsApp</span>
+      </div>
+    </a>
+    <a id="call-link" class="contact-btn call">
+      <span class="contact-icon">📞</span>
+      <div class="contact-text">
+        <span class="contact-label">Call us directly</span>
+        <span class="contact-value" id="call-display"></span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ============================================================
+     WIFI MODAL
+     ============================================================ -->
+<div id="wifi-overlay" class="overlay" onclick="closeWifi(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeWifiBtn()">✕</button>
+    <div class="modal-icon">📶</div>
+    <div class="modal-title">WiFi Access</div>
+    <div class="wifi-row">
+      <span class="wifi-label">Network Name</span>
+      <span class="wifi-value" id="wifi-name-display"></span>
+    </div>
+    <div class="wifi-row">
+      <span class="wifi-label">Password</span>
+      <span class="wifi-value" id="wifi-pass-display"></span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SCRIPT
+     ============================================================ -->
+<script>
+  // ── Populate from CONFIG ──────────────────────────────────────
+  function init() {
+    // Resort name in all screens
+    document.getElementById('home-resort-name').textContent    = CONFIG.resortName;
+    document.getElementById('home-resort-tagline').textContent = CONFIG.resortTagline;
+    document.getElementById('menu-resort-name').textContent    = CONFIG.resortName;
+    document.getElementById('dinner-resort-name').textContent  = CONFIG.resortName;
+    document.getElementById('contact-resort-name').textContent = CONFIG.resortName;
+    document.querySelectorAll('[id^="footer-mark"]').forEach(el =>
+      el.textContent = CONFIG.resortName + ' · All rights reserved'
+    );
+
+    // WiFi modal
+    document.getElementById('wifi-name-display').textContent = CONFIG.wifiName;
+    document.getElementById('wifi-pass-display').textContent = CONFIG.wifiPassword;
+
+    // Contact links
+    document.getElementById('call-link').href  = 'tel:' + CONFIG.phoneNumber;
+    document.getElementById('call-display').textContent = CONFIG.phoneNumber;
+    document.getElementById('whatsapp-link').href =
+      'https://wa.me/' + CONFIG.whatsappNumber;
+
+    // Build menus
+    buildMenu('main-menu-content',   CONFIG.mainMenu);
+    buildMenu('dinner-menu-content', CONFIG.dinnerMenu);
+  }
+
+  function buildMenu(containerId, sections) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    sections.forEach(sec => {
+      const h = document.createElement('div');
+      h.className = 'section-header';
+      h.textContent = sec.section;
+      container.appendChild(h);
+      sec.items.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'menu-item';
+        row.innerHTML = `
+          <div class="item-info">
+            <div class="item-name">${item.name}</div>
+            <div class="item-desc">${item.desc}</div>
+          </div>
+          <div class="item-price">${item.price}</div>`;
+        container.appendChild(row);
+      });
+    });
+  }
+
+  // ── Screen navigation ─────────────────────────────────────────
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── WiFi modal ────────────────────────────────────────────────
+  function showWifi() {
+    document.getElementById('wifi-overlay').classList.add('active');
+  }
+  function closeWifi(e) {
+    if (e.target === document.getElementById('wifi-overlay')) {
+      document.getElementById('wifi-overlay').classList.remove('active');
+    }
+  }
+  function closeWifiBtn() {
+    document.getElementById('wifi-overlay').classList.remove('active');
+  }
+
+  init();
+</script>
+</body>
+</html>
