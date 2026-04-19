@@ -1,733 +1,734 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lokavana Farmstay</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <title>Lokavana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
-    /* ============================================================
-       🌿 CUSTOMIZE YOUR RESORT HERE
-       ============================================================ */
     :root {
-      --resort-name: "LOKAVANA";          /* Your resort name */
-      --resort-tagline: "A place to unwind"; /* Tagline under logo */
-
-      /* COLORS */
-      --sap-green:   #3b5e45;
-      --green-dark:  #2a4332;
-      --green-light: #4e7a5c;
-      --beige:       #f2ead8;
-      --beige-dark:  #e0d3b8;
-      --beige-card:  #faf6ed;
-      --black:       #1a1a18;
-      --accent:      #c8a96e;
-
-      /* FONTS */
-      --font-display: 'Cormorant Garamond', serif;
-      --font-body:    'Jost', sans-serif;
+      --green:       #3b5e45;
+      --green-deep:  #2a4332;
+      --green-mid:   #4e7a5c;
+      --green-pale:  #d4e6d9;
+      --cream:       #faf6ee;
+      --cream-dark:  #f0e9d8;
+      --beige:       #e8dcc8;
+      --gold:        #b8945a;
+      --gold-lt:     #d4a96a;
+      --black:       #1c1c1a;
+      --white:       #ffffff;
+      --text-dark:   #2a2a26;
+      --text-mid:    #5a5a52;
+      --text-light:  #9a9a8a;
+      --font-d:      'Playfair Display', serif;
+      --font-b:      'Raleway', sans-serif;
     }
-
-    /* ============================================================
-       RESET & BASE
-       ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    html { scroll-behavior: smooth; }
     body {
-      font-family: var(--font-body);
-      background: var(--green-dark);
-      color: var(--beige);
+      font-family: var(--font-b);
+      background: var(--white);
+      color: var(--text-dark);
       min-height: 100vh;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Grain overlay */
-    body::before {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
-    }
+    /* ── SCREENS ── */
+    .screen { display: none; min-height: 100vh; flex-direction: column; align-items: center; }
+    .screen.active { display: flex; animation: sIn .4s cubic-bezier(.22,1,.36,1); }
+    @keyframes sIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 
-    /* ============================================================
-       SCREENS
-       ============================================================ */
-    .screen {
-      display: none;
-      min-height: 100vh;
-      flex-direction: column;
-      align-items: center;
-      padding: 0 0 48px;
-      animation: fadeIn 0.35s ease;
-    }
-    .screen.active { display: flex; }
+    /* ══════════════════════════════════════════
+       HOME
+    ══════════════════════════════════════════ */
+    #home { background: var(--white); }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ============================================================
-       HEADER / LOGO BAR
-       ============================================================ */
-    .logo-bar {
+    .hero {
       width: 100%;
-      background: var(--green-dark);
-      border-bottom: 1px solid rgba(200,169,110,0.25);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 36px 24px 28px;
-      gap: 6px;
+      padding: 56px 24px 32px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .logo-icon {
-      width: 64px; height: 64px;
-      margin-bottom: 8px;
+    /* soft radial glow behind logo */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 320px; height: 240px;
+      background: radial-gradient(ellipse at 50% 30%, rgba(78,122,92,.09) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .logo-name {
-      font-family: var(--font-display);
-      font-size: clamp(2rem, 7vw, 2.8rem);
-      font-weight: 300;
-      letter-spacing: 0.12em;
-      color: var(--beige);
+    /* watermark leaf bg */
+    .hero-leaf-bg {
+      position: absolute;
+      top: -20px; left: 50%;
+      transform: translateX(-50%);
+      width: 240px; height: 300px;
+      opacity: .04;
+      pointer-events: none;
+    }
+
+    .logo-circle {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: var(--green-deep);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 32px rgba(42,67,50,.22), 0 2px 8px rgba(42,67,50,.12);
+      position: relative; z-index: 1;
+      animation: popIn .8s cubic-bezier(.22,1,.36,1);
+    }
+    @keyframes popIn { from { opacity:0; transform:scale(.7) translateY(8px); } to { opacity:1; transform:none; } }
+
+    .resort-name {
+      font-family: var(--font-d);
+      font-size: clamp(2.2rem, 9vw, 3rem);
+      font-weight: 500;
+      letter-spacing: .14em;
+      color: var(--green-deep);
       text-transform: uppercase;
+      margin-top: 18px;
+      position: relative; z-index: 1;
+      animation: fUp .7s .1s both;
     }
-
-    .logo-tagline {
-      font-size: 0.72rem;
-      letter-spacing: 0.28em;
-      color: var(--accent);
+    .resort-tag {
+      font-size: .67rem;
+      letter-spacing: .32em;
       text-transform: uppercase;
-      font-weight: 300;
+      color: var(--gold);
+      font-weight: 600;
+      margin-top: 5px;
+      position: relative; z-index: 1;
+      animation: fUp .7s .2s both;
     }
+    @keyframes fUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
 
-    /* ============================================================
-       HOME — 2×2 GRID BUTTONS
-       ============================================================ */
+    .divider-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; padding: 18px 0 0;
+      width: 100%; max-width: 200px;
+      position: relative; z-index: 1;
+      animation: fUp .7s .25s both;
+    }
+    .divider-row .dl { flex:1; height:1px; background:var(--beige); }
+    .divider-row .dd { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:.7; }
+
+    /* ── GRID ── */
     .home-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      padding: 40px 24px 0;
-      width: 100%;
-      max-width: 480px;
+      gap: 13px;
+      padding: 28px 18px 28px;
+      width: 100%; max-width: 460px;
     }
 
-    .grid-btn {
-      background: var(--beige-card);
-      border: 1.5px solid var(--beige-dark);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 14px;
-      padding: 36px 20px;
+    .gbtn {
+      background: var(--white);
+      border: 1.5px solid var(--beige);
+      border-radius: 20px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 11px;
+      padding: 28px 14px;
       cursor: pointer;
-      transition: all 0.22s ease;
-      text-decoration: none;
-      color: var(--black);
+      transition: all .26s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 4px 20px rgba(42,67,50,.07);
       -webkit-tap-highlight-color: transparent;
+      position: relative; overflow: hidden;
     }
-
-    .grid-btn:active,
-    .grid-btn:hover {
-      background: var(--sap-green);
-      border-color: var(--sap-green);
-      color: var(--beige);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(42,67,50,0.45);
-    }
-
-    .grid-btn:active .btn-icon,
-    .grid-btn:hover .btn-icon {
-      color: var(--accent);
-    }
-
-    .btn-icon {
-      font-size: 2.2rem;
-      line-height: 1;
-      transition: color 0.22s;
-      color: var(--sap-green);
-    }
-
-    .btn-label {
-      font-size: 0.78rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    /* ============================================================
-       BACK BUTTON
-       ============================================================ */
-    .back-bar {
-      width: 100%;
-      max-width: 480px;
-      padding: 20px 24px 0;
-      display: flex;
-      align-items: center;
-    }
-
-    .back-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--accent);
-      cursor: pointer;
-      background: none;
-      border: none;
-      font-family: var(--font-body);
-      font-weight: 400;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* ============================================================
-       MENU SCREEN
-       ============================================================ */
-    .menu-title {
-      font-family: var(--font-display);
-      font-size: clamp(1.6rem, 6vw, 2.2rem);
-      font-weight: 300;
-      letter-spacing: 0.08em;
-      color: var(--beige);
-      padding: 24px 24px 4px;
-      text-align: center;
-      width: 100%;
-      max-width: 480px;
-    }
-
-    .menu-subtitle {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      color: var(--accent);
-      text-transform: uppercase;
-      text-align: center;
-      padding-bottom: 24px;
-    }
-
-    .divider {
-      width: 48px; height: 1px;
-      background: var(--accent);
-      margin: 0 auto 28px;
-      opacity: 0.6;
-    }
-
-    .menu-section {
-      width: 100%;
-      max-width: 480px;
-      padding: 0 24px;
-    }
-
-    .section-header {
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin: 28px 0 12px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .section-header::after {
+    .gbtn::before {
       content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(200,169,110,0.2);
+      position: absolute; inset: 0;
+      background: var(--green-deep);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform .3s cubic-bezier(.22,1,.36,1);
+      border-radius: 20px;
+    }
+    .gbtn:hover::before, .gbtn:active::before { transform: scaleY(1); }
+    .gbtn:hover, .gbtn:active {
+      border-color: var(--green-deep);
+      box-shadow: 0 12px 36px rgba(42,67,50,.2);
+      transform: translateY(-4px);
+    }
+    .gbtn:hover .glabel, .gbtn:active .glabel { color: var(--cream); }
+    .gbtn:hover .gicon, .gbtn:active .gicon {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.18);
+    }
+    .gbtn:hover .gicon svg, .gbtn:active .gicon svg { color: var(--gold-lt); }
+
+    .gicon {
+      width: 50px; height: 50px;
+      border-radius: 13px;
+      background: var(--green-pale);
+      border: 1px solid rgba(59,94,69,.1);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .26s;
+      position: relative; z-index: 1;
+    }
+    .gicon svg { color: var(--green-deep); transition: color .26s; }
+
+    .glabel {
+      font-size: .71rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      font-weight: 600;
+      transition: color .26s;
+      position: relative; z-index: 1;
     }
 
-    .menu-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(242,234,216,0.08);
-      gap: 16px;
-    }
-    .menu-item:last-child { border-bottom: none; }
+    .gbtn:nth-child(1) { animation: fUp .6s .3s both; }
+    .gbtn:nth-child(2) { animation: fUp .6s .38s both; }
+    .gbtn:nth-child(3) { animation: fUp .6s .46s both; }
+    .gbtn:nth-child(4) { animation: fUp .6s .54s both; }
+    .gbtn:nth-child(5) { animation: fUp .6s .62s both; }
+    .gbtn:nth-child(6) { animation: fUp .6s .70s both; }
 
-    .item-info { flex: 1; }
-
-    .item-name {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 400;
-      color: var(--beige);
-      line-height: 1.3;
+    .home-footer {
+      font-size: .59rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--text-light); padding: 8px 0 40px;
+      animation: fUp .7s .8s both;
     }
 
-    .item-desc {
-      font-size: 0.72rem;
-      color: rgba(242,234,216,0.5);
-      margin-top: 3px;
-      line-height: 1.4;
-      letter-spacing: 0.02em;
-    }
+    /* ══════════════════════════════════════════
+       INNER SCREENS
+    ══════════════════════════════════════════ */
+    .inner { background: var(--cream); }
 
-    .item-price {
-      font-family: var(--font-display);
-      font-size: 1rem;
-      color: var(--accent);
-      white-space: nowrap;
-      padding-top: 2px;
-    }
-
-    /* ============================================================
-       CONTACT SCREEN
-       ============================================================ */
-    .contact-wrap {
+    .ihead {
       width: 100%;
-      max-width: 480px;
-      padding: 8px 24px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
+      background: var(--green-deep);
+      display: flex; align-items: center;
+      padding: 18px 18px;
+      gap: 14px;
+      position: sticky; top: 0; z-index: 10;
     }
-
-    .contact-btn {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      padding: 22px 24px;
-      border-radius: 14px;
-      border: 1.5px solid;
-      cursor: pointer;
-      text-decoration: none;
-      font-family: var(--font-body);
-      transition: all 0.22s ease;
+    .bkbtn {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s; flex-shrink: 0;
       -webkit-tap-highlight-color: transparent;
     }
+    .bkbtn:hover { background: rgba(255,255,255,.2); }
+    .bkbtn svg { color: var(--cream); }
 
-    .contact-btn.whatsapp {
-      background: rgba(37,211,102,0.08);
-      border-color: rgba(37,211,102,0.3);
-      color: #4cd97b;
-    }
-    .contact-btn.whatsapp:hover,
-    .contact-btn.whatsapp:active {
-      background: rgba(37,211,102,0.18);
-      transform: translateY(-2px);
-    }
+    .ihead-title { font-family: var(--font-d); font-size: 1.18rem; font-weight: 500; color: var(--cream); letter-spacing: .06em; }
+    .ihead-sub   { font-size: .59rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-lt); margin-top: 2px; }
 
-    .contact-btn.call {
-      background: rgba(200,169,110,0.08);
-      border-color: rgba(200,169,110,0.3);
-      color: var(--accent);
-    }
-    .contact-btn.call:hover,
-    .contact-btn.call:active {
-      background: rgba(200,169,110,0.18);
-      transform: translateY(-2px);
+    .mbody {
+      width: 100%; max-width: 500px;
+      padding: 24px 20px 60px;
+      margin: 0 auto;
     }
 
-    .contact-icon { font-size: 1.8rem; }
-
-    .contact-text { display: flex; flex-direction: column; gap: 2px; }
-    .contact-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      opacity: 0.6;
+    .slabel {
+      font-size: .59rem; letter-spacing: .3em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+      margin: 28px 0 14px;
+      display: flex; align-items: center; gap: 10px;
     }
-    .contact-value {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 400;
+    .slabel::before { content:''; width:14px; height:1px; background:var(--gold); opacity:.5; }
+    .slabel::after  { content:''; flex:1; height:1px; background:rgba(184,148,90,.18); }
+
+    .mitem {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(42,67,50,.07);
+      gap: 16px;
+    }
+    .mitem:last-child { border-bottom: none; }
+    .mitem-info { flex: 1; }
+    .mitem-name  { font-family: var(--font-d); font-size: 1.02rem; font-weight: 400; color: var(--text-dark); line-height: 1.3; }
+    .mitem-desc  { font-size: .69rem; color: var(--text-mid); margin-top: 3px; line-height: 1.5; }
+    .mitem-price { font-family: var(--font-d); font-size: .98rem; color: var(--green); white-space: nowrap; padding-top: 2px; font-weight: 500; }
+
+    /* Tourist Spots */
+    .spot {
+      background: var(--white);
+      border: 1px solid var(--beige);
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin-bottom: 10px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 2px 12px rgba(42,67,50,.05);
+    }
+    .spot-ico {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .spot-ico svg { color: var(--green); }
+    .spot-name { font-family: var(--font-d); font-size: .96rem; color: var(--text-dark); }
+    .spot-type { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-light); margin-top: 2px; }
+    .spot-dist {
+      font-size: .7rem; font-weight: 600; color: var(--green);
+      background: var(--green-pale);
+      padding: 4px 10px; border-radius: 20px; white-space: nowrap; margin-left: auto;
     }
 
-    /* ============================================================
-       WIFI POPUP / MODAL
-       ============================================================ */
-    .overlay {
+    /* Activities */
+    .act-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .act-chip {
+      background: var(--white);
+      border: 1.5px solid var(--beige);
+      border-radius: 12px;
+      padding: 13px 13px;
+      display: flex; align-items: center; gap: 9px;
+      box-shadow: 0 2px 8px rgba(42,67,50,.05);
+    }
+    .act-chip svg { color: var(--green-mid); flex-shrink: 0; }
+    .act-chip span { font-size: .73rem; font-weight: 500; color: var(--text-dark); line-height: 1.3; }
+
+    /* ══════════════════════════════════════════
+       MODALS
+    ══════════════════════════════════════════ */
+    .ovl {
       display: none;
       position: fixed; inset: 0;
-      background: rgba(26,26,24,0.75);
-      backdrop-filter: blur(6px);
-      z-index: 100;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      animation: fadeIn 0.2s ease;
+      background: rgba(26,26,20,.58);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 200;
+      align-items: flex-end; justify-content: center;
     }
-    .overlay.active { display: flex; }
+    .ovl.active { display: flex; animation: ovlIn .25s ease; }
+    @keyframes ovlIn { from { opacity:0; } to { opacity:1; } }
 
-    .modal {
-      background: var(--green-dark);
-      border: 1px solid rgba(200,169,110,0.3);
-      border-radius: 20px;
-      padding: 40px 32px 36px;
-      width: 100%;
-      max-width: 340px;
-      text-align: center;
+    .sheet {
+      background: var(--white);
+      border-radius: 26px 26px 0 0;
+      width: 100%; max-width: 500px;
+      padding-bottom: env(safe-area-inset-bottom, 32px);
       position: relative;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      animation: shUp .36s cubic-bezier(.22,1,.36,1);
+      max-height: 88vh; overflow-y: auto;
     }
+    @keyframes shUp { from { transform:translateY(100%); } to { transform:none; } }
 
-    .modal-close {
-      position: absolute;
-      top: 16px; right: 18px;
-      font-size: 1.4rem;
-      color: rgba(242,234,216,0.4);
-      cursor: pointer;
-      background: none;
-      border: none;
-      line-height: 1;
+    .sh-handle { width: 38px; height: 4px; background: var(--beige); border-radius: 2px; margin: 13px auto 0; }
+
+    .sh-head {
+      padding: 22px 26px 18px;
+      border-bottom: 1px solid var(--cream-dark);
+      display: flex; align-items: flex-start; justify-content: space-between;
+    }
+    .sh-icon-box {
+      width: 46px; height: 46px;
+      border-radius: 13px;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 11px;
+    }
+    .sh-icon-box svg { color: var(--green); }
+    .sh-title { font-family: var(--font-d); font-size: 1.4rem; font-weight: 500; color: var(--text-dark); }
+    .sh-sub   { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-light); margin-top: 3px; }
+
+    .sh-close {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--cream-dark); border: none;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; margin-top: 2px;
       -webkit-tap-highlight-color: transparent;
     }
-    .modal-close:hover { color: var(--beige); }
+    .sh-close svg { color: var(--text-mid); }
 
-    .modal-icon { font-size: 2.8rem; margin-bottom: 16px; }
+    .sh-body { padding: 22px 26px 8px; }
 
-    .modal-title {
-      font-family: var(--font-display);
-      font-size: 1.6rem;
-      font-weight: 300;
-      letter-spacing: 0.06em;
-      color: var(--beige);
-      margin-bottom: 28px;
-    }
-
+    /* WiFi */
     .wifi-row {
-      background: rgba(242,234,216,0.06);
-      border: 1px solid rgba(242,234,216,0.1);
-      border-radius: 10px;
-      padding: 14px 18px;
-      margin-bottom: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      text-align: left;
+      background: var(--cream);
+      border: 1px solid var(--beige);
+      border-radius: 13px;
+      padding: 15px 18px; margin-bottom: 11px;
     }
+    .wifi-lbl { font-size: .59rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 5px; }
+    .wifi-val { font-family: var(--font-d); font-size: 1.25rem; color: var(--text-dark); word-break: break-all; }
 
-    .wifi-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--accent);
+    /* Contact */
+    .cbtn {
+      display: flex; align-items: center; gap: 16px;
+      padding: 17px 18px; border-radius: 15px; border: 1.5px solid;
+      cursor: pointer; text-decoration: none; font-family: var(--font-b);
+      transition: all .22s ease; margin-bottom: 11px;
+      -webkit-tap-highlight-color: transparent;
     }
-
-    .wifi-value {
-      font-family: var(--font-display);
-      font-size: 1.2rem;
-      color: var(--beige);
-      word-break: break-all;
+    .cbtn.wa { background: rgba(37,211,102,.06); border-color: rgba(37,211,102,.25); color: #1a8a44; }
+    .cbtn.wa:hover { background: rgba(37,211,102,.13); transform: translateY(-2px); }
+    .cbtn.wa .cbico { background: rgba(37,211,102,.11); }
+    .cbtn.wa .cbico svg { color: #1fad5c; }
+    .cbtn.ca { background: rgba(184,148,90,.06); border-color: rgba(184,148,90,.25); color: var(--gold); }
+    .cbtn.ca:hover { background: rgba(184,148,90,.13); transform: translateY(-2px); }
+    .cbtn.ca .cbico { background: rgba(184,148,90,.1); }
+    .cbtn.ca .cbico svg { color: var(--gold); }
+    .cbico {
+      width: 42px; height: 42px; border-radius: 11px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-
-    /* ============================================================
-       FOOTER MARK
-       ============================================================ */
-    .footer-mark {
-      width: 100%;
-      text-align: center;
-      padding: 40px 24px 0;
-      font-size: 0.6rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(242,234,216,0.2);
-    }
-
+    .cblbl { font-size: .61rem; letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
+    .cbval { font-family: var(--font-d); font-size: 1.08rem; }
   </style>
 </head>
 <body>
 
-<!-- ============================================================
-     🌿 CUSTOMIZE: Edit these values to match your resort
-     ============================================================ -->
+<!-- ══════════════════════════════════════════════════════════
+     🌿 CUSTOMIZE — edit only this CONFIG object
+══════════════════════════════════════════════════════════ -->
 <script>
-  const CONFIG = {
-    // Resort identity
-    resortName:    "LOKAVANA",
-    resortTagline: "A place to unwind",
+const CONFIG = {
+  resortName:    "Lokavana",
+  resortTagline: "Where the forest breathes",
 
-    // WiFi
-    wifiName:      "Verdant_Guest",
-    wifiPassword:  "welcome2025",
+  // Contact
+  phoneNumber:    "+910000000000",   // e.g. "+919876543210"
+  whatsappNumber: "910000000000",    // No + sign, e.g. "919876543210"
 
-    // Contact — replace with your actual numbers
-    phoneNumber:   "+917899616501",    // E.164 format
-    whatsappNumber:"917899616501",     // No + sign, with country code
+  // WiFi
+  wifiName:     "Lokavana_Guest",
+  wifiPassword: "forest2025",
 
-    // ── MAIN MENU ─────────────────────────────────────────────
-    mainMenu: [
-      {
-        section: "Starters",
-        items: [
-          { name: "Forest Mushroom Soup",    desc: "Wild mushrooms, truffle oil, sourdough crisp",  price: "₹320" },
-          { name: "Tandoori Platter",        desc: "Paneer tikka, seekh kebab, mint chutney",        price: "₹480" },
-          { name: "Avocado Toast",           desc: "Multigrain, cherry tomato, micro greens",        price: "₹290" },
-        ]
-      },
-      {
-        section: "Mains",
-        items: [
-          { name: "Dal Makhani",             desc: "Slow-cooked black lentils, butter naan",        price: "₹380" },
-          { name: "Grilled Bhetki",          desc: "Herb butter, lemon rice, seasonal greens",      price: "₹620" },
-          { name: "Garden Pasta",            desc: "Basil pesto, cherry tomato, parmesan",          price: "₹390" },
-          { name: "Chicken Chettinad",       desc: "Aromatic spices, steamed rice, raita",          price: "₹520" },
-        ]
-      },
-      {
-        section: "Desserts",
-        items: [
-          { name: "Gulab Jamun",             desc: "Warm, rose syrup, vanilla ice cream",           price: "₹180" },
-          { name: "Belgian Chocolate Mousse",desc: "Dark chocolate, hazelnut praline",              price: "₹250" },
-        ]
-      },
-      {
-        section: "Beverages",
-        items: [
-          { name: "Verdant Green Tea",       desc: "House blend, honey & lemon",                    price: "₹120" },
-          { name: "Fresh Coconut Water",     desc: "Served chilled, straight from the shell",       price: "₹90"  },
-          { name: "Mango Lassi",             desc: "Alphonso mango, chilled yogurt, cardamom",      price: "₹160" },
-        ]
-      }
-    ],
+  // Instagram (without @)
+  instagramHandle: "lokavana.resort",
 
-    // ── DINNER MENU ───────────────────────────────────────────
-    dinnerMenu: [
-      {
-        section: "Starters",
-        items: [
-          { name: "Smoked Salmon Blini",     desc: "Cream cheese, capers, dill",                   price: "₹580" },
-          { name: "Crispy Calamari",         desc: "Saffron aioli, lemon wedge",                   price: "₹420" },
-          { name: "Bruschetta Trio",         desc: "Tomato, olive tapenade, goat cheese",           price: "₹340" },
-        ]
-      },
-      {
-        section: "Mains",
-        items: [
-          { name: "Grilled Lamb Chops",      desc: "Rosemary jus, roasted vegetables, dauphinoise",price: "₹980" },
-          { name: "Lobster Thermidor",       desc: "Gruyère, cognac cream, pilaf rice",             price: "₹1450"},
-          { name: "Paneer Shashlik",         desc: "Bell peppers, saffron rice, mint raita",        price: "₹560" },
-          { name: "Seabass en Papillote",    desc: "Fennel, lemon, capers, herb butter",            price: "₹850" },
-        ]
-      },
-      {
-        section: "Desserts",
-        items: [
-          { name: "Crème Brûlée",            desc: "Madagascan vanilla, seasonal berries",          price: "₹320" },
-          { name: "Dark Chocolate Fondant",  desc: "Salted caramel, vanilla bean ice cream",        price: "₹380" },
-          { name: "Mango Pannacotta",        desc: "Alphonso mango coulis, toasted coconut",        price: "₹280" },
-        ]
-      },
-      {
-        section: "Mocktails & Beverages",
-        items: [
-          { name: "Sunset Spritzer",         desc: "Passion fruit, hibiscus, sparkling water",      price: "₹220" },
-          { name: "Verdant Garden",          desc: "Cucumber, basil, lime, ginger ale",             price: "₹200" },
-          { name: "Still / Sparkling Water", desc: "750ml bottle",                                  price: "₹80"  },
-        ]
-      }
-    ]
-  };
+  // Tourist Spots — type: waterfall | viewpoint | temple | forest | lake | beach | heritage
+  touristSpots: [
+    { name: "Abbey Falls",          distance: "3 km",  type: "waterfall" },
+    { name: "Raja's Seat",          distance: "7 km",  type: "viewpoint" },
+    { name: "Namdroling Monastery", distance: "12 km", type: "temple"    },
+    { name: "Iruppu Falls",         distance: "18 km", type: "waterfall" },
+    { name: "Pushpagiri Wildlife",  distance: "22 km", type: "forest"    },
+    { name: "Brahmagiri Peak",      distance: "28 km", type: "viewpoint" },
+  ],
+
+  // Activities — type: trek | birdwatch | yoga | bonfire | cycling | photography | cooking | stargazing | spa | plantation
+  activities: [
+    { name: "Nature Trails",    type: "trek"         },
+    { name: "Bird Watching",    type: "birdwatch"    },
+    { name: "Morning Yoga",     type: "yoga"         },
+    { name: "Bonfire Nights",   type: "bonfire"      },
+    { name: "Cycling",          type: "cycling"      },
+    { name: "Photography Walk", type: "photography"  },
+    { name: "Cooking Class",    type: "cooking"      },
+    { name: "Stargazing",       type: "stargazing"   },
+    { name: "Plantation Tour",  type: "plantation"   },
+    { name: "Spa & Wellness",   type: "spa"          },
+  ],
+
+  // Main Menu
+  mainMenu: [
+    { section: "Starters", items: [
+      { name: "Forest Mushroom Soup",  desc: "Wild mushrooms, truffle oil, sourdough crisp", price: "₹320" },
+      { name: "Paneer Tikka",          desc: "Tandoori spiced cottage cheese, mint chutney",  price: "₹380" },
+      { name: "Avocado Toast",         desc: "Multigrain, cherry tomato, micro greens",        price: "₹290" },
+    ]},
+    { section: "Mains", items: [
+      { name: "Dal Makhani",           desc: "Slow-cooked black lentils, butter naan",         price: "₹380" },
+      { name: "Grilled Fish",          desc: "Herb butter, lemon rice, seasonal greens",        price: "₹620" },
+      { name: "Garden Pasta",          desc: "Basil pesto, cherry tomato, parmesan",            price: "₹390" },
+      { name: "Chicken Chettinad",     desc: "Aromatic spices, steamed rice, raita",            price: "₹520" },
+    ]},
+    { section: "Desserts", items: [
+      { name: "Gulab Jamun",           desc: "Warm, rose syrup, vanilla ice cream",             price: "₹180" },
+      { name: "Chocolate Mousse",      desc: "Dark chocolate, hazelnut praline",                price: "₹250" },
+    ]},
+    { section: "Beverages", items: [
+      { name: "Green Tea",             desc: "House blend, honey & lemon",                      price: "₹120" },
+      { name: "Fresh Coconut Water",   desc: "Chilled, straight from the shell",                price: "₹90"  },
+      { name: "Mango Lassi",           desc: "Alphonso mango, yogurt, cardamom",                price: "₹160" },
+    ]},
+  ],
+
+  // Dinner Menu
+  dinnerMenu: [
+    { section: "Starters", items: [
+      { name: "Smoked Salmon Blini",   desc: "Cream cheese, capers, dill",                      price: "₹580" },
+      { name: "Crispy Calamari",       desc: "Saffron aioli, lemon wedge",                      price: "₹420" },
+      { name: "Bruschetta Trio",       desc: "Tomato, olive tapenade, goat cheese",              price: "₹340" },
+    ]},
+    { section: "Mains", items: [
+      { name: "Grilled Lamb Chops",    desc: "Rosemary jus, roasted vegetables, dauphinoise",   price: "₹980" },
+      { name: "Lobster Thermidor",     desc: "Gruyère, cognac cream, pilaf rice",               price: "₹1450"},
+      { name: "Paneer Shashlik",       desc: "Bell peppers, saffron rice, mint raita",           price: "₹560" },
+      { name: "Seabass en Papillote",  desc: "Fennel, lemon, capers, herb butter",              price: "₹850" },
+    ]},
+    { section: "Desserts", items: [
+      { name: "Crème Brûlée",          desc: "Madagascan vanilla, seasonal berries",             price: "₹320" },
+      { name: "Chocolate Fondant",     desc: "Salted caramel, vanilla bean ice cream",           price: "₹380" },
+    ]},
+    { section: "Mocktails", items: [
+      { name: "Sunset Spritzer",       desc: "Passion fruit, hibiscus, sparkling water",        price: "₹220" },
+      { name: "Verdant Garden",        desc: "Cucumber, basil, lime, ginger ale",               price: "₹200" },
+    ]},
+  ],
+};
 </script>
 
-<!-- ============================================================
-     HOME SCREEN
-     ============================================================ -->
+<!-- ════════════════ HOME ════════════════ -->
 <div id="home" class="screen active">
-  <div class="logo-bar">
-    <!-- Leaf SVG logo — replace <img> tag below with your logo if you have one -->
-    <svg class="logo-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <ellipse cx="32" cy="28" rx="20" ry="24" fill="#3b5e45" opacity="0.3"/>
-      <path d="M32 56 C32 56 12 38 14 22 C16 8 32 6 32 6 C32 6 48 8 50 22 C52 38 32 56 32 56Z"
-            fill="#3b5e45" stroke="#c8a96e" stroke-width="1.2"/>
-      <path d="M32 14 C32 14 22 26 24 38" stroke="#c8a96e" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-      <path d="M32 14 C32 14 42 26 40 38" stroke="#c8a96e" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
-      <line x1="32" y1="10" x2="32" y2="56" stroke="#c8a96e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+  <div class="hero">
+    <!-- watermark leaf -->
+    <svg class="hero-leaf-bg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 250 C100 250 20 170 25 80 C30 15 100 5 100 5 C100 5 170 15 175 80 C180 170 100 250 100 250Z" fill="#3b5e45"/>
     </svg>
-    <div class="logo-name" id="home-resort-name"></div>
-    <div class="logo-tagline" id="home-resort-tagline"></div>
-  </div>
 
-  <div class="home-grid">
-    <button class="grid-btn" onclick="showScreen('menu')">
-      <span class="btn-icon">🍽️</span>
-      <span class="btn-label">Menu</span>
-    </button>
-    <button class="grid-btn" onclick="showScreen('dinner')">
-      <span class="btn-icon">🕯️</span>
-      <span class="btn-label">Dinner Menu</span>
-    </button>
-    <button class="grid-btn" onclick="showWifi()">
-      <span class="btn-icon">📶</span>
-      <span class="btn-label">WiFi</span>
-    </button>
-    <button class="grid-btn" onclick="showScreen('contact')">
-      <span class="btn-icon">☎️</span>
-      <span class="btn-label">Contact</span>
-    </button>
-  </div>
-
-  <div class="footer-mark" id="footer-mark"></div>
-</div>
-
-<!-- ============================================================
-     MENU SCREEN
-     ============================================================ -->
-<div id="menu" class="screen">
-  <div class="logo-bar" style="padding:20px 24px 16px;">
-    <div class="logo-name" id="menu-resort-name" style="font-size:1.3rem;"></div>
-  </div>
-  <div class="back-bar">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
-  </div>
-  <div class="menu-title">Our Menu</div>
-  <div class="menu-subtitle">All Day Dining</div>
-  <div class="divider"></div>
-  <div id="main-menu-content" class="menu-section"></div>
-  <div class="footer-mark" style="margin-top:24px;" id="footer-mark2"></div>
-</div>
-
-<!-- ============================================================
-     DINNER MENU SCREEN
-     ============================================================ -->
-<div id="dinner" class="screen">
-  <div class="logo-bar" style="padding:20px 24px 16px;">
-    <div class="logo-name" id="dinner-resort-name" style="font-size:1.3rem;"></div>
-  </div>
-  <div class="back-bar">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
-  </div>
-  <div class="menu-title">Dinner Menu</div>
-  <div class="menu-subtitle">Order before 6, timings: · 7 PM – 9 PM</div>
-  <div class="divider"></div>
-  <div id="dinner-menu-content" class="menu-section"></div>
-  <div class="footer-mark" style="margin-top:24px;" id="footer-mark3"></div>
-</div>
-
-<!-- ============================================================
-     CONTACT SCREEN
-     ============================================================ -->
-<div id="contact" class="screen">
-  <div class="logo-bar" style="padding:20px 24px 16px;">
-    <div class="logo-name" id="contact-resort-name" style="font-size:1.3rem;"></div>
-  </div>
-  <div class="back-bar">
-    <button class="back-btn" onclick="showScreen('home')">← Back</button>
-  </div>
-  <div class="menu-title">Contact Us</div>
-  <div class="menu-subtitle">We're here to help</div>
-  <div class="divider"></div>
-  <div class="contact-wrap">
-    <a id="whatsapp-link" class="contact-btn whatsapp" target="_blank" rel="noopener">
-      <span class="contact-icon">💬</span>
-      <div class="contact-text">
-        <span class="contact-label">Message us on</span>
-        <span class="contact-value">WhatsApp</span>
-      </div>
-    </a>
-    <a id="call-link" class="contact-btn call">
-      <span class="contact-icon">📞</span>
-      <div class="contact-text">
-        <span class="contact-label">Call us directly</span>
-        <span class="contact-value" id="call-display"></span>
-      </div>
-    </a>
-  </div>
-</div>
-
-<!-- ============================================================
-     WIFI MODAL
-     ============================================================ -->
-<div id="wifi-overlay" class="overlay" onclick="closeWifi(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeWifiBtn()">✕</button>
-    <div class="modal-icon">📶</div>
-    <div class="modal-title">WiFi Access</div>
-    <div class="wifi-row">
-      <span class="wifi-label">Network Name</span>
-      <span class="wifi-value" id="wifi-name-display"></span>
+    <div class="logo-circle">
+      <!-- Leaf emblem SVG logo -->
+      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M25 45 C25 45 8 30 10 17 C12 7 25 5 25 5 C25 5 38 7 40 17 C42 30 25 45 25 45Z" fill="#d4e6d9" opacity=".9"/>
+        <path d="M25 45 C25 45 10 31 12 18 C14 8 25 6 25 6" fill="none" stroke="#3b5e45" stroke-width=".8" opacity=".4"/>
+        <line x1="25" y1="7" x2="25" y2="45" stroke="#3b5e45" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M25 15 C21 19 17 22 15 27" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".65"/>
+        <path d="M25 15 C29 19 33 22 35 27" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".65"/>
+        <path d="M25 24 C21 28 18 31 16 35" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
+        <path d="M25 24 C29 28 32 31 34 35" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
+        <circle cx="25" cy="45.5" r="2.2" fill="#b8945a"/>
+      </svg>
     </div>
-    <div class="wifi-row">
-      <span class="wifi-label">Password</span>
-      <span class="wifi-value" id="wifi-pass-display"></span>
+
+    <div class="resort-name" id="rname"></div>
+    <div class="resort-tag" id="rtag"></div>
+
+    <div class="divider-row">
+      <div class="dl"></div>
+      <div class="dd"></div>
+      <!-- tiny leaf -->
+      <svg width="12" height="14" viewBox="0 0 12 16" fill="none"><path d="M6 15 C6 15 1 10 1.5 5 C2 1.5 6 1 6 1 C6 1 10 1.5 10.5 5 C11 10 6 15 6 15Z" fill="#b8945a" opacity=".55"/></svg>
+      <div class="dd"></div>
+      <div class="dl"></div>
+    </div>
+  </div>
+
+  <div class="home-grid" id="home-grid"></div>
+  <div class="home-footer" id="hfoot"></div>
+</div>
+
+<!-- ════════════════ MENU ════════════════ -->
+<div id="menu" class="screen inner">
+  <div class="ihead">
+    <button class="bkbtn" onclick="showScreen('home')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div><div class="ihead-title">Our Menu</div><div class="ihead-sub">All Day Dining</div></div>
+  </div>
+  <div class="mbody" id="main-menu-body"></div>
+</div>
+
+<!-- ════════════════ DINNER ════════════════ -->
+<div id="dinner" class="screen inner">
+  <div class="ihead">
+    <button class="bkbtn" onclick="showScreen('home')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div><div class="ihead-title">Dinner Menu</div><div class="ihead-sub">Evening · 7 PM – 10:30 PM</div></div>
+  </div>
+  <div class="mbody" id="dinner-menu-body"></div>
+</div>
+
+<!-- ════════════════ EXPLORE ════════════════ -->
+<div id="explore" class="screen inner">
+  <div class="ihead">
+    <button class="bkbtn" onclick="showScreen('home')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div><div class="ihead-title">Explore Around</div><div class="ihead-sub">Tourist Spots & Activities</div></div>
+  </div>
+  <div class="mbody">
+    <div class="slabel">Nearby Attractions</div>
+    <div id="spots-list"></div>
+    <div class="slabel" style="margin-top:30px">Activities at Lokavana</div>
+    <div class="act-grid" id="act-grid"></div>
+  </div>
+</div>
+
+<!-- ════════════════ WIFI MODAL ════════════════ -->
+<div id="ovl-wifi" class="ovl" onclick="ovlClick(event,'ovl-wifi')">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-head">
+      <div>
+        <div class="sh-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="sh-title">WiFi Access</div>
+        <div class="sh-sub">Connect & stay in touch</div>
+      </div>
+      <button class="sh-close" onclick="closeOvl('ovl-wifi')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sh-body">
+      <div class="wifi-row"><div class="wifi-lbl">Network Name</div><div class="wifi-val" id="wname"></div></div>
+      <div class="wifi-row"><div class="wifi-lbl">Password</div><div class="wifi-val" id="wpass"></div></div>
     </div>
   </div>
 </div>
 
-<!-- ============================================================
-     SCRIPT
-     ============================================================ -->
+<!-- ════════════════ CONTACT MODAL ════════════════ -->
+<div id="ovl-contact" class="ovl" onclick="ovlClick(event,'ovl-contact')">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <div class="sh-head">
+      <div>
+        <div class="sh-icon-box">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="sh-title">Contact Us</div>
+        <div class="sh-sub">We're here to help</div>
+      </div>
+      <button class="sh-close" onclick="closeOvl('ovl-contact')">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="sh-body">
+      <a id="wa-link" class="cbtn wa" target="_blank" rel="noopener">
+        <div class="cbico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+        </div>
+        <div><div class="cblbl">Message us on</div><div class="cbval">WhatsApp</div></div>
+      </a>
+      <a id="call-link" class="cbtn ca">
+        <div class="cbico">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div><div class="cblbl">Call us directly</div><div class="cbval" id="cnum"></div></div>
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── Populate from CONFIG ──────────────────────────────────────
-  function init() {
-    // Resort name in all screens
-    document.getElementById('home-resort-name').textContent    = CONFIG.resortName;
-    document.getElementById('home-resort-tagline').textContent = CONFIG.resortTagline;
-    document.getElementById('menu-resort-name').textContent    = CONFIG.resortName;
-    document.getElementById('dinner-resort-name').textContent  = CONFIG.resortName;
-    document.getElementById('contact-resort-name').textContent = CONFIG.resortName;
-    document.querySelectorAll('[id^="footer-mark"]').forEach(el =>
-      el.textContent = CONFIG.resortName + ' · All rights reserved'
-    );
+/* ── SVG Icons ── */
+const I = {
+  menu:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
+  dinner:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+  wifi:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>`,
+  contact:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+  explore:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
+  instagram:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+  // spot types
+  waterfall:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v6M8 4l4-2 4 2"/><path d="M5 10c0 8 14 8 14 0"/><path d="M7 22c0-4 10-4 10 0"/><line x1="9" y1="10" x2="9" y2="22"/><line x1="15" y1="10" x2="15" y2="22"/></svg>`,
+  viewpoint:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 6l6 6 4-4 6 6 6-6"/><line x1="1" y1="18" x2="23" y2="18"/></svg>`,
+  temple:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="10" width="20" height="11"/><path d="M12 3L2 10h20z"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="7" y1="15" x2="7" y2="21"/><line x1="17" y1="15" x2="17" y2="21"/></svg>`,
+  forest:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L4 14h4v7h8v-7h4z"/></svg>`,
+  lake:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>`,
+  beach:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18"/><path d="M6 21V7l6-4 6 4v14"/><path d="M9 21v-9h6v9"/></svg>`,
+  heritage:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10"/><path d="M3 11l9-7 9 7"/><line x1="12" y1="21" x2="12" y2="15"/></svg>`,
+  // activities
+  trek:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="3" r="1.5"/><path d="M6 21l2-6-2-4h8l-2 4 2 6"/><path d="M13 9l4 3-2 4"/></svg>`,
+  birdwatch:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+  yoga:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="3.5" r="1.5"/><path d="M5 20.5l4-8 3 5 3-5 4 8"/><path d="M8.5 12.5L12 8l3.5 4.5"/></svg>`,
+  bonfire:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0C16 8 12 6 12 2z"/><path d="M8 22h8"/><line x1="12" y1="17" x2="12" y2="22"/></svg>`,
+  cycling:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="17" r="3"/><circle cx="6" cy="17" r="3"/><path d="M9 17l2-5h4l2 3"/><path d="M13 12l-4-4"/><circle cx="12" cy="7" r="1" fill="currentColor"/></svg>`,
+  photography:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+  cooking:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+  stargazing:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+  spa:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+  plantation:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="22" x2="12" y2="11"/><path d="M12 11C12 11 7 9 7 5a5 5 0 0 1 10 0c0 4-5 6-5 6z"/><path d="M12 15c0 0 4-1 4-4"/><path d="M12 19c0 0-4-1-4-4"/></svg>`,
+};
 
-    // WiFi modal
-    document.getElementById('wifi-name-display').textContent = CONFIG.wifiName;
-    document.getElementById('wifi-pass-display').textContent = CONFIG.wifiPassword;
+/* ── Navigation ── */
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
 
-    // Contact links
-    document.getElementById('call-link').href  = 'tel:' + CONFIG.phoneNumber;
-    document.getElementById('call-display').textContent = CONFIG.phoneNumber;
-    document.getElementById('whatsapp-link').href =
-      'https://wa.me/' + CONFIG.whatsappNumber;
+/* ── Modals ── */
+function openOvl(id) { document.getElementById(id).classList.add('active'); }
+function closeOvl(id) { document.getElementById(id).classList.remove('active'); }
+function ovlClick(e, id) { if (e.target.id === id) closeOvl(id); }
 
-    // Build menus
-    buildMenu('main-menu-content',   CONFIG.mainMenu);
-    buildMenu('dinner-menu-content', CONFIG.dinnerMenu);
-  }
+/* ── Build home grid ── */
+function buildGrid() {
+  const g = document.getElementById('home-grid');
+  const btns = [
+    { label:'Menu',        icon:'menu',      fn:"showScreen('menu')"        },
+    { label:'Dinner Menu', icon:'dinner',    fn:"showScreen('dinner')"      },
+    { label:'WiFi',        icon:'wifi',      fn:"openOvl('ovl-wifi')"       },
+    { label:'Contact',     icon:'contact',   fn:"openOvl('ovl-contact')"    },
+    { label:'Explore',     icon:'explore',   fn:"showScreen('explore')"     },
+    { label:'Instagram',   icon:'instagram', fn:"goInsta()"                 },
+  ];
+  g.innerHTML = btns.map(b => `
+    <button class="gbtn" onclick="${b.fn}">
+      <div class="gicon">${I[b.icon]}</div>
+      <span class="glabel">${b.label}</span>
+    </button>`).join('');
+}
 
-  function buildMenu(containerId, sections) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = '';
-    sections.forEach(sec => {
-      const h = document.createElement('div');
-      h.className = 'section-header';
-      h.textContent = sec.section;
-      container.appendChild(h);
-      sec.items.forEach(item => {
-        const row = document.createElement('div');
-        row.className = 'menu-item';
-        row.innerHTML = `
-          <div class="item-info">
-            <div class="item-name">${item.name}</div>
-            <div class="item-desc">${item.desc}</div>
-          </div>
-          <div class="item-price">${item.price}</div>`;
-        container.appendChild(row);
-      });
-    });
-  }
+/* ── Build menu ── */
+function buildMenu(id, sections) {
+  document.getElementById(id).innerHTML = sections.map(s => `
+    <div class="slabel">${s.section}</div>
+    ${s.items.map(it => `
+      <div class="mitem">
+        <div class="mitem-info">
+          <div class="mitem-name">${it.name}</div>
+          <div class="mitem-desc">${it.desc}</div>
+        </div>
+        <div class="mitem-price">${it.price}</div>
+      </div>`).join('')}
+  `).join('');
+}
 
-  // ── Screen navigation ─────────────────────────────────────────
-  function showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo(0, 0);
-  }
+/* ── Build spots ── */
+function buildSpots() {
+  document.getElementById('spots-list').innerHTML = CONFIG.touristSpots.map(s => `
+    <div class="spot">
+      <div class="spot-ico">${I[s.type] || I.explore}</div>
+      <div>
+        <div class="spot-name">${s.name}</div>
+        <div class="spot-type">${s.type}</div>
+      </div>
+      <div class="spot-dist">${s.distance}</div>
+    </div>`).join('');
+}
 
-  // ── WiFi modal ────────────────────────────────────────────────
-  function showWifi() {
-    document.getElementById('wifi-overlay').classList.add('active');
-  }
-  function closeWifi(e) {
-    if (e.target === document.getElementById('wifi-overlay')) {
-      document.getElementById('wifi-overlay').classList.remove('active');
-    }
-  }
-  function closeWifiBtn() {
-    document.getElementById('wifi-overlay').classList.remove('active');
-  }
+/* ── Build activities ── */
+function buildActs() {
+  document.getElementById('act-grid').innerHTML = CONFIG.activities.map(a => `
+    <div class="act-chip">
+      ${I[a.type] || I.explore}
+      <span>${a.name}</span>
+    </div>`).join('');
+}
 
-  init();
+/* ── Instagram ── */
+function goInsta() {
+  window.open('https://instagram.com/' + CONFIG.instagramHandle, '_blank', 'noopener');
+}
+
+/* ── Init ── */
+(function init() {
+  document.title = CONFIG.resortName;
+  document.getElementById('rname').textContent = CONFIG.resortName;
+  document.getElementById('rtag').textContent  = CONFIG.resortTagline;
+  document.getElementById('hfoot').textContent = '© ' + CONFIG.resortName + ' · All rights reserved';
+
+  document.getElementById('wname').textContent = CONFIG.wifiName;
+  document.getElementById('wpass').textContent = CONFIG.wifiPassword;
+
+  document.getElementById('wa-link').href    = 'https://wa.me/' + CONFIG.whatsappNumber;
+  document.getElementById('call-link').href  = 'tel:' + CONFIG.phoneNumber;
+  document.getElementById('cnum').textContent = CONFIG.phoneNumber;
+
+  buildGrid();
+  buildMenu('main-menu-body',   CONFIG.mainMenu);
+  buildMenu('dinner-menu-body', CONFIG.dinnerMenu);
+  buildSpots();
+  buildActs();
+})();
 </script>
 </body>
 </html>
