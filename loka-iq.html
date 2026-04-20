@@ -16,7 +16,6 @@
       --beige:       #e8dcc8;
       --gold:        #b8945a;
       --gold-lt:     #d4a96a;
-      --black:       #1c1c1a;
       --white:       #ffffff;
       --text-dark:   #2a2a26;
       --text-mid:    #5a5a52;
@@ -47,80 +46,24 @@
 
     .hero {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 56px 24px 32px;
-      position: relative;
-      overflow: hidden;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 40px 24px 28px;
+      position: relative; overflow: hidden;
+      background: var(--white);
     }
 
-    /* soft radial glow behind logo */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 320px; height: 240px;
-      background: radial-gradient(ellipse at 50% 30%, rgba(78,122,92,.09) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    /* watermark leaf bg */
-    .hero-leaf-bg {
-      position: absolute;
-      top: -20px; left: 50%;
-      transform: translateX(-50%);
-      width: 240px; height: 300px;
-      opacity: .04;
-      pointer-events: none;
-    }
-
-    .logo-circle {
-      width: 90px; height: 90px;
-      border-radius: 50%;
-      background: var(--green-deep);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 32px rgba(42,67,50,.22), 0 2px 8px rgba(42,67,50,.12);
-      position: relative; z-index: 1;
+    .logo-img {
+      width: min(72vw, 280px);
+      height: auto;
+      object-fit: contain;
+      display: block;
       animation: popIn .8s cubic-bezier(.22,1,.36,1);
-    }
-    @keyframes popIn { from { opacity:0; transform:scale(.7) translateY(8px); } to { opacity:1; transform:none; } }
-
-    .resort-name {
-      font-family: var(--font-d);
-      font-size: clamp(2.2rem, 9vw, 3rem);
-      font-weight: 500;
-      letter-spacing: .14em;
-      color: var(--green-deep);
-      text-transform: uppercase;
-      margin-top: 18px;
       position: relative; z-index: 1;
-      animation: fUp .7s .1s both;
     }
-    .resort-tag {
-      font-size: .67rem;
-      letter-spacing: .32em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 600;
-      margin-top: 5px;
-      position: relative; z-index: 1;
-      animation: fUp .7s .2s both;
-    }
+    @keyframes popIn { from { opacity:0; transform:scale(.88) translateY(10px); } to { opacity:1; transform:none; } }
     @keyframes fUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
 
-    .divider-row {
-      display: flex; align-items: center; justify-content: center;
-      gap: 10px; padding: 18px 0 0;
-      width: 100%; max-width: 200px;
-      position: relative; z-index: 1;
-      animation: fUp .7s .25s both;
-    }
-    .divider-row .dl { flex:1; height:1px; background:var(--beige); }
-    .divider-row .dd { width:4px; height:4px; border-radius:50%; background:var(--gold); opacity:.7; }
-
-    /* ── GRID ── */
+    /* ── HOME GRID ── */
     .home-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -129,14 +72,14 @@
       width: 100%; max-width: 460px;
     }
 
+    /* Standard 2-col card button */
     .gbtn {
       background: var(--white);
       border: 1.5px solid var(--beige);
       border-radius: 20px;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      gap: 11px;
-      padding: 28px 14px;
+      gap: 11px; padding: 28px 14px;
       cursor: pointer;
       transition: all .26s cubic-bezier(.22,1,.36,1);
       box-shadow: 0 4px 20px rgba(42,67,50,.07);
@@ -144,8 +87,7 @@
       position: relative; overflow: hidden;
     }
     .gbtn::before {
-      content: '';
-      position: absolute; inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: var(--green-deep);
       transform: scaleY(0); transform-origin: bottom;
       transition: transform .3s cubic-bezier(.22,1,.36,1);
@@ -159,43 +101,83 @@
     }
     .gbtn:hover .glabel, .gbtn:active .glabel { color: var(--cream); }
     .gbtn:hover .gicon, .gbtn:active .gicon {
-      background: rgba(255,255,255,.12);
-      border-color: rgba(255,255,255,.18);
+      background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.18);
     }
     .gbtn:hover .gicon svg, .gbtn:active .gicon svg { color: var(--gold-lt); }
 
     .gicon {
-      width: 50px; height: 50px;
-      border-radius: 13px;
+      width: 50px; height: 50px; border-radius: 13px;
       background: var(--green-pale);
       border: 1px solid rgba(59,94,69,.1);
       display: flex; align-items: center; justify-content: center;
-      transition: all .26s;
-      position: relative; z-index: 1;
+      transition: all .26s; position: relative; z-index: 1;
     }
     .gicon svg { color: var(--green-deep); transition: color .26s; }
-
     .glabel {
-      font-size: .71rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--text-dark);
-      font-weight: 600;
-      transition: color .26s;
-      position: relative; z-index: 1;
+      font-size: .71rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--text-dark); font-weight: 600;
+      transition: color .26s; position: relative; z-index: 1;
     }
 
-    .gbtn:nth-child(1) { animation: fUp .6s .3s both; }
+    /* ── CONTACT BUTTON — full width, always highlighted ── */
+    .gbtn-contact {
+      grid-column: 1 / -1;                    /* span both columns */
+      background: var(--green-deep);           /* always filled green */
+      border: 1.5px solid var(--green-deep);
+      border-radius: 20px;
+      display: flex; flex-direction: row;
+      align-items: center; justify-content: center;
+      gap: 14px; padding: 22px 24px;
+      cursor: pointer;
+      transition: all .26s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 8px 28px rgba(42,67,50,.25);
+      -webkit-tap-highlight-color: transparent;
+      position: relative; overflow: hidden;
+    }
+    .gbtn-contact::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--green-mid);
+      transform: scaleY(0); transform-origin: bottom;
+      transition: transform .3s cubic-bezier(.22,1,.36,1);
+      border-radius: 20px;
+    }
+    .gbtn-contact:hover::before, .gbtn-contact:active::before { transform: scaleY(1); }
+    .gbtn-contact:hover, .gbtn-contact:active {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(42,67,50,.3);
+    }
+    .gbtn-contact .gicon-contact {
+      width: 50px; height: 50px; border-radius: 13px;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .gbtn-contact .gicon-contact svg { color: var(--gold-lt); }
+    .gbtn-contact .glabel-contact {
+      font-size: .82rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--cream); font-weight: 600;
+      position: relative; z-index: 1;
+    }
+    .gbtn-contact .glabel-sub {
+      font-size: .62rem; letter-spacing: .1em;
+      color: rgba(250,246,238,.55); font-weight: 400;
+      position: relative; z-index: 1; margin-top: 1px;
+    }
+
+    /* stagger animations — contact is first child (col-span), then 6 regular btns */
+    .gbtn-contact      { animation: fUp .6s .30s both; }
     .gbtn:nth-child(2) { animation: fUp .6s .38s both; }
     .gbtn:nth-child(3) { animation: fUp .6s .46s both; }
     .gbtn:nth-child(4) { animation: fUp .6s .54s both; }
     .gbtn:nth-child(5) { animation: fUp .6s .62s both; }
     .gbtn:nth-child(6) { animation: fUp .6s .70s both; }
+    .gbtn:nth-child(7) { animation: fUp .6s .78s both; }
 
     .home-footer {
       font-size: .59rem; letter-spacing: .2em; text-transform: uppercase;
       color: var(--text-light); padding: 8px 0 40px;
-      animation: fUp .7s .8s both;
+      animation: fUp .7s .82s both;
     }
 
     /* ══════════════════════════════════════════
@@ -204,16 +186,13 @@
     .inner { background: var(--cream); }
 
     .ihead {
-      width: 100%;
-      background: var(--green-deep);
+      width: 100%; background: var(--green-deep);
       display: flex; align-items: center;
-      padding: 18px 18px;
-      gap: 14px;
+      padding: 18px 18px; gap: 14px;
       position: sticky; top: 0; z-index: 10;
     }
     .bkbtn {
-      width: 38px; height: 38px;
-      border-radius: 10px;
+      width: 38px; height: 38px; border-radius: 10px;
       background: rgba(255,255,255,.1);
       border: 1px solid rgba(255,255,255,.15);
       display: flex; align-items: center; justify-content: center;
@@ -222,20 +201,14 @@
     }
     .bkbtn:hover { background: rgba(255,255,255,.2); }
     .bkbtn svg { color: var(--cream); }
-
     .ihead-title { font-family: var(--font-d); font-size: 1.18rem; font-weight: 500; color: var(--cream); letter-spacing: .06em; }
     .ihead-sub   { font-size: .59rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-lt); margin-top: 2px; }
 
-    .mbody {
-      width: 100%; max-width: 500px;
-      padding: 24px 20px 60px;
-      margin: 0 auto;
-    }
+    .mbody { width: 100%; max-width: 500px; padding: 24px 20px 60px; margin: 0 auto; }
 
     .slabel {
       font-size: .59rem; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600;
-      margin: 28px 0 14px;
+      color: var(--gold); font-weight: 600; margin: 28px 0 14px;
       display: flex; align-items: center; gap: 10px;
     }
     .slabel::before { content:''; width:14px; height:1px; background:var(--gold); opacity:.5; }
@@ -243,141 +216,176 @@
 
     .mitem {
       display: flex; justify-content: space-between; align-items: flex-start;
-      padding: 13px 0;
-      border-bottom: 1px solid rgba(42,67,50,.07);
-      gap: 16px;
+      padding: 13px 0; border-bottom: 1px solid rgba(42,67,50,.07); gap: 16px;
     }
     .mitem:last-child { border-bottom: none; }
-    .mitem-info { flex: 1; }
     .mitem-name  { font-family: var(--font-d); font-size: 1.02rem; font-weight: 400; color: var(--text-dark); line-height: 1.3; }
     .mitem-desc  { font-size: .69rem; color: var(--text-mid); margin-top: 3px; line-height: 1.5; }
     .mitem-price { font-family: var(--font-d); font-size: .98rem; color: var(--green); white-space: nowrap; padding-top: 2px; font-weight: 500; }
 
     /* Tourist Spots */
     .spot {
-      background: var(--white);
-      border: 1px solid var(--beige);
-      border-radius: 14px;
-      padding: 15px 16px;
-      margin-bottom: 10px;
+      background: var(--white); border: 1px solid var(--beige); border-radius: 14px;
+      padding: 15px 16px; margin-bottom: 10px;
       display: flex; align-items: center; gap: 14px;
       box-shadow: 0 2px 12px rgba(42,67,50,.05);
     }
-    .spot-ico {
-      width: 42px; height: 42px;
-      border-radius: 11px;
-      background: var(--green-pale);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
+    .spot-ico { width: 42px; height: 42px; border-radius: 11px; background: var(--green-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .spot-ico svg { color: var(--green); }
     .spot-name { font-family: var(--font-d); font-size: .96rem; color: var(--text-dark); }
     .spot-type { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-light); margin-top: 2px; }
-    .spot-dist {
-      font-size: .7rem; font-weight: 600; color: var(--green);
-      background: var(--green-pale);
-      padding: 4px 10px; border-radius: 20px; white-space: nowrap; margin-left: auto;
-    }
+    .spot-dist { font-size: .7rem; font-weight: 600; color: var(--green); background: var(--green-pale); padding: 4px 10px; border-radius: 20px; white-space: nowrap; margin-left: auto; }
 
     /* Activities */
     .act-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .act-chip {
-      background: var(--white);
-      border: 1.5px solid var(--beige);
-      border-radius: 12px;
-      padding: 13px 13px;
-      display: flex; align-items: center; gap: 9px;
+      background: var(--white); border: 1.5px solid var(--beige); border-radius: 12px;
+      padding: 13px 13px; display: flex; align-items: center; gap: 9px;
       box-shadow: 0 2px 8px rgba(42,67,50,.05);
     }
     .act-chip svg { color: var(--green-mid); flex-shrink: 0; }
     .act-chip span { font-size: .73rem; font-weight: 500; color: var(--text-dark); line-height: 1.3; }
 
+    /* ── RULES SCREEN ── */
+    .rules-body { width: 100%; max-width: 500px; padding: 24px 20px 60px; margin: 0 auto; }
+
+    .rules-intro {
+      font-size: .8rem; line-height: 1.7; color: var(--text-mid);
+      background: var(--cream-dark); border-left: 3px solid var(--gold);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px; margin-bottom: 24px;
+    }
+
+    .rules-section {
+      background: var(--white); border: 1px solid var(--beige);
+      border-radius: 16px; padding: 18px 18px; margin-bottom: 14px;
+      box-shadow: 0 2px 12px rgba(42,67,50,.05);
+    }
+    .rules-section-title {
+      font-family: var(--font-d); font-size: .98rem; font-weight: 500;
+      color: var(--green-deep); display: flex; align-items: center; gap: 10px;
+      margin-bottom: 12px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--beige);
+    }
+    .rules-section-title .rnum {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--green-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .65rem; font-weight: 700; color: var(--green); flex-shrink: 0;
+    }
+    .rules-list { list-style: none; padding: 0; }
+    .rules-list li {
+      font-size: .76rem; line-height: 1.65; color: var(--text-mid);
+      padding: 5px 0 5px 20px; position: relative;
+      border-bottom: 1px dashed rgba(42,67,50,.07);
+    }
+    .rules-list li:last-child { border-bottom: none; }
+    .rules-list li::before {
+      content: '';
+      position: absolute; left: 6px; top: 13px;
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--gold); opacity: .7;
+    }
+    .rules-agreement {
+      background: var(--green-deep); border-radius: 16px;
+      padding: 20px 20px; margin-top: 20px;
+      text-align: center;
+    }
+    .rules-agreement p {
+      font-size: .74rem; color: rgba(250,246,238,.7); line-height: 1.6; margin-bottom: 10px;
+    }
+    .rules-agreement strong { color: var(--cream); font-weight: 600; }
+
     /* ══════════════════════════════════════════
-       MODALS
+       CENTERED MODALS
     ══════════════════════════════════════════ */
     .ovl {
       display: none;
       position: fixed; inset: 0;
-      background: rgba(26,26,20,.58);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(26,26,20,.6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       z-index: 200;
-      align-items: flex-end; justify-content: center;
+      align-items: center; justify-content: center;
+      padding: 24px;
     }
     .ovl.active { display: flex; animation: ovlIn .25s ease; }
     @keyframes ovlIn { from { opacity:0; } to { opacity:1; } }
 
-    .sheet {
+    /* Center card modal */
+    .modal-card {
       background: var(--white);
-      border-radius: 26px 26px 0 0;
-      width: 100%; max-width: 500px;
-      padding-bottom: env(safe-area-inset-bottom, 32px);
+      border-radius: 28px;
+      width: 100%; max-width: 360px;
       position: relative;
-      animation: shUp .36s cubic-bezier(.22,1,.36,1);
-      max-height: 88vh; overflow-y: auto;
+      animation: cardIn .35s cubic-bezier(.22,1,.36,1);
+      overflow: hidden;
     }
-    @keyframes shUp { from { transform:translateY(100%); } to { transform:none; } }
-
-    .sh-handle { width: 38px; height: 4px; background: var(--beige); border-radius: 2px; margin: 13px auto 0; }
-
-    .sh-head {
-      padding: 22px 26px 18px;
-      border-bottom: 1px solid var(--cream-dark);
-      display: flex; align-items: flex-start; justify-content: space-between;
+    @keyframes cardIn {
+      from { opacity:0; transform:scale(.88) translateY(16px); }
+      to   { opacity:1; transform:none; }
     }
-    .sh-icon-box {
-      width: 46px; height: 46px;
-      border-radius: 13px;
-      background: var(--green-pale);
+
+    .mc-top {
+      background: var(--green-deep);
+      padding: 32px 28px 24px;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; position: relative;
+    }
+    .mc-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      border: none; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
+    }
+    .mc-close svg { color: rgba(250,246,238,.7); }
+    .mc-icon {
+      width: 56px; height: 56px; border-radius: 18px;
+      background: rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.18);
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 11px;
+      margin-bottom: 14px;
     }
-    .sh-icon-box svg { color: var(--green); }
-    .sh-title { font-family: var(--font-d); font-size: 1.4rem; font-weight: 500; color: var(--text-dark); }
-    .sh-sub   { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--text-light); margin-top: 3px; }
+    .mc-icon svg { color: var(--gold-lt); }
+    .mc-title { font-family: var(--font-d); font-size: 1.5rem; font-weight: 500; color: var(--cream); }
+    .mc-sub { font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); margin-top: 4px; }
 
-    .sh-close {
-      width: 30px; height: 30px; border-radius: 50%;
-      background: var(--cream-dark); border: none;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; flex-shrink: 0; margin-top: 2px;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .sh-close svg { color: var(--text-mid); }
+    .mc-body { padding: 24px 24px 28px; }
 
-    .sh-body { padding: 22px 26px 8px; }
-
-    /* WiFi */
+    /* WiFi rows */
     .wifi-row {
-      background: var(--cream);
-      border: 1px solid var(--beige);
-      border-radius: 13px;
-      padding: 15px 18px; margin-bottom: 11px;
+      background: var(--cream); border: 1px solid var(--beige);
+      border-radius: 13px; padding: 14px 18px; margin-bottom: 10px;
     }
     .wifi-lbl { font-size: .59rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 5px; }
-    .wifi-val { font-family: var(--font-d); font-size: 1.25rem; color: var(--text-dark); word-break: break-all; }
+    .wifi-val { font-family: var(--font-d); font-size: 1.22rem; color: var(--text-dark); word-break: break-all; }
 
-    /* Contact */
-    .cbtn {
-      display: flex; align-items: center; gap: 16px;
-      padding: 17px 18px; border-radius: 15px; border: 1.5px solid;
-      cursor: pointer; text-decoration: none; font-family: var(--font-b);
-      transition: all .22s ease; margin-bottom: 11px;
+    /* Contact round buttons */
+    .contact-rounds {
+      display: flex; justify-content: center; gap: 32px; padding: 8px 0 4px;
+    }
+    .round-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      text-decoration: none; cursor: pointer;
       -webkit-tap-highlight-color: transparent;
+      transition: transform .22s cubic-bezier(.22,1,.36,1);
     }
-    .cbtn.wa { background: rgba(37,211,102,.06); border-color: rgba(37,211,102,.25); color: #1a8a44; }
-    .cbtn.wa:hover { background: rgba(37,211,102,.13); transform: translateY(-2px); }
-    .cbtn.wa .cbico { background: rgba(37,211,102,.11); }
-    .cbtn.wa .cbico svg { color: #1fad5c; }
-    .cbtn.ca { background: rgba(184,148,90,.06); border-color: rgba(184,148,90,.25); color: var(--gold); }
-    .cbtn.ca:hover { background: rgba(184,148,90,.13); transform: translateY(-2px); }
-    .cbtn.ca .cbico { background: rgba(184,148,90,.1); }
-    .cbtn.ca .cbico svg { color: var(--gold); }
-    .cbico {
-      width: 42px; height: 42px; border-radius: 11px;
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    .round-btn:hover, .round-btn:active { transform: translateY(-4px); }
+    .round-circle {
+      width: 72px; height: 72px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+      transition: box-shadow .22s;
     }
-    .cblbl { font-size: .61rem; letter-spacing: .18em; text-transform: uppercase; opacity: .6; }
-    .cbval { font-family: var(--font-d); font-size: 1.08rem; }
+    .round-btn:hover .round-circle { box-shadow: 0 12px 32px rgba(0,0,0,.22); }
+    .round-circle.wa { background: #25d366; }
+    .round-circle.ca { background: var(--green-deep); }
+    .round-circle svg { color: white; }
+    .round-label {
+      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
+      font-weight: 600; color: var(--text-mid);
+    }
   </style>
 </head>
 <body>
@@ -390,18 +398,14 @@ const CONFIG = {
   resortName:    "Lokavana",
   resortTagline: "Where the forest breathes",
 
-  // Contact
   phoneNumber:    "+910000000000",   // e.g. "+919876543210"
   whatsappNumber: "910000000000",    // No + sign, e.g. "919876543210"
 
-  // WiFi
   wifiName:     "Lokavana_Guest",
   wifiPassword: "forest2025",
 
-  // Instagram (without @)
   instagramHandle: "lokavana.resort",
 
-  // Tourist Spots — type: waterfall | viewpoint | temple | forest | lake | beach | heritage
   touristSpots: [
     { name: "Abbey Falls",          distance: "3 km",  type: "waterfall" },
     { name: "Raja's Seat",          distance: "7 km",  type: "viewpoint" },
@@ -411,64 +415,61 @@ const CONFIG = {
     { name: "Brahmagiri Peak",      distance: "28 km", type: "viewpoint" },
   ],
 
-  // Activities — type: trek | birdwatch | yoga | bonfire | cycling | photography | cooking | stargazing | spa | plantation
   activities: [
-    { name: "Nature Trails",    type: "trek"         },
-    { name: "Bird Watching",    type: "birdwatch"    },
-    { name: "Morning Yoga",     type: "yoga"         },
-    { name: "Bonfire Nights",   type: "bonfire"      },
-    { name: "Cycling",          type: "cycling"      },
-    { name: "Photography Walk", type: "photography"  },
-    { name: "Cooking Class",    type: "cooking"      },
-    { name: "Stargazing",       type: "stargazing"   },
-    { name: "Plantation Tour",  type: "plantation"   },
-    { name: "Spa & Wellness",   type: "spa"          },
+    { name: "Nature Trails",    type: "trek"        },
+    { name: "Bird Watching",    type: "birdwatch"   },
+    { name: "Morning Yoga",     type: "yoga"        },
+    { name: "Bonfire Nights",   type: "bonfire"     },
+    { name: "Cycling",          type: "cycling"     },
+    { name: "Photography Walk", type: "photography" },
+    { name: "Cooking Class",    type: "cooking"     },
+    { name: "Stargazing",       type: "stargazing"  },
+    { name: "Plantation Tour",  type: "plantation"  },
+    { name: "Spa & Wellness",   type: "spa"         },
   ],
 
-  // Main Menu
   mainMenu: [
     { section: "Starters", items: [
-      { name: "Forest Mushroom Soup",  desc: "Wild mushrooms, truffle oil, sourdough crisp", price: "₹320" },
-      { name: "Paneer Tikka",          desc: "Tandoori spiced cottage cheese, mint chutney",  price: "₹380" },
-      { name: "Avocado Toast",         desc: "Multigrain, cherry tomato, micro greens",        price: "₹290" },
+      { name: "Forest Mushroom Soup", desc: "Wild mushrooms, truffle oil, sourdough crisp", price: "₹320" },
+      { name: "Paneer Tikka",         desc: "Tandoori spiced cottage cheese, mint chutney",  price: "₹380" },
+      { name: "Avocado Toast",        desc: "Multigrain, cherry tomato, micro greens",        price: "₹290" },
     ]},
     { section: "Mains", items: [
-      { name: "Dal Makhani",           desc: "Slow-cooked black lentils, butter naan",         price: "₹380" },
-      { name: "Grilled Fish",          desc: "Herb butter, lemon rice, seasonal greens",        price: "₹620" },
-      { name: "Garden Pasta",          desc: "Basil pesto, cherry tomato, parmesan",            price: "₹390" },
-      { name: "Chicken Chettinad",     desc: "Aromatic spices, steamed rice, raita",            price: "₹520" },
+      { name: "Dal Makhani",          desc: "Slow-cooked black lentils, butter naan",         price: "₹380" },
+      { name: "Grilled Fish",         desc: "Herb butter, lemon rice, seasonal greens",        price: "₹620" },
+      { name: "Garden Pasta",         desc: "Basil pesto, cherry tomato, parmesan",            price: "₹390" },
+      { name: "Chicken Chettinad",    desc: "Aromatic spices, steamed rice, raita",            price: "₹520" },
     ]},
     { section: "Desserts", items: [
-      { name: "Gulab Jamun",           desc: "Warm, rose syrup, vanilla ice cream",             price: "₹180" },
-      { name: "Chocolate Mousse",      desc: "Dark chocolate, hazelnut praline",                price: "₹250" },
+      { name: "Gulab Jamun",          desc: "Warm, rose syrup, vanilla ice cream",             price: "₹180" },
+      { name: "Chocolate Mousse",     desc: "Dark chocolate, hazelnut praline",                price: "₹250" },
     ]},
     { section: "Beverages", items: [
-      { name: "Green Tea",             desc: "House blend, honey & lemon",                      price: "₹120" },
-      { name: "Fresh Coconut Water",   desc: "Chilled, straight from the shell",                price: "₹90"  },
-      { name: "Mango Lassi",           desc: "Alphonso mango, yogurt, cardamom",                price: "₹160" },
+      { name: "Green Tea",            desc: "House blend, honey & lemon",                      price: "₹120" },
+      { name: "Fresh Coconut Water",  desc: "Chilled, straight from the shell",                price: "₹90"  },
+      { name: "Mango Lassi",          desc: "Alphonso mango, yogurt, cardamom",                price: "₹160" },
     ]},
   ],
 
-  // Dinner Menu
   dinnerMenu: [
     { section: "Starters", items: [
-      { name: "Smoked Salmon Blini",   desc: "Cream cheese, capers, dill",                      price: "₹580" },
-      { name: "Crispy Calamari",       desc: "Saffron aioli, lemon wedge",                      price: "₹420" },
-      { name: "Bruschetta Trio",       desc: "Tomato, olive tapenade, goat cheese",              price: "₹340" },
+      { name: "Smoked Salmon Blini",  desc: "Cream cheese, capers, dill",                      price: "₹580" },
+      { name: "Crispy Calamari",      desc: "Saffron aioli, lemon wedge",                      price: "₹420" },
+      { name: "Bruschetta Trio",      desc: "Tomato, olive tapenade, goat cheese",              price: "₹340" },
     ]},
     { section: "Mains", items: [
-      { name: "Grilled Lamb Chops",    desc: "Rosemary jus, roasted vegetables, dauphinoise",   price: "₹980" },
-      { name: "Lobster Thermidor",     desc: "Gruyère, cognac cream, pilaf rice",               price: "₹1450"},
-      { name: "Paneer Shashlik",       desc: "Bell peppers, saffron rice, mint raita",           price: "₹560" },
-      { name: "Seabass en Papillote",  desc: "Fennel, lemon, capers, herb butter",              price: "₹850" },
+      { name: "Grilled Lamb Chops",   desc: "Rosemary jus, roasted vegetables, dauphinoise",   price: "₹980" },
+      { name: "Lobster Thermidor",    desc: "Gruyère, cognac cream, pilaf rice",               price: "₹1450"},
+      { name: "Paneer Shashlik",      desc: "Bell peppers, saffron rice, mint raita",           price: "₹560" },
+      { name: "Seabass en Papillote", desc: "Fennel, lemon, capers, herb butter",              price: "₹850" },
     ]},
     { section: "Desserts", items: [
-      { name: "Crème Brûlée",          desc: "Madagascan vanilla, seasonal berries",             price: "₹320" },
-      { name: "Chocolate Fondant",     desc: "Salted caramel, vanilla bean ice cream",           price: "₹380" },
+      { name: "Crème Brûlée",         desc: "Madagascan vanilla, seasonal berries",             price: "₹320" },
+      { name: "Chocolate Fondant",    desc: "Salted caramel, vanilla bean ice cream",           price: "₹380" },
     ]},
     { section: "Mocktails", items: [
-      { name: "Sunset Spritzer",       desc: "Passion fruit, hibiscus, sparkling water",        price: "₹220" },
-      { name: "Verdant Garden",        desc: "Cucumber, basil, lime, ginger ale",               price: "₹200" },
+      { name: "Sunset Spritzer",      desc: "Passion fruit, hibiscus, sparkling water",        price: "₹220" },
+      { name: "Verdant Garden",       desc: "Cucumber, basil, lime, ginger ale",               price: "₹200" },
     ]},
   ],
 };
@@ -477,36 +478,12 @@ const CONFIG = {
 <!-- ════════════════ HOME ════════════════ -->
 <div id="home" class="screen active">
   <div class="hero">
-    <!-- watermark leaf -->
-    <svg class="hero-leaf-bg" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M100 250 C100 250 20 170 25 80 C30 15 100 5 100 5 C100 5 170 15 175 80 C180 170 100 250 100 250Z" fill="#3b5e45"/>
-    </svg>
-
-    <div class="logo-circle">
-      <!-- Leaf emblem SVG logo -->
-      <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M25 45 C25 45 8 30 10 17 C12 7 25 5 25 5 C25 5 38 7 40 17 C42 30 25 45 25 45Z" fill="#d4e6d9" opacity=".9"/>
-        <path d="M25 45 C25 45 10 31 12 18 C14 8 25 6 25 6" fill="none" stroke="#3b5e45" stroke-width=".8" opacity=".4"/>
-        <line x1="25" y1="7" x2="25" y2="45" stroke="#3b5e45" stroke-width="1.2" stroke-linecap="round"/>
-        <path d="M25 15 C21 19 17 22 15 27" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".65"/>
-        <path d="M25 15 C29 19 33 22 35 27" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".65"/>
-        <path d="M25 24 C21 28 18 31 16 35" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
-        <path d="M25 24 C29 28 32 31 34 35" stroke="#3b5e45" stroke-width=".9" stroke-linecap="round" opacity=".5"/>
-        <circle cx="25" cy="45.5" r="2.2" fill="#b8945a"/>
-      </svg>
-    </div>
-
-    <div class="resort-name" id="rname"></div>
-    <div class="resort-tag" id="rtag"></div>
-
-    <div class="divider-row">
-      <div class="dl"></div>
-      <div class="dd"></div>
-      <!-- tiny leaf -->
-      <svg width="12" height="14" viewBox="0 0 12 16" fill="none"><path d="M6 15 C6 15 1 10 1.5 5 C2 1.5 6 1 6 1 C6 1 10 1.5 10.5 5 C11 10 6 15 6 15Z" fill="#b8945a" opacity=".55"/></svg>
-      <div class="dd"></div>
-      <div class="dl"></div>
-    </div>
+    <img
+      src="https://kaushalg47.github.io/Loka-Menu/LOKA.png"
+      alt="Lokavana"
+      class="logo-img"
+      id="logo-img"
+    />
   </div>
 
   <div class="home-grid" id="home-grid"></div>
@@ -551,72 +528,163 @@ const CONFIG = {
   </div>
 </div>
 
-<!-- ════════════════ WIFI MODAL ════════════════ -->
+<!-- ════════════════ RULES ════════════════ -->
+<div id="rules" class="screen inner">
+  <div class="ihead">
+    <button class="bkbtn" onclick="showScreen('home')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    </button>
+    <div><div class="ihead-title">Rules & Regulations</div><div class="ihead-sub">Please read carefully</div></div>
+  </div>
+  <div class="rules-body">
+    <div class="rules-intro">
+      By confirming your booking and entering the premises, you agree to comply with the following terms and conditions.
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">1</span> General Rules, Conduct & Restrictions</div>
+      <ul class="rules-list">
+        <li>Guests must behave responsibly and respectfully toward property, staff, and others.</li>
+        <li>Fights, violence, abusive behavior, or inappropriate language will NOT be tolerated and may result in immediate eviction without refund.</li>
+        <li>Use of narcotics, drugs, or illegal substances is strictly prohibited.</li>
+        <li>Loud music or disturbance after 11:00 PM is not allowed unless pre-approved.</li>
+        <li>Staff assistance is available only until 11:00 PM.</li>
+        <li>Only registered guests are allowed; outside visitors require prior approval.</li>
+      </ul>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">2</span> Property Use, Cleanliness & Environment</div>
+      <ul class="rules-list">
+        <li>Guests must maintain the property in good condition.</li>
+        <li>Any damage to property, furniture, appliances, or surroundings will be charged.</li>
+        <li>Trash must be disposed of in designated bins only; littering is strictly prohibited.</li>
+        <li>Respect nature, plants, animals, and surroundings.</li>
+        <li>Any environmental damage or excessive littering will attract penalties.</li>
+      </ul>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">3</span> Safety, Liability & Surveillance</div>
+      <ul class="rules-list">
+        <li>Guests stay at the property at their own risk.</li>
+        <li>Management is not responsible for personal injuries, accidents, loss or theft of belongings, or damage/theft of vehicles.</li>
+        <li>Parking is at owner's risk.</li>
+        <li>The property is under CCTV surveillance in common areas. Footage may be used in case of disputes or legal requirements.</li>
+      </ul>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">4</span> Pool Rules</div>
+      <ul class="rules-list">
+        <li>Pool timings: 7:00 AM to 10:30 PM.</li>
+        <li>Shower before entering is mandatory.</li>
+        <li>Only proper waterproof/swimwear is allowed.</li>
+        <li>Glass items, sharp objects, and food are strictly prohibited near the pool.</li>
+        <li>No unsafe behavior — running, diving in shallow areas, etc.</li>
+        <li>Children must be supervised at all times.</li>
+        <li>Pool usage is at the guest's own risk.</li>
+      </ul>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">5</span> Pets & Bonfire</div>
+      <ul class="rules-list">
+        <li>Pets are allowed on the property but strictly NOT allowed inside rooms.</li>
+        <li>Pet owners must clean any litter/waste and are responsible for any damage caused.</li>
+        <li>Bonfire is available only on prior request and must be used responsibly.</li>
+      </ul>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">6</span> Check-in, Check-out & ID Policy</div>
+      <ul class="rules-list">
+        <li>Guests must follow agreed check-in and check-out timings.</li>
+        <li>Original Government-issued ID proof is mandatory at check-in.</li>
+        <li>ID will be returned at checkout upon proper handover of keys.</li>
+        <li>Late check-out may incur additional charges.</li>
+      </ul>
+    </div>
+
+    <div class="rules-section">
+      <div class="rules-section-title"><span class="rnum">7</span> Penalties, Enforcement & Rights</div>
+      <ul class="rules-list">
+        <li>Any rule violation may result in immediate eviction without refund, monetary fines, or legal action.</li>
+        <li>Management reserves the right to refuse entry, cancel booking, or evict guests for non-compliance.</li>
+      </ul>
+    </div>
+
+    <div class="rules-agreement">
+      <p><strong>Agreement</strong></p>
+      <p>By staying at the property, you confirm that you have read and understood all terms and conditions, and agree to abide by all rules stated above.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════ WIFI MODAL (centered) ════════════════ -->
 <div id="ovl-wifi" class="ovl" onclick="ovlClick(event,'ovl-wifi')">
-  <div class="sheet">
-    <div class="sh-handle"></div>
-    <div class="sh-head">
-      <div>
-        <div class="sh-icon-box">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
-        </div>
-        <div class="sh-title">WiFi Access</div>
-        <div class="sh-sub">Connect & stay in touch</div>
-      </div>
-      <button class="sh-close" onclick="closeOvl('ovl-wifi')">
+  <div class="modal-card">
+    <div class="mc-top">
+      <button class="mc-close" onclick="closeOvl('ovl-wifi')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
+      <div class="mc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      </div>
+      <div class="mc-title">WiFi Access</div>
+      <div class="mc-sub">Connect & stay in touch</div>
     </div>
-    <div class="sh-body">
+    <div class="mc-body">
       <div class="wifi-row"><div class="wifi-lbl">Network Name</div><div class="wifi-val" id="wname"></div></div>
       <div class="wifi-row"><div class="wifi-lbl">Password</div><div class="wifi-val" id="wpass"></div></div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════ CONTACT MODAL ════════════════ -->
+<!-- ════════════════ CONTACT MODAL (centered, round buttons) ════════════════ -->
 <div id="ovl-contact" class="ovl" onclick="ovlClick(event,'ovl-contact')">
-  <div class="sheet">
-    <div class="sh-handle"></div>
-    <div class="sh-head">
-      <div>
-        <div class="sh-icon-box">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="sh-title">Contact Us</div>
-        <div class="sh-sub">We're here to help</div>
-      </div>
-      <button class="sh-close" onclick="closeOvl('ovl-contact')">
+  <div class="modal-card">
+    <div class="mc-top">
+      <button class="mc-close" onclick="closeOvl('ovl-contact')">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
       </button>
+      <div class="mc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </div>
+      <div class="mc-title">Contact Us</div>
+      <div class="mc-sub">We're here to help</div>
     </div>
-    <div class="sh-body">
-      <a id="wa-link" class="cbtn wa" target="_blank" rel="noopener">
-        <div class="cbico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-        </div>
-        <div><div class="cblbl">Message us on</div><div class="cbval">WhatsApp</div></div>
-      </a>
-      <a id="call-link" class="cbtn ca">
-        <div class="cbico">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div><div class="cblbl">Call us directly</div><div class="cbval" id="cnum"></div></div>
-      </a>
+    <div class="mc-body">
+      <div class="contact-rounds">
+        <!-- WhatsApp round button -->
+        <a id="wa-link" class="round-btn" target="_blank" rel="noopener">
+          <div class="round-circle wa">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          </div>
+          <span class="round-label">WhatsApp</span>
+        </a>
+        <!-- Call round button -->
+        <a id="call-link" class="round-btn">
+          <div class="round-circle ca">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span class="round-label">Call</span>
+        </a>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-/* ── SVG Icons ── */
+/* ── Icons ── */
 const I = {
   menu:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
   dinner:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
   wifi:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>`,
-  contact:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
   explore:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
   instagram:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
-  // spot types
+  rules:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+  contact:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
   waterfall:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v6M8 4l4-2 4 2"/><path d="M5 10c0 8 14 8 14 0"/><path d="M7 22c0-4 10-4 10 0"/><line x1="9" y1="10" x2="9" y2="22"/><line x1="15" y1="10" x2="15" y2="22"/></svg>`,
   viewpoint:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 6l6 6 4-4 6 6 6-6"/><line x1="1" y1="18" x2="23" y2="18"/></svg>`,
   temple:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="10" width="20" height="11"/><path d="M12 3L2 10h20z"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="7" y1="15" x2="7" y2="21"/><line x1="17" y1="15" x2="17" y2="21"/></svg>`,
@@ -624,7 +692,6 @@ const I = {
   lake:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg>`,
   beach:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 21h18"/><path d="M6 21V7l6-4 6 4v14"/><path d="M9 21v-9h6v9"/></svg>`,
   heritage:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10"/><path d="M3 11l9-7 9 7"/><line x1="12" y1="21" x2="12" y2="15"/></svg>`,
-  // activities
   trek:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="3" r="1.5"/><path d="M6 21l2-6-2-4h8l-2 4 2 6"/><path d="M13 9l4 3-2 4"/></svg>`,
   birdwatch:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
   yoga:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="3.5" r="1.5"/><path d="M5 20.5l4-8 3 5 3-5 4 8"/><path d="M8.5 12.5L12 8l3.5 4.5"/></svg>`,
@@ -637,91 +704,80 @@ const I = {
   plantation:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="22" x2="12" y2="11"/><path d="M12 11C12 11 7 9 7 5a5 5 0 0 1 10 0c0 4-5 6-5 6z"/><path d="M12 15c0 0 4-1 4-4"/><path d="M12 19c0 0-4-1-4-4"/></svg>`,
 };
 
-/* ── Navigation ── */
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0, 0);
 }
-
-/* ── Modals ── */
-function openOvl(id) { document.getElementById(id).classList.add('active'); }
+function openOvl(id)  { document.getElementById(id).classList.add('active'); }
 function closeOvl(id) { document.getElementById(id).classList.remove('active'); }
 function ovlClick(e, id) { if (e.target.id === id) closeOvl(id); }
 
-/* ── Build home grid ── */
 function buildGrid() {
   const g = document.getElementById('home-grid');
   const btns = [
-    { label:'Menu',        icon:'menu',      fn:"showScreen('menu')"        },
-    { label:'Dinner Menu', icon:'dinner',    fn:"showScreen('dinner')"      },
-    { label:'WiFi',        icon:'wifi',      fn:"openOvl('ovl-wifi')"       },
-    { label:'Contact',     icon:'contact',   fn:"openOvl('ovl-contact')"    },
-    { label:'Explore',     icon:'explore',   fn:"showScreen('explore')"     },
-    { label:'Instagram',   icon:'instagram', fn:"goInsta()"                 },
+    { label:'Menu',        icon:'menu',      fn:"showScreen('menu')"    },
+    { label:'Dinner Menu', icon:'dinner',    fn:"showScreen('dinner')"  },
+    { label:'WiFi',        icon:'wifi',      fn:"openOvl('ovl-wifi')"   },
+    { label:'Explore',     icon:'explore',   fn:"showScreen('explore')" },
+    { label:'Rules',       icon:'rules',     fn:"showScreen('rules')"   },
+    { label:'Instagram',   icon:'instagram', fn:"goInsta()"             },
   ];
-  g.innerHTML = btns.map(b => `
+  // Contact full-width button FIRST so it appears at top
+  const contactHTML = `
+    <button class="gbtn-contact" onclick="openOvl('ovl-contact')">
+      <div class="gicon-contact">${I.contact}</div>
+      <div>
+        <div class="glabel-contact">Contact Us</div>
+        <div class="glabel-sub">WhatsApp \xB7 Call</div>
+      </div>
+    </button>`;
+  const regularHTML = btns.map(b => `
     <button class="gbtn" onclick="${b.fn}">
       <div class="gicon">${I[b.icon]}</div>
       <span class="glabel">${b.label}</span>
     </button>`).join('');
+  g.innerHTML = contactHTML + regularHTML;
 }
 
-/* ── Build menu ── */
 function buildMenu(id, sections) {
   document.getElementById(id).innerHTML = sections.map(s => `
     <div class="slabel">${s.section}</div>
     ${s.items.map(it => `
       <div class="mitem">
-        <div class="mitem-info">
-          <div class="mitem-name">${it.name}</div>
-          <div class="mitem-desc">${it.desc}</div>
-        </div>
+        <div><div class="mitem-name">${it.name}</div><div class="mitem-desc">${it.desc}</div></div>
         <div class="mitem-price">${it.price}</div>
       </div>`).join('')}
   `).join('');
 }
 
-/* ── Build spots ── */
 function buildSpots() {
   document.getElementById('spots-list').innerHTML = CONFIG.touristSpots.map(s => `
     <div class="spot">
       <div class="spot-ico">${I[s.type] || I.explore}</div>
-      <div>
-        <div class="spot-name">${s.name}</div>
-        <div class="spot-type">${s.type}</div>
-      </div>
+      <div><div class="spot-name">${s.name}</div><div class="spot-type">${s.type}</div></div>
       <div class="spot-dist">${s.distance}</div>
     </div>`).join('');
 }
 
-/* ── Build activities ── */
 function buildActs() {
   document.getElementById('act-grid').innerHTML = CONFIG.activities.map(a => `
-    <div class="act-chip">
-      ${I[a.type] || I.explore}
-      <span>${a.name}</span>
-    </div>`).join('');
+    <div class="act-chip">${I[a.type] || I.explore}<span>${a.name}</span></div>`).join('');
 }
 
-/* ── Instagram ── */
 function goInsta() {
   window.open('https://instagram.com/' + CONFIG.instagramHandle, '_blank', 'noopener');
 }
 
-/* ── Init ── */
 (function init() {
   document.title = CONFIG.resortName;
-  document.getElementById('rname').textContent = CONFIG.resortName;
-  document.getElementById('rtag').textContent  = CONFIG.resortTagline;
   document.getElementById('hfoot').textContent = '© ' + CONFIG.resortName + ' · All rights reserved';
 
   document.getElementById('wname').textContent = CONFIG.wifiName;
   document.getElementById('wpass').textContent = CONFIG.wifiPassword;
 
-  document.getElementById('wa-link').href    = 'https://wa.me/' + CONFIG.whatsappNumber;
-  document.getElementById('call-link').href  = 'tel:' + CONFIG.phoneNumber;
-  document.getElementById('cnum').textContent = CONFIG.phoneNumber;
+  document.getElementById('wa-link').href   = 'https://wa.me/' + CONFIG.whatsappNumber;
+  document.getElementById('call-link').href = 'tel:' + CONFIG.phoneNumber;
 
   buildGrid();
   buildMenu('main-menu-body',   CONFIG.mainMenu);
