@@ -1997,6 +1997,7 @@
         msg += `• ${i.name} x${i.qty} — ₹${i.subtotal}\n`;
       });
       msg += divider + '\n';
+      msg += `*Total: ₹${totalPrice}*`;
 
       const encoded = encodeURIComponent(msg);
       const url = `https://api.whatsapp.com/send/?phone=${CONFIG.whatsappNumber}&text=${encoded}`;
