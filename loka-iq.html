@@ -1,30 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Lokavana</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
-      --green:       #3b5e45;
-      --green-deep:  #2a4332;
-      --green-mid:   #4e7a5c;
-      --green-pale:  #d4e6d9;
-      --cream:       #faf6ee;
-      --cream-dark:  #f0e9d8;
-      --beige:       #e8dcc8;
-      --gold:        #b8945a;
-      --gold-lt:     #d4a96a;
-      --white:       #ffffff;
-      --text-dark:   #2a2a26;
-      --text-mid:    #5a5a52;
-      --text-light:  #9a9a8a;
-      --font-d:      'Playfair Display', serif;
-      --font-b:      'Raleway', sans-serif;
+      --green: #3b5e45;
+      --green-deep: #2a4332;
+      --green-mid: #4e7a5c;
+      --green-pale: #d4e6d9;
+      --cream: #faf6ee;
+      --cream-dark: #f0e9d8;
+      --beige: #e8dcc8;
+      --gold: #b8945a;
+      --gold-lt: #d4a96a;
+      --white: #ffffff;
+      --text-dark: #2a2a26;
+      --text-mid: #5a5a52;
+      --text-light: #9a9a8a;
+      --font-d: 'Playfair Display', serif;
+      --font-b: 'Raleway', sans-serif;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: var(--font-b);
       background: var(--white);
@@ -35,20 +49,45 @@
     }
 
     /* ── SCREENS ── */
-    .screen { display: none; min-height: 100vh; flex-direction: column; align-items: center; }
-    .screen.active { display: flex; animation: sIn .4s cubic-bezier(.22,1,.36,1); }
-    @keyframes sIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+    .screen {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .screen.active {
+      display: flex;
+      animation: sIn .4s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    @keyframes sIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     /* ══════════════════════════════════════════
        HOME
     ══════════════════════════════════════════ */
-    #home { background: var(--white); }
+    #home {
+      background: var(--white);
+    }
 
     .hero {
       width: 100%;
-      display: flex; flex-direction: column; align-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       padding: 40px 24px 14px;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
       background: var(--white);
     }
 
@@ -57,11 +96,34 @@
       height: auto;
       object-fit: contain;
       display: block;
-      animation: popIn .8s cubic-bezier(.22,1,.36,1);
-      position: relative; z-index: 1;
+      animation: popIn .8s cubic-bezier(.22, 1, .36, 1);
+      position: relative;
+      z-index: 1;
     }
-    @keyframes popIn { from { opacity:0; transform:scale(.88) translateY(10px); } to { opacity:1; transform:none; } }
-    @keyframes fUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:none; } }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(.88) translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @keyframes fUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     /* ── HOME GRID ── */
     .home-grid {
@@ -69,53 +131,95 @@
       grid-template-columns: 1fr 1fr;
       gap: 13px;
       padding: 28px 18px 28px;
-      width: 100%; max-width: 460px;
+      width: 100%;
+      max-width: 460px;
     }
 
     .gbtn {
       background: var(--white);
       border: 1.5px solid var(--beige);
       border-radius: 20px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 11px; padding: 28px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 11px;
+      padding: 28px 14px;
       cursor: pointer;
-      transition: all .26s cubic-bezier(.22,1,.36,1);
-      box-shadow: 0 4px 20px rgba(42,67,50,.07);
+      transition: all .26s cubic-bezier(.22, 1, .36, 1);
+      box-shadow: 0 4px 20px rgba(42, 67, 50, .07);
       -webkit-tap-highlight-color: transparent;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+
     .gbtn::before {
-      content: ''; position: absolute; inset: 0;
+      content: '';
+      position: absolute;
+      inset: 0;
       background: var(--green-deep);
-      transform: scaleY(0); transform-origin: bottom;
-      transition: transform .3s cubic-bezier(.22,1,.36,1);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .3s cubic-bezier(.22, 1, .36, 1);
       border-radius: 20px;
     }
-    .gbtn:hover::before, .gbtn:active::before { transform: scaleY(1); }
-    .gbtn:hover, .gbtn:active {
+
+    .gbtn:hover::before,
+    .gbtn:active::before {
+      transform: scaleY(1);
+    }
+
+    .gbtn:hover,
+    .gbtn:active {
       border-color: var(--green-deep);
-      box-shadow: 0 12px 36px rgba(42,67,50,.2);
+      box-shadow: 0 12px 36px rgba(42, 67, 50, .2);
       transform: translateY(-4px);
     }
-    .gbtn:hover .glabel, .gbtn:active .glabel { color: var(--cream); }
-    .gbtn:hover .gicon, .gbtn:active .gicon {
-      background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.18);
+
+    .gbtn:hover .glabel,
+    .gbtn:active .glabel {
+      color: var(--cream);
     }
-    .gbtn:hover .gicon svg, .gbtn:active .gicon svg { color: var(--gold-lt); }
+
+    .gbtn:hover .gicon,
+    .gbtn:active .gicon {
+      background: rgba(255, 255, 255, .12);
+      border-color: rgba(255, 255, 255, .18);
+    }
+
+    .gbtn:hover .gicon svg,
+    .gbtn:active .gicon svg {
+      color: var(--gold-lt);
+    }
 
     .gicon {
-      width: 50px; height: 50px; border-radius: 13px;
+      width: 50px;
+      height: 50px;
+      border-radius: 13px;
       background: var(--green-pale);
-      border: 1px solid rgba(59,94,69,.1);
-      display: flex; align-items: center; justify-content: center;
-      transition: all .26s; position: relative; z-index: 1;
+      border: 1px solid rgba(59, 94, 69, .1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .26s;
+      position: relative;
+      z-index: 1;
     }
-    .gicon svg { color: var(--green-deep); transition: color .26s; }
+
+    .gicon svg {
+      color: var(--green-deep);
+      transition: color .26s;
+    }
+
     .glabel {
-      font-size: .71rem; letter-spacing: .18em; text-transform: uppercase;
-      color: var(--text-dark); font-weight: 600;
-      transition: color .26s; position: relative; z-index: 1;
+      font-size: .71rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      font-weight: 600;
+      transition: color .26s;
+      position: relative;
+      z-index: 1;
     }
 
     .gbtn-contact {
@@ -123,614 +227,1703 @@
       background: var(--green-deep);
       border: 1.5px solid var(--green-deep);
       border-radius: 20px;
-      display: flex; flex-direction: row;
-      align-items: center; justify-content: center;
-      gap: 14px; padding: 22px 24px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 22px 24px;
       cursor: pointer;
-      transition: all .26s cubic-bezier(.22,1,.36,1);
-      box-shadow: 0 8px 28px rgba(42,67,50,.25);
+      transition: all .26s cubic-bezier(.22, 1, .36, 1);
+      box-shadow: 0 8px 28px rgba(42, 67, 50, .25);
       -webkit-tap-highlight-color: transparent;
-      position: relative; overflow: hidden;
+      position: relative;
+      overflow: hidden;
     }
+
     .gbtn-contact::before {
-      content: ''; position: absolute; inset: 0;
+      content: '';
+      position: absolute;
+      inset: 0;
       background: var(--green-mid);
-      transform: scaleY(0); transform-origin: bottom;
-      transition: transform .3s cubic-bezier(.22,1,.36,1);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform .3s cubic-bezier(.22, 1, .36, 1);
       border-radius: 20px;
     }
-    .gbtn-contact:hover::before, .gbtn-contact:active::before { transform: scaleY(1); }
-    .gbtn-contact:hover, .gbtn-contact:active {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(42,67,50,.3);
-    }
-    .gbtn-contact .gicon-contact {
-      width: 50px; height: 50px; border-radius: 13px;
-      background: rgba(255,255,255,.14);
-      border: 1px solid rgba(255,255,255,.2);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; position: relative; z-index: 1;
-    }
-    .gbtn-contact .gicon-contact svg { color: var(--gold-lt); }
-    .gbtn-contact .glabel-contact {
-      font-size: .82rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--cream); font-weight: 600;
-      position: relative; z-index: 1;
-    }
-    .gbtn-contact .glabel-sub {
-      font-size: .62rem; letter-spacing: .1em;
-      color: rgba(250,246,238,.55); font-weight: 400;
-      position: relative; z-index: 1; margin-top: 1px;
+
+    .gbtn-contact:hover::before,
+    .gbtn-contact:active::before {
+      transform: scaleY(1);
     }
 
-    .gbtn-contact      { animation: fUp .6s .30s both; }
-    .gbtn:nth-child(2) { animation: fUp .6s .38s both; }
-    .gbtn:nth-child(3) { animation: fUp .6s .46s both; }
-    .gbtn:nth-child(4) { animation: fUp .6s .54s both; }
-    .gbtn:nth-child(5) { animation: fUp .6s .62s both; }
-    .gbtn:nth-child(6) { animation: fUp .6s .70s both; }
-    .gbtn:nth-child(7) { animation: fUp .6s .78s both; }
+    .gbtn-contact:hover,
+    .gbtn-contact:active {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 36px rgba(42, 67, 50, .3);
+    }
+
+    .gbtn-contact .gicon-contact {
+      width: 50px;
+      height: 50px;
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .14);
+      border: 1px solid rgba(255, 255, 255, .2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gbtn-contact .gicon-contact svg {
+      color: var(--gold-lt);
+    }
+
+    .gbtn-contact .glabel-contact {
+      font-size: .82rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--cream);
+      font-weight: 600;
+      position: relative;
+      z-index: 1;
+    }
+
+    .gbtn-contact .glabel-sub {
+      font-size: .62rem;
+      letter-spacing: .1em;
+      color: rgba(250, 246, 238, .55);
+      font-weight: 400;
+      position: relative;
+      z-index: 1;
+      margin-top: 1px;
+    }
+
+    .gbtn-contact {
+      animation: fUp .6s .30s both;
+    }
+
+    .gbtn:nth-child(2) {
+      animation: fUp .6s .38s both;
+    }
+
+    .gbtn:nth-child(3) {
+      animation: fUp .6s .46s both;
+    }
+
+    .gbtn:nth-child(4) {
+      animation: fUp .6s .54s both;
+    }
+
+    .gbtn:nth-child(5) {
+      animation: fUp .6s .62s both;
+    }
+
+    .gbtn:nth-child(6) {
+      animation: fUp .6s .70s both;
+    }
+
+    .gbtn:nth-child(7) {
+      animation: fUp .6s .78s both;
+    }
 
     .home-footer {
-      font-size: .59rem; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--text-light); padding: 8px 0 40px;
+      font-size: .59rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      padding: 8px 0 40px;
       animation: fUp .7s .82s both;
     }
 
     /* ══════════════════════════════════════════
        INNER SCREENS
     ══════════════════════════════════════════ */
-    .inner { background: var(--cream); }
+    .inner {
+      background: var(--cream);
+    }
 
     .ihead {
-      width: 100%; background: var(--green-deep);
-      display: flex; align-items: center;
-      padding: 18px 18px; gap: 14px;
-      position: sticky; top: 0; z-index: 10;
+      width: 100%;
+      background: var(--green-deep);
+      display: flex;
+      align-items: center;
+      padding: 18px 18px;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
+
     .bkbtn {
-      width: 38px; height: 38px; border-radius: 10px;
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.15);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; transition: background .2s; flex-shrink: 0;
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background .2s;
+      flex-shrink: 0;
       -webkit-tap-highlight-color: transparent;
     }
-    .bkbtn:hover { background: rgba(255,255,255,.2); }
-    .bkbtn svg { color: var(--cream); }
-    .ihead-title { font-family: var(--font-d); font-size: 1.18rem; font-weight: 500; color: var(--cream); letter-spacing: .06em; }
-    .ihead-sub   { font-size: .59rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold-lt); margin-top: 2px; }
 
-    .mbody { width: 100%; max-width: 500px; padding: 24px 20px 60px; margin: 0 auto; }
+    .bkbtn:hover {
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .bkbtn svg {
+      color: var(--cream);
+    }
+
+    .ihead-title {
+      font-family: var(--font-d);
+      font-size: 1.18rem;
+      font-weight: 500;
+      color: var(--cream);
+      letter-spacing: .06em;
+    }
+
+    .ihead-sub {
+      font-size: .59rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-top: 2px;
+    }
+
+    .mbody {
+      width: 100%;
+      max-width: 500px;
+      padding: 24px 20px 60px;
+      margin: 0 auto;
+    }
 
     .slabel {
-      font-size: .59rem; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600; margin: 28px 0 14px;
-      display: flex; align-items: center; gap: 10px;
+      font-size: .59rem;
+      letter-spacing: .3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin: 28px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .slabel::before { content:''; width:14px; height:1px; background:var(--gold); opacity:.5; }
-    .slabel::after  { content:''; flex:1; height:1px; background:rgba(184,148,90,.18); }
+
+    .slabel::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--gold);
+      opacity: .5;
+    }
+
+    .slabel::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(184, 148, 90, .18);
+    }
 
     .mitem {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      padding: 13px 0; border-bottom: 1px solid rgba(42,67,50,.07); gap: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(42, 67, 50, .07);
+      gap: 16px;
     }
-    .mitem:last-child { border-bottom: none; }
-    .mitem-name  { font-family: var(--font-d); font-size: 1.02rem; font-weight: 400; color: var(--text-dark); line-height: 1.3; }
-    .mitem-desc  { font-size: .69rem; color: var(--text-mid); margin-top: 3px; line-height: 1.5; }
-    .mitem-price { font-family: var(--font-d); font-size: .98rem; color: var(--green); white-space: nowrap; padding-top: 2px; font-weight: 500; }
+
+    .mitem:last-child {
+      border-bottom: none;
+    }
+
+    .mitem-name {
+      font-family: var(--font-d);
+      font-size: 1.02rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .mitem-desc {
+      font-size: .69rem;
+      color: var(--text-mid);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    .mitem-price {
+      font-family: var(--font-d);
+      font-size: .98rem;
+      color: var(--green);
+      white-space: nowrap;
+      padding-top: 2px;
+      font-weight: 500;
+    }
 
     /* Tourist Spots */
     .spot {
-      background: var(--white); border: 1px solid var(--beige); border-radius: 14px;
-      padding: 15px 16px; margin-bottom: 10px;
-      display: flex; align-items: center; gap: 14px;
-      box-shadow: 0 2px 12px rgba(42,67,50,.05);
+      background: var(--white);
+      border: 1px solid var(--beige);
+      border-radius: 14px;
+      padding: 15px 16px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 12px rgba(42, 67, 50, .05);
     }
-    .spot-ico { width: 42px; height: 42px; border-radius: 11px; background: var(--green-pale); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .spot-ico svg { color: var(--green); }
-    .spot-name { font-family: var(--font-d); font-size: .96rem; color: var(--text-dark); }
-    .spot-type { font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-light); margin-top: 2px; }
-    .spot-dist { font-size: .7rem; font-weight: 600; color: var(--green); background: var(--green-pale); padding: 4px 10px; border-radius: 20px; white-space: nowrap; margin-left: auto; }
+
+    .spot-ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: var(--green-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .spot-ico svg {
+      color: var(--green);
+    }
+
+    .spot-name {
+      font-family: var(--font-d);
+      font-size: .96rem;
+      color: var(--text-dark);
+    }
+
+    .spot-type {
+      font-size: .62rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .spot-dist {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--green-pale);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      margin-left: auto;
+    }
 
     /* Activities */
-    .act-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .act-chip {
-      background: var(--white); border: 1.5px solid var(--beige); border-radius: 12px;
-      padding: 13px 13px; display: flex; align-items: center; gap: 9px;
-      box-shadow: 0 2px 8px rgba(42,67,50,.05);
+    .act-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
-    .act-chip svg { color: var(--green-mid); flex-shrink: 0; }
-    .act-chip span { font-size: .73rem; font-weight: 500; color: var(--text-dark); line-height: 1.3; }
+
+    .act-chip {
+      background: var(--white);
+      border: 1.5px solid var(--beige);
+      border-radius: 12px;
+      padding: 13px 13px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      box-shadow: 0 2px 8px rgba(42, 67, 50, .05);
+    }
+
+    .act-chip svg {
+      color: var(--green-mid);
+      flex-shrink: 0;
+    }
+
+    .act-chip span {
+      font-size: .73rem;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
 
     /* ── RULES SCREEN ── */
-    .rules-body { width: 100%; max-width: 500px; padding: 24px 20px 60px; margin: 0 auto; }
+    .rules-body {
+      width: 100%;
+      max-width: 500px;
+      padding: 24px 20px 60px;
+      margin: 0 auto;
+    }
 
     .rules-intro {
-      font-size: .8rem; line-height: 1.7; color: var(--text-mid);
-      background: var(--cream-dark); border-left: 3px solid var(--gold);
+      font-size: .8rem;
+      line-height: 1.7;
+      color: var(--text-mid);
+      background: var(--cream-dark);
+      border-left: 3px solid var(--gold);
       border-radius: 0 10px 10px 0;
-      padding: 14px 16px; margin-bottom: 24px;
+      padding: 14px 16px;
+      margin-bottom: 24px;
     }
 
     .rules-section {
-      background: var(--white); border: 1px solid var(--beige);
-      border-radius: 16px; padding: 18px 18px; margin-bottom: 14px;
-      box-shadow: 0 2px 12px rgba(42,67,50,.05);
+      background: var(--white);
+      border: 1px solid var(--beige);
+      border-radius: 16px;
+      padding: 18px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 12px rgba(42, 67, 50, .05);
     }
+
     .rules-section-title {
-      font-family: var(--font-d); font-size: .98rem; font-weight: 500;
-      color: var(--green-deep); display: flex; align-items: center; gap: 10px;
-      margin-bottom: 12px; padding-bottom: 10px;
+      font-family: var(--font-d);
+      font-size: .98rem;
+      font-weight: 500;
+      color: var(--green-deep);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--beige);
     }
+
     .rules-section-title .rnum {
-      width: 26px; height: 26px; border-radius: 50%;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
       background: var(--green-pale);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .65rem; font-weight: 700; color: var(--green); flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .65rem;
+      font-weight: 700;
+      color: var(--green);
+      flex-shrink: 0;
     }
-    .rules-list { list-style: none; padding: 0; }
+
+    .rules-list {
+      list-style: none;
+      padding: 0;
+    }
+
     .rules-list li {
-      font-size: .76rem; line-height: 1.65; color: var(--text-mid);
-      padding: 5px 0 5px 20px; position: relative;
-      border-bottom: 1px dashed rgba(42,67,50,.07);
+      font-size: .76rem;
+      line-height: 1.65;
+      color: var(--text-mid);
+      padding: 5px 0 5px 20px;
+      position: relative;
+      border-bottom: 1px dashed rgba(42, 67, 50, .07);
     }
-    .rules-list li:last-child { border-bottom: none; }
+
+    .rules-list li:last-child {
+      border-bottom: none;
+    }
+
     .rules-list li::before {
       content: '';
-      position: absolute; left: 6px; top: 13px;
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--gold); opacity: .7;
+      position: absolute;
+      left: 6px;
+      top: 13px;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: .7;
     }
+
     .rules-agreement {
-      background: var(--green-deep); border-radius: 16px;
-      padding: 20px 20px; margin-top: 20px;
+      background: var(--green-deep);
+      border-radius: 16px;
+      padding: 20px 20px;
+      margin-top: 20px;
       text-align: center;
     }
+
     .rules-agreement p {
-      font-size: .74rem; color: rgba(250,246,238,.7); line-height: 1.6; margin-bottom: 10px;
+      font-size: .74rem;
+      color: rgba(250, 246, 238, .7);
+      line-height: 1.6;
+      margin-bottom: 10px;
     }
-    .rules-agreement strong { color: var(--cream); font-weight: 600; }
+
+    .rules-agreement strong {
+      color: var(--cream);
+      font-weight: 600;
+    }
 
     /* ══════════════════════════════════════════
        CENTERED MODALS
     ══════════════════════════════════════════ */
     .ovl {
       display: none;
-      position: fixed; inset: 0;
-      background: rgba(26,26,20,.6);
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 20, .6);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       z-index: 200;
-      align-items: center; justify-content: center;
+      align-items: center;
+      justify-content: center;
       padding: 24px;
     }
-    .ovl.active { display: flex; animation: ovlIn .25s ease; }
-    @keyframes ovlIn { from { opacity:0; } to { opacity:1; } }
+
+    .ovl.active {
+      display: flex;
+      animation: ovlIn .25s ease;
+    }
+
+    @keyframes ovlIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
 
     .modal-card {
       background: var(--white);
       border-radius: 28px;
-      width: 100%; max-width: 360px;
+      width: 100%;
+      max-width: 360px;
       position: relative;
-      animation: cardIn .35s cubic-bezier(.22,1,.36,1);
+      animation: cardIn .35s cubic-bezier(.22, 1, .36, 1);
       overflow: hidden;
     }
+
     @keyframes cardIn {
-      from { opacity:0; transform:scale(.88) translateY(16px); }
-      to   { opacity:1; transform:none; }
+      from {
+        opacity: 0;
+        transform: scale(.88) translateY(16px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
     }
 
     .mc-top {
       background: var(--green-deep);
       padding: 32px 28px 24px;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
     }
+
     .mc-close {
-      position: absolute; top: 14px; right: 14px;
-      width: 28px; height: 28px; border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      border: none; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; -webkit-tap-highlight-color: transparent;
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .12);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
-    .mc-close svg { color: rgba(250,246,238,.7); }
+
+    .mc-close svg {
+      color: rgba(250, 246, 238, .7);
+    }
+
     .mc-icon {
-      width: 56px; height: 56px; border-radius: 18px;
-      background: rgba(255,255,255,.12);
-      border: 1px solid rgba(255,255,255,.18);
-      display: flex; align-items: center; justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 14px;
     }
-    .mc-icon svg { color: var(--gold-lt); }
-    .mc-title { font-family: var(--font-d); font-size: 1.5rem; font-weight: 500; color: var(--cream); }
-    .mc-sub { font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-lt); margin-top: 4px; }
 
-    .mc-body { padding: 24px 24px 28px; }
+    .mc-icon svg {
+      color: var(--gold-lt);
+    }
+
+    .mc-title {
+      font-family: var(--font-d);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--cream);
+    }
+
+    .mc-sub {
+      font-size: .62rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--gold-lt);
+      margin-top: 4px;
+    }
+
+    .mc-body {
+      padding: 24px 24px 28px;
+    }
 
     .wifi-row {
-      background: var(--cream); border: 1px solid var(--beige);
-      border-radius: 13px; padding: 14px 18px; margin-bottom: 10px;
+      background: var(--cream);
+      border: 1px solid var(--beige);
+      border-radius: 13px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
     }
-    .wifi-lbl { font-size: .59rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 5px; }
-    .wifi-val { font-family: var(--font-d); font-size: 1.22rem; color: var(--text-dark); word-break: break-all; }
+
+    .wifi-lbl {
+      font-size: .59rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .wifi-val {
+      font-family: var(--font-d);
+      font-size: 1.22rem;
+      color: var(--text-dark);
+      word-break: break-all;
+    }
 
     .contact-rounds {
-      display: flex; justify-content: center; gap: 32px; padding: 8px 0 4px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      padding: 8px 0 4px;
     }
+
     .round-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
-      text-decoration: none; cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      cursor: pointer;
       -webkit-tap-highlight-color: transparent;
-      transition: transform .22s cubic-bezier(.22,1,.36,1);
+      transition: transform .22s cubic-bezier(.22, 1, .36, 1);
     }
-    .round-btn:hover, .round-btn:active { transform: translateY(-4px); }
+
+    .round-btn:hover,
+    .round-btn:active {
+      transform: translateY(-4px);
+    }
+
     .round-circle {
-      width: 72px; height: 72px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 24px rgba(0,0,0,.15);
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, .15);
       transition: box-shadow .22s;
     }
-    .round-btn:hover .round-circle { box-shadow: 0 12px 32px rgba(0,0,0,.22); }
-    .round-circle.wa { background: #25d366; }
-    .round-circle.ca { background: var(--green-deep); }
-    .round-circle svg { color: white; }
+
+    .round-btn:hover .round-circle {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, .22);
+    }
+
+    .round-circle.wa {
+      background: #25d366;
+    }
+
+    .round-circle.ca {
+      background: var(--green-deep);
+    }
+
+    .round-circle svg {
+      color: white;
+    }
+
     .round-label {
-      font-size: .68rem; letter-spacing: .14em; text-transform: uppercase;
-      font-weight: 600; color: var(--text-mid);
+      font-size: .68rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--text-mid);
+    }
+
+    /* ══════════════════════════════════════════
+       ORDER SYSTEM
+    ══════════════════════════════════════════ */
+    .order-btn {
+      margin-left: auto;
+      background: var(--gold);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      padding: 9px 18px;
+      font-family: var(--font-b);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .25s cubic-bezier(.22, 1, .36, 1);
+      box-shadow: 0 4px 14px rgba(184, 148, 90, .35);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .order-btn:hover {
+      background: var(--gold-lt);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(184, 148, 90, .45);
+    }
+
+    .order-btn:active {
+      transform: translateY(0);
+    }
+
+    .order-btn.active {
+      background: rgba(255, 255, 255, .15);
+      color: var(--cream);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+      border: 1.5px solid rgba(255, 255, 255, .25);
+    }
+
+    .order-btn.active:hover {
+      background: rgba(255, 255, 255, .22);
+    }
+
+    .order-btn svg {
+      flex-shrink: 0;
+    }
+
+    /* ── Ordering Mode Banner ── */
+    .order-banner {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
+      color: var(--white);
+      text-align: center;
+      padding: 10px 20px;
+      font-family: var(--font-b);
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      animation: bannerSlide .35s cubic-bezier(.22, 1, .36, 1);
+      box-shadow: 0 2px 12px rgba(184, 148, 90, .3);
+    }
+
+    .order-banner.visible {
+      display: flex;
+    }
+
+    @keyframes bannerSlide {
+      from {
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .order-banner .banner-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--white);
+      animation: dotPulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+
+      0%,
+      100% {
+        opacity: .5;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.3);
+      }
+    }
+
+    /* ── Quantity Controls ── */
+    .mitem-qty {
+      display: none;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+      margin-left: 10px;
+    }
+
+    .ordering-mode .mitem-qty {
+      display: flex;
+    }
+
+    .qty-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      border: 1.5px solid var(--beige);
+      background: var(--white);
+      color: var(--green-deep);
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .18s;
+      font-family: var(--font-b);
+      padding: 0;
+      line-height: 1;
+    }
+
+    .qty-btn:hover {
+      background: var(--green-pale);
+      border-color: var(--green-mid);
+    }
+
+    .qty-btn:active {
+      transform: scale(.92);
+    }
+
+    .qty-btn.minus {
+      border-radius: 8px 0 0 8px;
+      border-right: none;
+    }
+
+    .qty-btn.plus {
+      border-radius: 0 8px 8px 0;
+      border-left: none;
+      background: var(--green-deep);
+      color: var(--white);
+      border-color: var(--green-deep);
+    }
+
+    .qty-btn.plus:hover {
+      background: var(--green-mid);
+      border-color: var(--green-mid);
+    }
+
+    .qty-val {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      background: var(--cream);
+      border-top: 1.5px solid var(--beige);
+      border-bottom: 1.5px solid var(--beige);
+      font-family: var(--font-b);
+      user-select: none;
+    }
+
+    .qty-val.has-qty {
+      color: var(--green-deep);
+      background: var(--green-pale);
+      border-color: var(--green-mid);
+      font-weight: 800;
+    }
+
+    /* mitem in ordering mode */
+    .ordering-mode .mitem {
+      transition: background .2s;
+      border-radius: 10px;
+      padding: 13px 8px;
+      margin: 0 -8px;
+    }
+
+    .ordering-mode .mitem.has-items {
+      background: rgba(59, 94, 69, .06);
+    }
+
+    /* ══════════════════════════════════════════
+       FLOATING CART BAR
+    ══════════════════════════════════════════ */
+    .floating-cart {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: none;
+      justify-content: center;
+      padding: 0 16px 20px;
+      pointer-events: none;
+    }
+
+    .floating-cart.visible {
+      display: flex;
+      animation: cartSlideUp .35s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    @keyframes cartSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(100%);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .cart-bar {
+      width: 100%;
+      max-width: 460px;
+      background: var(--green-deep);
+      border-radius: 18px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      pointer-events: auto;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .22s cubic-bezier(.22, 1, .36, 1);
+      box-shadow: 0 8px 32px rgba(42, 67, 50, .4), 0 2px 8px rgba(0, 0, 0, .15);
+    }
+
+    .cart-bar:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 40px rgba(42, 67, 50, .5), 0 4px 12px rgba(0, 0, 0, .2);
+    }
+
+    .cart-bar:active {
+      transform: translateY(-1px);
+    }
+
+    .cart-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .cart-badge {
+      background: var(--gold);
+      color: var(--white);
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .82rem;
+      font-weight: 800;
+      font-family: var(--font-b);
+      box-shadow: 0 2px 8px rgba(184, 148, 90, .4);
+    }
+
+    .cart-label {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+
+    .cart-label-sub {
+      font-size: .6rem;
+      color: rgba(250, 246, 238, .5);
+      letter-spacing: .08em;
+      margin-top: 1px;
+    }
+
+    .cart-total {
+      font-family: var(--font-d);
+      font-size: 1.12rem;
+      font-weight: 600;
+      color: var(--gold-lt);
+      white-space: nowrap;
+    }
+
+    /* ══════════════════════════════════════════
+       ORDER SUMMARY MODAL
+    ══════════════════════════════════════════ */
+    .order-summary-ovl {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 26, 20, .6);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 300;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 0;
+    }
+
+    .order-summary-ovl.active {
+      display: flex;
+      animation: ovlIn .25s ease;
+    }
+
+    .order-panel {
+      background: var(--white);
+      border-radius: 28px 28px 0 0;
+      width: 100%;
+      max-width: 500px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      animation: panelSlideUp .4s cubic-bezier(.22, 1, .36, 1);
+      position: relative;
+    }
+
+    @keyframes panelSlideUp {
+      from {
+        transform: translateY(100%);
+      }
+
+      to {
+        transform: none;
+      }
+    }
+
+    .panel-handle {
+      width: 36px;
+      height: 4px;
+      border-radius: 4px;
+      background: var(--beige);
+      margin: 12px auto 0;
+      flex-shrink: 0;
+    }
+
+    .panel-header {
+      padding: 16px 24px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--beige);
+      flex-shrink: 0;
+    }
+
+    .panel-title {
+      font-family: var(--font-d);
+      font-size: 1.22rem;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+
+    .panel-close {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1px solid var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: background .18s;
+    }
+
+    .panel-close:hover {
+      background: var(--beige);
+    }
+
+    .panel-close svg {
+      color: var(--text-mid);
+    }
+
+    .panel-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 8px 24px;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(42, 67, 50, .07);
+      gap: 12px;
+    }
+
+    .summary-item:last-child {
+      border-bottom: none;
+    }
+
+    .summary-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .summary-item-name {
+      font-family: var(--font-d);
+      font-size: .96rem;
+      color: var(--text-dark);
+      line-height: 1.3;
+    }
+
+    .summary-item-meta {
+      font-size: .68rem;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .summary-item-subtotal {
+      font-family: var(--font-d);
+      font-size: .96rem;
+      font-weight: 500;
+      color: var(--green);
+      white-space: nowrap;
+    }
+
+    .panel-empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--text-light);
+    }
+
+    .panel-empty-icon {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+      opacity: .5;
+    }
+
+    .panel-empty-text {
+      font-size: .8rem;
+      letter-spacing: .08em;
+    }
+
+    .panel-footer {
+      padding: 18px 24px 24px;
+      border-top: 1px solid var(--beige);
+      flex-shrink: 0;
+      background: var(--cream);
+      border-radius: 0 0 0 0;
+    }
+
+    .panel-total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .panel-total-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+    }
+
+    .panel-total-val {
+      font-family: var(--font-d);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green-deep);
+    }
+
+    .panel-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-clear-cart {
+      background: var(--white);
+      color: var(--text-mid);
+      border: 1.5px solid var(--beige);
+      border-radius: 14px;
+      padding: 14px 18px;
+      font-family: var(--font-b);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .18s;
+      flex-shrink: 0;
+    }
+
+    .btn-clear-cart:hover {
+      background: var(--cream-dark);
+      border-color: var(--text-light);
+    }
+
+    .btn-whatsapp-order {
+      flex: 1;
+      background: #25d366;
+      color: var(--white);
+      border: none;
+      border-radius: 14px;
+      padding: 14px 20px;
+      font-family: var(--font-b);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .22s cubic-bezier(.22, 1, .36, 1);
+      box-shadow: 0 4px 16px rgba(37, 211, 102, .35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+    }
+
+    .btn-whatsapp-order:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(37, 211, 102, .45);
+    }
+
+    .btn-whatsapp-order:active {
+      transform: translateY(0);
+    }
+
+    .btn-whatsapp-order.disabled {
+      background: var(--beige);
+      color: var(--text-light);
+      box-shadow: none;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .btn-whatsapp-order svg {
+      flex-shrink: 0;
+    }
+
+    /* bottom spacing for menu body when cart is visible */
+    .mbody.has-cart {
+      padding-bottom: 100px;
     }
   </style>
 </head>
+
 <body>
 
-<script>
-const CONFIG = {
-  resortName:    "Lokavana",
-  resortTagline: "Where the forest breathes",
+  <script>
+    const CONFIG = {
+      resortName: "Lokavana",
+      resortTagline: "Where the forest breathes",
 
-  phoneNumber:    "+917899616501",
-  whatsappNumber: "917899616501",
+      phoneNumber: "+917899616501",
+      whatsappNumber: "917899616501",
 
-  wifiName:     "Lokavana_Guest",
-  wifiPassword: "forest2025",
+      wifiName: "Lokavana_Guest",
+      wifiPassword: "forest2025",
 
-  instagramHandle: "lokavana.farmstay",
-  instagramUrl: "https://www.instagram.com/lokavana.farmstay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      instagramHandle: "lokavana.farmstay",
+      instagramUrl: "https://www.instagram.com/lokavana.farmstay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
 
-  touristSpots: [
-    { name: "Nimshamba Temple",           distance: "2.3 km", type: "temple"    },
-    { name: "Karighatta",                 distance: "2.5 km", type: "viewpoint" },
-    { name: "Tippu Sultan Darga",         distance: "4.5 km", type: "heritage"  },
-    { name: "Ranganathaswamy Temple",     distance: "5.4 km", type: "temple"    },
-    { name: "Ranganthittu Bird Sanctuary",distance: "8.4 km", type: "forest"    },
-    { name: "Payana",                     distance: "10 km",  type: "viewpoint" },
-    { name: "Balamuri Falls",             distance: "17 km",  type: "waterfall" },
-  ],
+      touristSpots: [
+        { name: "Nimshamba Temple", distance: "2.3 km", type: "temple" },
+        { name: "Karighatta", distance: "2.5 km", type: "viewpoint" },
+        { name: "Tippu Sultan Darga", distance: "4.5 km", type: "heritage" },
+        { name: "Ranganathaswamy Temple", distance: "5.4 km", type: "temple" },
+        { name: "Ranganthittu Bird Sanctuary", distance: "8.4 km", type: "forest" },
+        { name: "Payana", distance: "10 km", type: "viewpoint" },
+        { name: "Balamuri Falls", distance: "17 km", type: "waterfall" },
+      ],
 
-  activities: [
-    { name: "Fishing (18+)",    type: "fishing"    },
-    { name: "Campfire",         type: "bonfire"    },
-    { name: "Cricket",          type: "cricket"    },
-    { name: "Badminton",        type: "badminton"  },
-    { name: "Volleyball",       type: "volleyball" },
-    { name: "Swimming Pool",    type: "swimming"   },
-    { name: "Movie Screening",  type: "movie"      },
-  ],
+      activities: [
+        { name: "Fishing (18+)", type: "fishing" },
+        { name: "Campfire", type: "bonfire" },
+        { name: "Cricket", type: "cricket" },
+        { name: "Badminton", type: "badminton" },
+        { name: "Volleyball", type: "volleyball" },
+        { name: "Swimming Pool", type: "swimming" },
+        { name: "Movie Screening", type: "movie" },
+      ],
 
-  mainMenu: [
-    { section: "Snacks & Starters", items: [
-      { name: "Onion Pakoda",      price: "₹120" },
-      { name: "Aloo Pakoda",       price: "₹120" },
-      { name: "Capsicum Pakoda",   price: "₹130" },
-      { name: "French Fries",      price: "₹140" },
-    ]},
-    { section: "Snacks & Quick Bites", items: [
-      { name: "Maggie",            price: "₹90"  },
-      { name: "Cheese Maggie",     price: "₹120" },
-    ]},
-    { section: "Egg Items", items: [
-      { name: "Boiled Egg (2 pcs)", price: "₹60"  },
-      { name: "Omelette",           price: "₹90"  },
-      { name: "Cheese Omelette",    price: "₹120" },
-      { name: "Egg Burji",          price: "₹120" },
-    ]},
-    { section: "Juices", items: [
-      { name: "Lemon Juice",       price: "₹60"  },
-      { name: "Mint Lime Juice",   price: "₹80"  },
-      { name: "Buttermilk",        price: "₹40"  },
-      { name: "Orange Juice",      price: "₹100" },
-      { name: "Moosambi Juice",    price: "₹100" },
-    ]},
-    { section: "Hot Beverages", items: [
-      { name: "Tea",               price: "₹40"  },
-      { name: "Coffee",            price: "₹50"  },
-      { name: "Hot Milk",          price: "₹50"  },
-    ]},
-  ],
+      mainMenu: [
+        {
+          section: "Snacks & Starters", items: [
+            { name: "Onion Pakoda", price: "₹120" },
+            { name: "Aloo Pakoda", price: "₹120" },
+            { name: "Capsicum Pakoda", price: "₹130" },
+            { name: "French Fries", price: "₹140" },
+          ]
+        },
+        {
+          section: "Snacks & Quick Bites", items: [
+            { name: "Maggie", price: "₹90" },
+            { name: "Cheese Maggie", price: "₹120" },
+          ]
+        },
+        {
+          section: "Egg Items", items: [
+            { name: "Boiled Egg (2 pcs)", price: "₹60" },
+            { name: "Omelette", price: "₹90" },
+            { name: "Cheese Omelette", price: "₹120" },
+            { name: "Egg Burji", price: "₹120" },
+          ]
+        },
+        {
+          section: "Juices", items: [
+            { name: "Lemon Juice", price: "₹60" },
+            { name: "Mint Lime Juice", price: "₹80" },
+            { name: "Buttermilk", price: "₹40" },
+            { name: "Orange Juice", price: "₹100" },
+            { name: "Moosambi Juice", price: "₹100" },
+          ]
+        },
+        {
+          section: "Hot Beverages", items: [
+            { name: "Tea", price: "₹40" },
+            { name: "Coffee", price: "₹50" },
+            { name: "Hot Milk", price: "₹50" },
+          ]
+        },
+      ],
 
-  dinnerMenu: [
-    { section: "Non-Veg Starters", items: [
-      { name: "Chicken Kebab",        price: "₹240" },
-      { name: "Fish Kebab",           price: "₹340" },
-      { name: "Chicken Pepper Dry",   price: "₹290" },
-      { name: "Mutton Pepper Dry",    price: "₹380" },
-      { name: "Chilli Chicken",       price: "₹290" },
-      { name: "Mutton Fry",           price: "₹420" },
-      { name: "Egg Fry",              price: "₹220" },
-    ]},
-    { section: "Non-Veg Main Course", items: [
-      { name: "Chicken Curry",        price: "₹280" },
-      { name: "Mutton Curry",         price: "₹380" },
-      { name: "Kheema Curry",         price: "₹280" },
-    ]},
-    { section: "Rice & Biryani", items: [
-      { name: "Chicken Biryani",      price: "₹260" },
-      { name: "Veg Biryani",          price: "₹220" },
-      { name: "Kushka",               price: "₹150" },
-      { name: "White Rice",           price: "₹100" },
-      { name: "Mudde",                price: "₹80"  },
-    ]},
-    { section: "Breads", items: [
-      { name: "Chapati (2 pcs)",      price: "₹70"  },
-      { name: "Roti",                 price: "₹60"  },
-      { name: "Kulcha",               price: "₹70"  },
-      { name: "Naan",                 price: "₹70"  },
-    ]},
-    { section: "Veg Starters", items: [
-      { name: "Gobi Manchurian / Chilly",     price: "₹210" },
-      { name: "Paneer Manchurian / Chilly",   price: "₹250" },
-      { name: "Mushroom Manchurian / Chilly", price: "₹230" },
-      { name: "Babycorn Manchurian / Chilly", price: "₹230" },
-      { name: "Aloo Chilly",                  price: "₹200" },
-    ]},
-    { section: "Veg Main Course", items: [
-      { name: "Paneer Butter Masala",  price: "₹280" },
-      { name: "Kadai Paneer",          price: "₹280" },
-      { name: "Mushroom Mutter Masala",price: "₹270" },
-      { name: "Aloo Mutter",           price: "₹230" },
-      { name: "Babycorn Masala",       price: "₹270" },
-      { name: "Mix Veg Curry",         price: "₹250" },
-    ]},
-  ],
-};
-</script>
+      dinnerMenu: [
+        {
+          section: "Non-Veg Starters", items: [
+            { name: "Chicken Kebab", price: "₹240" },
+            { name: "Fish Kebab", price: "₹340" },
+            { name: "Chicken Pepper Dry", price: "₹290" },
+            { name: "Mutton Pepper Dry", price: "₹380" },
+            { name: "Chilli Chicken", price: "₹290" },
+            { name: "Mutton Fry", price: "₹420" },
+            { name: "Egg Fry", price: "₹220" },
+          ]
+        },
+        {
+          section: "Non-Veg Main Course", items: [
+            { name: "Chicken Curry", price: "₹280" },
+            { name: "Mutton Curry", price: "₹380" },
+            { name: "Kheema Curry", price: "₹280" },
+          ]
+        },
+        {
+          section: "Rice & Biryani", items: [
+            { name: "Chicken Biryani", price: "₹260" },
+            { name: "Veg Biryani", price: "₹220" },
+            { name: "Kushka", price: "₹150" },
+            { name: "White Rice", price: "₹100" },
+            { name: "Mudde", price: "₹80" },
+          ]
+        },
+        {
+          section: "Breads", items: [
+            { name: "Chapati (2 pcs)", price: "₹70" },
+            { name: "Roti", price: "₹60" },
+            { name: "Kulcha", price: "₹70" },
+            { name: "Naan", price: "₹70" },
+          ]
+        },
+        {
+          section: "Veg Starters", items: [
+            { name: "Gobi Manchurian / Chilly", price: "₹210" },
+            { name: "Paneer Manchurian / Chilly", price: "₹250" },
+            { name: "Mushroom Manchurian / Chilly", price: "₹230" },
+            { name: "Babycorn Manchurian / Chilly", price: "₹230" },
+            { name: "Aloo Chilly", price: "₹200" },
+          ]
+        },
+        {
+          section: "Veg Main Course", items: [
+            { name: "Paneer Butter Masala", price: "₹280" },
+            { name: "Kadai Paneer", price: "₹280" },
+            { name: "Mushroom Mutter Masala", price: "₹270" },
+            { name: "Aloo Mutter", price: "₹230" },
+            { name: "Babycorn Masala", price: "₹270" },
+            { name: "Mix Veg Curry", price: "₹250" },
+          ]
+        },
+      ],
+    };
+  </script>
 
-<!-- HOME -->
-<div id="home" class="screen active">
-  <div class="hero">
-    <img src="https://kaushalg47.github.io/Loka-Menu/LOKA.png" alt="Lokavana" class="logo-img" id="logo-img"/>
+  <!-- HOME -->
+  <div id="home" class="screen active">
+    <div class="hero">
+      <img src="https://kaushalg47.github.io/Loka-Menu/LOKA.png" alt="Lokavana" class="logo-img" id="logo-img" />
+    </div>
+    <div class="home-grid" id="home-grid"></div>
+    <div class="home-footer" id="hfoot"></div>
   </div>
-  <div class="home-grid" id="home-grid"></div>
-  <div class="home-footer" id="hfoot"></div>
-</div>
 
-<!-- MENU -->
-<div id="menu" class="screen inner">
-  <div class="ihead">
-    <button class="bkbtn" onclick="showScreen('home')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    </button>
-    <div><div class="ihead-title">All Day Menu</div><div class="ihead-sub">Available all day</div></div>
-  </div>
-  <div class="mbody" id="main-menu-body"></div>
-</div>
-
-<!-- DINNER -->
-<div id="dinner" class="screen inner">
-  <div class="ihead">
-    <button class="bkbtn" onclick="showScreen('home')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    </button>
-    <div><div class="ihead-title">Dinner Menu</div><div class="ihead-sub">Evening · 7 PM – 10:30 PM</div></div>
-  </div>
-  <div class="mbody" id="dinner-menu-body"></div>
-</div>
-
-<!-- EXPLORE -->
-<div id="explore" class="screen inner">
-  <div class="ihead">
-    <button class="bkbtn" onclick="showScreen('home')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    </button>
-    <div><div class="ihead-title">Explore Around</div><div class="ihead-sub">Tourist Spots & Activities</div></div>
-  </div>
-  <div class="mbody">
-    <div class="slabel">Nearby Attractions</div>
-    <div id="spots-list"></div>
-    <div class="slabel" style="margin-top:30px">Activities at Lokavana</div>
-    <div class="act-grid" id="act-grid"></div>
-  </div>
-</div>
-
-<!-- RULES -->
-<div id="rules" class="screen inner">
-  <div class="ihead">
-    <button class="bkbtn" onclick="showScreen('home')">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    </button>
-    <div><div class="ihead-title">Rules & Regulations</div><div class="ihead-sub">Please read carefully</div></div>
-  </div>
-  <div class="rules-body">
-    <div class="rules-intro">
-      By confirming your booking and entering the premises, you agree to comply with the following terms and conditions.
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">1</span> General Rules, Conduct & Restrictions</div>
-      <ul class="rules-list">
-        <li>Guests must behave responsibly and respectfully toward property, staff, and others.</li>
-        <li>Fights, violence, abusive behavior, or inappropriate language will NOT be tolerated and may result in immediate eviction without refund.</li>
-        <li>Use of narcotics, drugs, or illegal substances is strictly prohibited.</li>
-        <li>Loud music or disturbance after 11:00 PM is not allowed unless pre-approved.</li>
-        <li>Staff assistance is available only until 11:00 PM.</li>
-        <li>Only registered guests are allowed; outside visitors require prior approval.</li>
-      </ul>
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">2</span> Property Use, Cleanliness & Environment</div>
-      <ul class="rules-list">
-        <li>Guests must maintain the property in good condition.</li>
-        <li>Any damage to property, furniture, appliances, or surroundings will be charged.</li>
-        <li>Trash must be disposed of in designated bins only; littering is strictly prohibited.</li>
-        <li>Respect nature, plants, animals, and surroundings.</li>
-        <li>Any environmental damage or excessive littering will attract penalties.</li>
-      </ul>
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">3</span> Safety, Liability & Surveillance</div>
-      <ul class="rules-list">
-        <li>Guests stay at the property at their own risk.</li>
-        <li>Management is not responsible for personal injuries, accidents, loss or theft of belongings, or damage/theft of vehicles.</li>
-        <li>Parking is at owner's risk.</li>
-        <li>The property is under CCTV surveillance in common areas. Footage may be used in case of disputes or legal requirements.</li>
-      </ul>
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">4</span> Pool Rules</div>
-      <ul class="rules-list">
-        <li>Pool timings: 7:00 AM to 10:30 PM.</li>
-        <li>Shower before entering is mandatory.</li>
-        <li>Only proper waterproof/swimwear is allowed.</li>
-        <li>Glass items, sharp objects, and food are strictly prohibited near the pool.</li>
-        <li>No unsafe behavior — running, diving in shallow areas, etc.</li>
-        <li>Children must be supervised at all times.</li>
-        <li>Pool usage is at the guest's own risk.</li>
-      </ul>
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">5</span> Pets & Bonfire</div>
-      <ul class="rules-list">
-        <li>Pets are allowed on the property but strictly NOT allowed inside rooms.</li>
-        <li>Pet owners must clean any litter/waste and are responsible for any damage caused.</li>
-        <li>Bonfire is available only on prior request and must be used responsibly.</li>
-      </ul>
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">6</span> Check-in, Check-out & ID Policy</div>
-      <ul class="rules-list">
-        <li>Guests must follow agreed check-in and check-out timings.</li>
-        <li>Original Government-issued ID proof is mandatory at check-in.</li>
-        <li>ID will be returned at checkout upon proper handover of keys.</li>
-        <li>Late check-out may incur additional charges.</li>
-      </ul>
-    </div>
-    <div class="rules-section">
-      <div class="rules-section-title"><span class="rnum">7</span> Penalties, Enforcement & Rights</div>
-      <ul class="rules-list">
-        <li>Any rule violation may result in immediate eviction without refund, monetary fines, or legal action.</li>
-        <li>Management reserves the right to refuse entry, cancel booking, or evict guests for non-compliance.</li>
-      </ul>
-    </div>
-    <div class="rules-agreement">
-      <p><strong>Agreement</strong></p>
-      <p>By staying at the property, you confirm that you have read and understood all terms and conditions, and agree to abide by all rules stated above.</p>
-    </div>
-  </div>
-</div>
-
-<!-- WIFI MODAL -->
-<div id="ovl-wifi" class="ovl" onclick="ovlClick(event,'ovl-wifi')">
-  <div class="modal-card">
-    <div class="mc-top">
-      <button class="mc-close" onclick="closeOvl('ovl-wifi')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  <!-- MENU -->
+  <div id="menu" class="screen inner">
+    <div class="ihead">
+      <button class="bkbtn" onclick="exitOrderingMode('menu'); showScreen('home')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 5l-7 7 7 7" />
+        </svg>
       </button>
-      <div class="mc-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+      <div>
+        <div class="ihead-title">All Day Menu</div>
+        <div class="ihead-sub">Available all day</div>
       </div>
-      <div class="mc-title">WiFi Access</div>
-      <div class="mc-sub">Connect & stay in touch</div>
-    </div>
-    <div class="mc-body">
-      <div class="wifi-row"><div class="wifi-lbl">Network Name</div><div class="wifi-val" id="wname"></div></div>
-      <div class="wifi-row"><div class="wifi-lbl">Password</div><div class="wifi-val" id="wpass"></div></div>
-    </div>
-  </div>
-</div>
-
-<!-- CONTACT MODAL -->
-<div id="ovl-contact" class="ovl" onclick="ovlClick(event,'ovl-contact')">
-  <div class="modal-card">
-    <div class="mc-top">
-      <button class="mc-close" onclick="closeOvl('ovl-contact')">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      <button class="order-btn" id="order-btn-menu" onclick="toggleOrderingMode('menu')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span>Order</span>
       </button>
-      <div class="mc-icon">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-      </div>
-      <div class="mc-title">Contact Us</div>
-      <div class="mc-sub">We're here to help</div>
     </div>
-    <div class="mc-body">
-      <div class="contact-rounds">
-        <a id="wa-link" class="round-btn" target="_blank" rel="noopener">
-          <div class="round-circle wa">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          </div>
-          <span class="round-label">WhatsApp</span>
-        </a>
-        <a id="call-link" class="round-btn">
-          <div class="round-circle ca">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <span class="round-label">Call</span>
-        </a>
+    <div class="order-banner" id="order-banner-menu">
+      <span class="banner-dot"></span>
+      Select items to order
+    </div>
+    <div class="mbody" id="main-menu-body"></div>
+  </div>
+
+  <!-- DINNER -->
+  <div id="dinner" class="screen inner">
+    <div class="ihead">
+      <button class="bkbtn" onclick="exitOrderingMode('dinner'); showScreen('home')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 5l-7 7 7 7" />
+        </svg>
+      </button>
+      <div>
+        <div class="ihead-title">Dinner Menu</div>
+        <div class="ihead-sub">Evening · 7 PM – 10:30 PM</div>
+      </div>
+      <button class="order-btn" id="order-btn-dinner" onclick="toggleOrderingMode('dinner')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+        <span>Order</span>
+      </button>
+    </div>
+    <div class="order-banner" id="order-banner-dinner">
+      <span class="banner-dot"></span>
+      Select items to order
+    </div>
+    <div class="mbody" id="dinner-menu-body"></div>
+  </div>
+
+  <!-- EXPLORE -->
+  <div id="explore" class="screen inner">
+    <div class="ihead">
+      <button class="bkbtn" onclick="showScreen('home')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 5l-7 7 7 7" />
+        </svg>
+      </button>
+      <div>
+        <div class="ihead-title">Explore Around</div>
+        <div class="ihead-sub">Tourist Spots & Activities</div>
+      </div>
+    </div>
+    <div class="mbody">
+      <div class="slabel">Nearby Attractions</div>
+      <div id="spots-list"></div>
+      <div class="slabel" style="margin-top:30px">Activities at Lokavana</div>
+      <div class="act-grid" id="act-grid"></div>
+    </div>
+  </div>
+
+  <!-- RULES -->
+  <div id="rules" class="screen inner">
+    <div class="ihead">
+      <button class="bkbtn" onclick="showScreen('home')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 5l-7 7 7 7" />
+        </svg>
+      </button>
+      <div>
+        <div class="ihead-title">Rules & Regulations</div>
+        <div class="ihead-sub">Please read carefully</div>
+      </div>
+    </div>
+    <div class="rules-body">
+      <div class="rules-intro">
+        By confirming your booking and entering the premises, you agree to comply with the following terms and
+        conditions.
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">1</span> General Rules, Conduct & Restrictions</div>
+        <ul class="rules-list">
+          <li>Guests must behave responsibly and respectfully toward property, staff, and others.</li>
+          <li>Fights, violence, abusive behavior, or inappropriate language will NOT be tolerated and may result in
+            immediate eviction without refund.</li>
+          <li>Use of narcotics, drugs, or illegal substances is strictly prohibited.</li>
+          <li>Loud music or disturbance after 11:00 PM is not allowed unless pre-approved.</li>
+          <li>Staff assistance is available only until 11:00 PM.</li>
+          <li>Only registered guests are allowed; outside visitors require prior approval.</li>
+        </ul>
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">2</span> Property Use, Cleanliness & Environment</div>
+        <ul class="rules-list">
+          <li>Guests must maintain the property in good condition.</li>
+          <li>Any damage to property, furniture, appliances, or surroundings will be charged.</li>
+          <li>Trash must be disposed of in designated bins only; littering is strictly prohibited.</li>
+          <li>Respect nature, plants, animals, and surroundings.</li>
+          <li>Any environmental damage or excessive littering will attract penalties.</li>
+        </ul>
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">3</span> Safety, Liability & Surveillance</div>
+        <ul class="rules-list">
+          <li>Guests stay at the property at their own risk.</li>
+          <li>Management is not responsible for personal injuries, accidents, loss or theft of belongings, or
+            damage/theft of vehicles.</li>
+          <li>Parking is at owner's risk.</li>
+          <li>The property is under CCTV surveillance in common areas. Footage may be used in case of disputes or legal
+            requirements.</li>
+        </ul>
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">4</span> Pool Rules</div>
+        <ul class="rules-list">
+          <li>Pool timings: 7:00 AM to 10:30 PM.</li>
+          <li>Shower before entering is mandatory.</li>
+          <li>Only proper waterproof/swimwear is allowed.</li>
+          <li>Glass items, sharp objects, and food are strictly prohibited near the pool.</li>
+          <li>No unsafe behavior — running, diving in shallow areas, etc.</li>
+          <li>Children must be supervised at all times.</li>
+          <li>Pool usage is at the guest's own risk.</li>
+        </ul>
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">5</span> Pets & Bonfire</div>
+        <ul class="rules-list">
+          <li>Pets are allowed on the property but strictly NOT allowed inside rooms.</li>
+          <li>Pet owners must clean any litter/waste and are responsible for any damage caused.</li>
+          <li>Bonfire is available only on prior request and must be used responsibly.</li>
+        </ul>
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">6</span> Check-in, Check-out & ID Policy</div>
+        <ul class="rules-list">
+          <li>Guests must follow agreed check-in and check-out timings.</li>
+          <li>Original Government-issued ID proof is mandatory at check-in.</li>
+          <li>ID will be returned at checkout upon proper handover of keys.</li>
+          <li>Late check-out may incur additional charges.</li>
+        </ul>
+      </div>
+      <div class="rules-section">
+        <div class="rules-section-title"><span class="rnum">7</span> Penalties, Enforcement & Rights</div>
+        <ul class="rules-list">
+          <li>Any rule violation may result in immediate eviction without refund, monetary fines, or legal action.</li>
+          <li>Management reserves the right to refuse entry, cancel booking, or evict guests for non-compliance.</li>
+        </ul>
+      </div>
+      <div class="rules-agreement">
+        <p><strong>Agreement</strong></p>
+        <p>By staying at the property, you confirm that you have read and understood all terms and conditions, and agree
+          to abide by all rules stated above.</p>
       </div>
     </div>
   </div>
-</div>
 
-<script>
-const I = {
-  menu:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
-  dinner:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
-  wifi:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>`,
-  explore:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
-  instagram:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
-  rules:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
-  contact:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
-  waterfall:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v6M8 4l4-2 4 2"/><path d="M5 10c0 8 14 8 14 0"/><path d="M7 22c0-4 10-4 10 0"/><line x1="9" y1="10" x2="9" y2="22"/><line x1="15" y1="10" x2="15" y2="22"/></svg>`,
-  viewpoint:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 6l6 6 4-4 6 6 6-6"/><line x1="1" y1="18" x2="23" y2="18"/></svg>`,
-  temple:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="10" width="20" height="11"/><path d="M12 3L2 10h20z"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="7" y1="15" x2="7" y2="21"/><line x1="17" y1="15" x2="17" y2="21"/></svg>`,
-  forest:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L4 14h4v7h8v-7h4z"/></svg>`,
-  heritage:`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10"/><path d="M3 11l9-7 9 7"/><line x1="12" y1="21" x2="12" y2="15"/></svg>`,
-  fishing:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 9l-3-3 3-3"/><path d="M15 6c3.33 0 6 2.67 6 6s-2.67 6-6 6H3"/><circle cx="5" cy="18" r="2"/><path d="M7 18h4"/></svg>`,
-  cricket:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20L20 4"/><path d="M14 4l6 6"/><path d="M4 14l2 2"/></svg>`,
-  badminton:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="17" cy="7" r="3"/><path d="M14.5 9.5L3 21"/><path d="M13 6l-2 2"/></svg>`,
-  volleyball:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 6.5 17.5"/><path d="M2.5 8.5A10 10 0 0 1 15 2"/><path d="M8 22a10 10 0 0 1 2-19.5"/></svg>`,
-  swimming:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><circle cx="12" cy="6" r="2"/><path d="M12 8v2"/></svg>`,
-  movie:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 4v16"/><path d="M16 4v16"/><path d="M2 12h20"/><path d="M2 8h6"/><path d="M2 16h6"/><path d="M16 8h6"/><path d="M16 16h6"/></svg>`,
-  birdwatch:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
-  yoga:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="3.5" r="1.5"/><path d="M5 20.5l4-8 3 5 3-5 4 8"/><path d="M8.5 12.5L12 8l3.5 4.5"/></svg>`,
-  bonfire:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0C16 8 12 6 12 2z"/><path d="M8 22h8"/><line x1="12" y1="17" x2="12" y2="22"/></svg>`,
-  cycling:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="17" r="3"/><circle cx="6" cy="17" r="3"/><path d="M9 17l2-5h4l2 3"/><path d="M13 12l-4-4"/><circle cx="12" cy="7" r="1" fill="currentColor"/></svg>`,
-  photography:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
-  cooking:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
-  stargazing:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
-  spa:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
-  plantation:`<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="22" x2="12" y2="11"/><path d="M12 11C12 11 7 9 7 5a5 5 0 0 1 10 0c0 4-5 6-5 6z"/><path d="M12 15c0 0 4-1 4-4"/><path d="M12 19c0 0-4-1-4-4"/></svg>`,
-};
+  <!-- WIFI MODAL -->
+  <div id="ovl-wifi" class="ovl" onclick="ovlClick(event,'ovl-wifi')">
+    <div class="modal-card">
+      <div class="mc-top">
+        <button class="mc-close" onclick="closeOvl('ovl-wifi')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+        <div class="mc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0" />
+            <path d="M1.42 9a16 16 0 0 1 21.16 0" />
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0" />
+            <circle cx="12" cy="20" r="1" fill="currentColor" />
+          </svg>
+        </div>
+        <div class="mc-title">WiFi Access</div>
+        <div class="mc-sub">Connect & stay in touch</div>
+      </div>
+      <div class="mc-body">
+        <div class="wifi-row">
+          <div class="wifi-lbl">Network Name</div>
+          <div class="wifi-val" id="wname"></div>
+        </div>
+        <div class="wifi-row">
+          <div class="wifi-lbl">Password</div>
+          <div class="wifi-val" id="wpass"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0, 0);
-}
-function openOvl(id)  { document.getElementById(id).classList.add('active'); }
-function closeOvl(id) { document.getElementById(id).classList.remove('active'); }
-function ovlClick(e, id) { if (e.target.id === id) closeOvl(id); }
+  <!-- CONTACT MODAL -->
+  <div id="ovl-contact" class="ovl" onclick="ovlClick(event,'ovl-contact')">
+    <div class="modal-card">
+      <div class="mc-top">
+        <button class="mc-close" onclick="closeOvl('ovl-contact')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+        <div class="mc-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+          </svg>
+        </div>
+        <div class="mc-title">Contact Us</div>
+        <div class="mc-sub">We're here to help</div>
+      </div>
+      <div class="mc-body">
+        <div class="contact-rounds">
+          <a id="wa-link" class="round-btn" target="_blank" rel="noopener">
+            <div class="round-circle wa">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+              </svg>
+            </div>
+            <span class="round-label">WhatsApp</span>
+          </a>
+          <a id="call-link" class="round-btn">
+            <div class="round-circle ca">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <span class="round-label">Call</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-function buildGrid() {
-  const g = document.getElementById('home-grid');
-  const btns = [
-    { label:'All Day Menu', icon:'menu',      fn:"showScreen('menu')"    },
-    { label:'Dinner Menu',  icon:'dinner',    fn:"showScreen('dinner')"  },
-    { label:'WiFi',         icon:'wifi',      fn:"openOvl('ovl-wifi')"   },
-    { label:'Explore',      icon:'explore',   fn:"showScreen('explore')" },
-    { label:'Rules',        icon:'rules',     fn:"showScreen('rules')"   },
-    { label:'Instagram',    icon:'instagram', fn:"goInsta()"             },
-  ];
-  const contactHTML = `
+  <!-- FLOATING CART -->
+  <div class="floating-cart" id="floating-cart">
+    <div class="cart-bar" onclick="openOrderSummary()">
+      <div class="cart-left">
+        <div class="cart-badge" id="cart-badge">0</div>
+        <div>
+          <div class="cart-label">View Cart</div>
+          <div class="cart-label-sub">Tap to review order</div>
+        </div>
+      </div>
+      <div class="cart-total" id="cart-total">₹0</div>
+    </div>
+  </div>
+
+  <!-- ORDER SUMMARY MODAL -->
+  <div class="order-summary-ovl" id="ovl-order-summary" onclick="if(event.target===this)closeOrderSummary()">
+    <div class="order-panel">
+      <div class="panel-handle"></div>
+      <div class="panel-header">
+        <div class="panel-title">Order Summary</div>
+        <button class="panel-close" onclick="closeOrderSummary()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+      <div class="panel-items" id="panel-items"></div>
+      <div class="panel-footer">
+        <div class="panel-total-row">
+          <span class="panel-total-label">Grand Total</span>
+          <span class="panel-total-val" id="panel-total">₹0</span>
+        </div>
+        <div class="panel-actions">
+          <button class="btn-clear-cart" onclick="clearCart()">Clear</button>
+          <button class="btn-whatsapp-order" id="btn-wa-order" onclick="sendWhatsAppOrder()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+            </svg>
+            Order via WhatsApp
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const I = {
+      menu: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
+      dinner: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+      wifi: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>`,
+      explore: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
+      instagram: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>`,
+      rules: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+      contact: `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.38 2 2 0 0 1 3.57 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.5a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`,
+      waterfall: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v6M8 4l4-2 4 2"/><path d="M5 10c0 8 14 8 14 0"/><path d="M7 22c0-4 10-4 10 0"/><line x1="9" y1="10" x2="9" y2="22"/><line x1="15" y1="10" x2="15" y2="22"/></svg>`,
+      viewpoint: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 6l6 6 4-4 6 6 6-6"/><line x1="1" y1="18" x2="23" y2="18"/></svg>`,
+      temple: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="10" width="20" height="11"/><path d="M12 3L2 10h20z"/><line x1="12" y1="10" x2="12" y2="21"/><line x1="7" y1="15" x2="7" y2="21"/><line x1="17" y1="15" x2="17" y2="21"/></svg>`,
+      forest: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L4 14h4v7h8v-7h4z"/></svg>`,
+      heritage: `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="11" width="18" height="10"/><path d="M3 11l9-7 9 7"/><line x1="12" y1="21" x2="12" y2="15"/></svg>`,
+      fishing: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 9l-3-3 3-3"/><path d="M15 6c3.33 0 6 2.67 6 6s-2.67 6-6 6H3"/><circle cx="5" cy="18" r="2"/><path d="M7 18h4"/></svg>`,
+      cricket: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 20L20 4"/><path d="M14 4l6 6"/><path d="M4 14l2 2"/></svg>`,
+      badminton: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="17" cy="7" r="3"/><path d="M14.5 9.5L3 21"/><path d="M13 6l-2 2"/></svg>`,
+      volleyball: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 1 6.5 17.5"/><path d="M2.5 8.5A10 10 0 0 1 15 2"/><path d="M8 22a10 10 0 0 1 2-19.5"/></svg>`,
+      swimming: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><circle cx="12" cy="6" r="2"/><path d="M12 8v2"/></svg>`,
+      movie: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 4v16"/><path d="M16 4v16"/><path d="M2 12h20"/><path d="M2 8h6"/><path d="M2 16h6"/><path d="M16 8h6"/><path d="M16 16h6"/></svg>`,
+      birdwatch: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+      yoga: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="3.5" r="1.5"/><path d="M5 20.5l4-8 3 5 3-5 4 8"/><path d="M8.5 12.5L12 8l3.5 4.5"/></svg>`,
+      bonfire: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0C16 8 12 6 12 2z"/><path d="M8 22h8"/><line x1="12" y1="17" x2="12" y2="22"/></svg>`,
+      cycling: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="17" r="3"/><circle cx="6" cy="17" r="3"/><path d="M9 17l2-5h4l2 3"/><path d="M13 12l-4-4"/><circle cx="12" cy="7" r="1" fill="currentColor"/></svg>`,
+      photography: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`,
+      cooking: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
+      stargazing: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
+      spa: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>`,
+      plantation: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="22" x2="12" y2="11"/><path d="M12 11C12 11 7 9 7 5a5 5 0 0 1 10 0c0 4-5 6-5 6z"/><path d="M12 15c0 0 4-1 4-4"/><path d="M12 19c0 0-4-1-4-4"/></svg>`,
+    };
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    function openOvl(id) { document.getElementById(id).classList.add('active'); }
+    function closeOvl(id) { document.getElementById(id).classList.remove('active'); }
+    function ovlClick(e, id) { if (e.target.id === id) closeOvl(id); }
+
+    function buildGrid() {
+      const g = document.getElementById('home-grid');
+      const btns = [
+        { label: 'All Day Menu', icon: 'menu', fn: "showScreen('menu')" },
+        { label: 'Dinner Menu', icon: 'dinner', fn: "showScreen('dinner')" },
+        { label: 'WiFi', icon: 'wifi', fn: "openOvl('ovl-wifi')" },
+        { label: 'Explore', icon: 'explore', fn: "showScreen('explore')" },
+        { label: 'Rules', icon: 'rules', fn: "showScreen('rules')" },
+        { label: 'Instagram', icon: 'instagram', fn: "goInsta()" },
+      ];
+      const contactHTML = `
     <button class="gbtn-contact" onclick="openOvl('ovl-contact')">
       <div class="gicon-contact">${I.contact}</div>
       <div>
@@ -738,56 +1931,222 @@ function buildGrid() {
         <div class="glabel-sub">WhatsApp · Call</div>
       </div>
     </button>`;
-  const regularHTML = btns.map(b => `
+      const regularHTML = btns.map(b => `
     <button class="gbtn" onclick="${b.fn}">
       <div class="gicon">${I[b.icon]}</div>
       <span class="glabel">${b.label}</span>
     </button>`).join('');
-  g.innerHTML = contactHTML + regularHTML;
-}
+      g.innerHTML = contactHTML + regularHTML;
+    }
 
-function buildMenu(id, sections) {
-  document.getElementById(id).innerHTML = sections.map(s => `
+    function buildMenu(id, sections) {
+      document.getElementById(id).innerHTML = sections.map(s => `
     <div class="slabel">${s.section}</div>
     ${s.items.map(it => `
-      <div class="mitem">
+      <div class="mitem" data-item-name="${it.name}" data-item-price="${it.price}">
         <div><div class="mitem-name">${it.name}</div>${it.desc ? `<div class="mitem-desc">${it.desc}</div>` : ''}</div>
         <div class="mitem-price">${it.price}</div>
+        <div class="mitem-qty">
+          <button class="qty-btn minus" onclick="changeQty(this, -1)">&minus;</button>
+          <span class="qty-val">0</span>
+          <button class="qty-btn plus" onclick="changeQty(this, 1)">+</button>
+        </div>
       </div>`).join('')}
   `).join('');
-}
+    }
 
-function buildSpots() {
-  document.getElementById('spots-list').innerHTML = CONFIG.touristSpots.map(s => `
+    function buildSpots() {
+      document.getElementById('spots-list').innerHTML = CONFIG.touristSpots.map(s => `
     <div class="spot">
       <div class="spot-ico">${I[s.type] || I.explore}</div>
       <div><div class="spot-name">${s.name}</div><div class="spot-type">${s.type}</div></div>
       <div class="spot-dist">${s.distance}</div>
     </div>`).join('');
-}
+    }
 
-function buildActs() {
-  document.getElementById('act-grid').innerHTML = CONFIG.activities.map(a => `
+    function buildActs() {
+      document.getElementById('act-grid').innerHTML = CONFIG.activities.map(a => `
     <div class="act-chip">${I[a.type] || I.explore}<span>${a.name}</span></div>`).join('');
-}
+    }
 
-function goInsta() {
-  window.open(CONFIG.instagramUrl, '_blank', 'noopener');
-}
+    function goInsta() {
+      window.open(CONFIG.instagramUrl, '_blank', 'noopener');
+    }
 
-(function init() {
-  document.title = CONFIG.resortName;
-  document.getElementById('hfoot').textContent = '© ' + CONFIG.resortName + ' · All rights reserved';
-  document.getElementById('wname').textContent = CONFIG.wifiName;
-  document.getElementById('wpass').textContent = CONFIG.wifiPassword;
-  document.getElementById('wa-link').href   = 'https://wa.me/' + CONFIG.whatsappNumber;
-  document.getElementById('call-link').href = 'tel:' + CONFIG.phoneNumber;
-  buildGrid();
-  buildMenu('main-menu-body',   CONFIG.mainMenu);
-  buildMenu('dinner-menu-body', CONFIG.dinnerMenu);
-  buildSpots();
-  buildActs();
-})();
-</script>
+    /* ── Ordering Mode Logic ── */
+    function toggleOrderingMode(menuId) {
+      const screenEl = document.getElementById(menuId);
+      const bodyId = menuId === 'menu' ? 'main-menu-body' : 'dinner-menu-body';
+      const bodyEl = document.getElementById(bodyId);
+      const banner = document.getElementById('order-banner-' + menuId);
+      const btn = document.getElementById('order-btn-' + menuId);
+      const isActive = bodyEl.classList.contains('ordering-mode');
+
+      if (isActive) {
+        exitOrderingMode(menuId);
+      } else {
+        bodyEl.classList.add('ordering-mode');
+        banner.classList.add('visible');
+        btn.classList.add('active');
+        btn.querySelector('span').textContent = 'Cancel';
+      }
+    }
+
+    function exitOrderingMode(menuId) {
+      const bodyId = menuId === 'menu' ? 'main-menu-body' : 'dinner-menu-body';
+      const bodyEl = document.getElementById(bodyId);
+      const banner = document.getElementById('order-banner-' + menuId);
+      const btn = document.getElementById('order-btn-' + menuId);
+
+      bodyEl.classList.remove('ordering-mode');
+      banner.classList.remove('visible');
+      btn.classList.remove('active');
+      btn.querySelector('span').textContent = 'Order';
+
+      // Reset all quantities
+      bodyEl.querySelectorAll('.qty-val').forEach(el => {
+        el.textContent = '0';
+        el.classList.remove('has-qty');
+      });
+      bodyEl.querySelectorAll('.mitem').forEach(el => el.classList.remove('has-items'));
+      updateFloatingCart();
+    }
+
+    function changeQty(btnEl, delta) {
+      const qtyEl = btnEl.parentElement.querySelector('.qty-val');
+      const mitemEl = btnEl.closest('.mitem');
+      let val = parseInt(qtyEl.textContent) + delta;
+      if (val < 0) val = 0;
+      if (val > 99) val = 99;
+      qtyEl.textContent = val;
+
+      if (val > 0) {
+        qtyEl.classList.add('has-qty');
+        mitemEl.classList.add('has-items');
+      } else {
+        qtyEl.classList.remove('has-qty');
+        mitemEl.classList.remove('has-items');
+      }
+      updateFloatingCart();
+    }
+
+    /* ── Floating Cart ── */
+    function getCartItems() {
+      const items = [];
+      document.querySelectorAll('.ordering-mode .mitem').forEach(el => {
+        const qtyEl = el.querySelector('.qty-val');
+        const qty = parseInt(qtyEl.textContent);
+        if (qty > 0) {
+          const name = el.getAttribute('data-item-name');
+          const priceStr = el.getAttribute('data-item-price');
+          const price = parseInt(priceStr.replace(/[^0-9]/g, ''));
+          items.push({ name, qty, price, subtotal: qty * price });
+        }
+      });
+      return items;
+    }
+
+    function updateFloatingCart() {
+      const items = getCartItems();
+      const totalQty = items.reduce((s, i) => s + i.qty, 0);
+      const totalPrice = items.reduce((s, i) => s + i.subtotal, 0);
+      const cartEl = document.getElementById('floating-cart');
+      const badgeEl = document.getElementById('cart-badge');
+      const totalEl = document.getElementById('cart-total');
+
+      if (totalQty > 0) {
+        cartEl.classList.add('visible');
+        badgeEl.textContent = totalQty;
+        totalEl.textContent = '₹' + totalPrice;
+        // add bottom padding to active menu body
+        document.querySelectorAll('.mbody.ordering-mode').forEach(el => el.classList.add('has-cart'));
+      } else {
+        cartEl.classList.remove('visible');
+        document.querySelectorAll('.mbody').forEach(el => el.classList.remove('has-cart'));
+      }
+    }
+
+    /* ── Order Summary ── */
+    function openOrderSummary() {
+      const items = getCartItems();
+      const panelItems = document.getElementById('panel-items');
+      const panelTotal = document.getElementById('panel-total');
+      const waBtn = document.getElementById('btn-wa-order');
+
+      if (items.length === 0) {
+        panelItems.innerHTML = `
+          <div class="panel-empty">
+            <div class="panel-empty-icon">🛒</div>
+            <div class="panel-empty-text">Your cart is empty</div>
+          </div>`;
+        panelTotal.textContent = '₹0';
+        waBtn.classList.add('disabled');
+      } else {
+        const totalPrice = items.reduce((s, i) => s + i.subtotal, 0);
+        panelItems.innerHTML = items.map(i => `
+          <div class="summary-item">
+            <div class="summary-item-info">
+              <div class="summary-item-name">${i.name}</div>
+              <div class="summary-item-meta">₹${i.price} × ${i.qty}</div>
+            </div>
+            <div class="summary-item-subtotal">₹${i.subtotal}</div>
+          </div>`).join('');
+        panelTotal.textContent = '₹' + totalPrice;
+        waBtn.classList.remove('disabled');
+      }
+
+      document.getElementById('ovl-order-summary').classList.add('active');
+    }
+
+    function closeOrderSummary() {
+      document.getElementById('ovl-order-summary').classList.remove('active');
+    }
+
+    function clearCart() {
+      // Reset quantities in all ordering-mode menus
+      document.querySelectorAll('.ordering-mode .qty-val').forEach(el => {
+        el.textContent = '0';
+        el.classList.remove('has-qty');
+      });
+      document.querySelectorAll('.ordering-mode .mitem').forEach(el => el.classList.remove('has-items'));
+      updateFloatingCart();
+      closeOrderSummary();
+    }
+
+    /* ── WhatsApp Order ── */
+    function sendWhatsAppOrder() {
+      const items = getCartItems();
+      if (items.length === 0) return;
+
+      const totalPrice = items.reduce((s, i) => s + i.subtotal, 0);
+      const divider = '———————————';
+      let msg = '🛒 *New Order - Lokavana*\n';
+      msg += divider + '\n';
+      items.forEach(i => {
+        msg += `• ${i.name} x${i.qty} — ₹${i.subtotal}\n`;
+      });
+      msg += divider + '\n';
+      msg += `*Total: ₹${totalPrice}*`;
+
+      const encoded = encodeURIComponent(msg);
+      const url = `https://api.whatsapp.com/send/?phone=${CONFIG.whatsappNumber}&text=${encoded}`;
+      window.open(url, '_blank', 'noopener');
+    }
+
+    (function init() {
+      document.title = CONFIG.resortName;
+      document.getElementById('hfoot').textContent = '© ' + CONFIG.resortName + ' · All rights reserved';
+      document.getElementById('wname').textContent = CONFIG.wifiName;
+      document.getElementById('wpass').textContent = CONFIG.wifiPassword;
+      document.getElementById('wa-link').href = 'https://wa.me/' + CONFIG.whatsappNumber;
+      document.getElementById('call-link').href = 'tel:' + CONFIG.phoneNumber;
+      buildGrid();
+      buildMenu('main-menu-body', CONFIG.mainMenu);
+      buildMenu('dinner-menu-body', CONFIG.dinnerMenu);
+      buildSpots();
+      buildActs();
+    })();
+  </script>
 </body>
+
 </html>
