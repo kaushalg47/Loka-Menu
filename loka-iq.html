@@ -99,8 +99,14 @@
     .qty-btn.minus { border-radius:8px 0 0 8px; border-right:none; }
     .qty-btn.plus { border-radius:0 8px 8px 0; border-left:none; background:var(--green-deep); color:var(--white); border-color:var(--green-deep); }
     .qty-btn.plus:hover { background:var(--green-mid); }
+    .qty-btn:disabled { opacity:.35; cursor:not-allowed; }
+    .qty-btn.plus:disabled:hover { background:var(--green-deep); }
     .qty-val { width:30px; height:30px; display:flex; align-items:center; justify-content:center; font-size:.82rem; font-weight:700; color:var(--text-dark); background:var(--cream); border-top:1.5px solid var(--beige); border-bottom:1.5px solid var(--beige); font-family:var(--font-b); user-select:none; }
     .qty-val.has-qty { color:var(--green-deep); background:var(--green-pale); border-color:var(--green-mid); font-weight:800; }
+
+    /* Dinner closed state */
+    .dinner-closed-notice { font-size:.78rem; line-height:1.7; color:var(--text-mid); background:var(--cream-dark); border-left:3px solid var(--gold); border-radius:0 10px 10px 0; padding:14px 16px; margin-bottom:18px; }
+    .dinner-limit-notice { font-size:.7rem; color:var(--text-light); text-align:center; margin-top:10px; letter-spacing:.04em; }
 
     /* Tourist Spots */
     .spot { background:var(--white); border:1px solid var(--beige); border-radius:14px; padding:15px 16px; margin-bottom:10px; display:flex; align-items:center; gap:14px; box-shadow:0 2px 12px rgba(42,67,50,.05); }
@@ -239,8 +245,8 @@
 <script>
 const CONFIG = {
   resortName: "Lokavana",
-  phoneNumber: "+917899616501",
-  whatsappNumber: "917899616501",
+  phoneNumber: "+919986339995",
+  whatsappNumber: "919986339995",
   wifiName: "Lokavana_Guest",
   wifiPassword: "forest2025",
   instagramUrl: "https://www.instagram.com/lokavana.farmstay?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
@@ -263,37 +269,11 @@ const CONFIG = {
     { name: "Movie Screening", type: "movie" },
   ],
   mainMenu: [
-    { section: "Snacks & Starters", items: [
-      { name: "Onion Pakoda", price: "₹120" },
-      { name: "Aloo Pakoda", price: "₹120" },
-      { name: "Capsicum Pakoda", price: "₹130" },
-      { name: "French Fries", price: "₹140" },
-      { name: "Fried Chicken Momos (5 pcs)", price: "₹140" },
-      { name: "Fried Veg Momos (5 pcs)", price: "₹120" },
-      { name: "Batata Vada (2 pcs)", price: "₹80" },
-      { name: "Chicken Lollipop (5 pcs)", price: "₹200" },
-    ]},
-    { section: "Snacks & Quick Bites", items: [
-      { name: "Maggie", price: "₹90" },
-      { name: "Cheese Maggie", price: "₹120" },
-    ]},
-    { section: "Egg Items", items: [
-      { name: "Boiled Egg (2 pcs)", price: "₹60" },
-      { name: "Omelette", price: "₹90" },
-      { name: "Cheese Omelette", price: "₹120" },
-      { name: "Egg Burji", price: "₹120" },
-    ]},
-    { section: "Juices", items: [
-      { name: "Lemon Juice", price: "₹60" },
-      { name: "Mint Lime Juice", price: "₹80" },
-      { name: "Buttermilk", price: "₹40" },
-      { name: "Orange Juice", price: "₹100" },
-      { name: "Moosambi Juice", price: "₹100" },
-    ]},
-    { section: "Hot Beverages", items: [
+    { section: "Beverages", items: [
       { name: "Tea", price: "₹40" },
       { name: "Coffee", price: "₹50" },
       { name: "Hot Milk", price: "₹50" },
+      { name: "Badam Milk", price: "₹80" },
     ]},
   ],
   dinnerMenu: [
@@ -341,6 +321,7 @@ const CONFIG = {
     ]},
   ],
 };
+const DINNER_ITEM_LIMIT = 5;
 </script>
 
 <!-- HOME -->
@@ -353,14 +334,14 @@ const CONFIG = {
   <div class="home-footer">© Lokavana · All rights reserved</div>
 </div>
 
-<!-- ALL DAY MENU -->
+<!-- BEVERAGE MENU -->
 <div id="menu" class="screen inner">
   <div class="ihead">
     <button class="bkbtn" onclick="showScreen('home')">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     </button>
     <div>
-      <div class="ihead-title">All Day Menu</div>
+      <div class="ihead-title">Beverage Menu</div>
       <div class="ihead-sub">Available all day</div>
     </div>
   </div>
@@ -375,10 +356,14 @@ const CONFIG = {
     </button>
     <div>
       <div class="ihead-title">Dinner Menu</div>
-      <div class="ihead-sub">Evening · 7 PM – 10:30 PM</div>
+      <div class="ihead-sub">Evening · Orders till 7 PM</div>
     </div>
   </div>
-  <div class="mbody" id="dinner-menu-body"></div>
+  <div class="mbody" id="dinner-menu-body">
+    <div class="rules-intro">Dinner orders are taken only until <strong>7:00 PM</strong>. You can choose up to <strong>5 different items</strong>, in any quantity.</div>
+    <div id="dinner-closed-notice" class="dinner-closed-notice" style="display:none">Dinner orders are taken until 7:00 PM. Please contact us directly via WhatsApp or call for any late requests.</div>
+    <div id="dinner-menu-content"></div>
+  </div>
 </div>
 
 <!-- EXPLORE -->
@@ -593,7 +578,7 @@ const CONFIG = {
 
 <script>
 const I = {
-  menu:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
+  menu:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h2a3 3 0 0 1 0 6h-2"/><path d="M3 8h14v7a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`,
   dinner:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>`,
   wifi:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>`,
   explore:`<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>`,
@@ -620,23 +605,25 @@ function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   window.scrollTo(0,0);
+  if(id==='dinner') renderDinnerScreen();
 }
 function openOvl(id){ document.getElementById(id).classList.add('active'); }
 function closeOvl(id){ document.getElementById(id).classList.remove('active'); }
 function ovlClick(e,id){ if(e.target.id===id) closeOvl(id); }
 
-function isDinnerOpen(){
+/* Dinner order window: until 7:00 PM */
+function isDinnerOrderOpen(){
   const now=new Date(), mins=now.getHours()*60+now.getMinutes();
-  return mins>=18*60 && mins<=(20*60+30);
+  return mins < (19*60); // before 7:00 PM
 }
 
 function buildGrid(){
   const g=document.getElementById('home-grid');
   const g2=document.getElementById('home-grid-row2');
-  const open=isDinnerOpen();
+  const open=isDinnerOrderOpen();
   const dinnerBadge=open
-    ? `<span class="dinner-time-badge open" style="color:rgba(120,220,140,.9)">🟢 Orders open now</span>`
-    : `<span class="dinner-time-badge">Orders: 6–8:30 PM</span>`;
+    ? `<span class="dinner-time-badge open" style="color:rgba(120,220,140,.9)">🟢 Orders open until 7 PM</span>`
+    : `<span class="dinner-time-badge">Orders closed for today</span>`;
 
   g.innerHTML=`
   <button class="gbtn-contact" onclick="openOvl('ovl-contact')">
@@ -646,14 +633,8 @@ function buildGrid(){
       <div class="glabel-sub">WhatsApp · Call</div>
     </div>
   </button>
-  <button class="gbtn" onclick="showScreen('menu')"><div class="gicon">${I.menu}</div><span class="glabel">All Day Menu</span></button>
+  <button class="gbtn" onclick="showScreen('menu')"><div class="gicon">${I.menu}</div><span class="glabel">Beverage Menu</span></button>
   <button class="gbtn" onclick="showScreen('dinner')"><div class="gicon">${I.dinner}</div><span class="glabel">Dinner Menu</span>${dinnerBadge}</button>
-  <button class="gbtn" onclick="openOvl('ovl-wifi')"><div class="gicon">${I.wifi}</div><span class="glabel">WiFi</span></button>
-  <button class="gbtn" onclick="showScreen('explore')"><div class="gicon">${I.explore}</div><span class="glabel">Explore</span></button>
-  <button class="gbtn" onclick="showScreen('rules')"><div class="gicon">${I.rules}</div><span class="glabel">Rules</span></button>
-  <button class="gbtn" onclick="window.open(CONFIG.instagramUrl,'_blank','noopener')"><div class="gicon">${I.instagram}</div><span class="glabel">Instagram</span></button>`;
-
-  g2.innerHTML=`
   <button class="gbtn gbtn-water" onclick="openOvl('ovl-water')">
     <div class="gicon">${I.water}</div>
     <span class="glabel">Water Bottle</span>
@@ -663,7 +644,13 @@ function buildGrid(){
     <div class="gicon">${I.broom}</div>
     <span class="glabel">Room Cleaning</span>
     <span class="glabel-small">Housekeeping</span>
-  </button>`;
+  </button>
+  <button class="gbtn" onclick="openOvl('ovl-wifi')"><div class="gicon">${I.wifi}</div><span class="glabel">WiFi</span></button>
+  <button class="gbtn" onclick="showScreen('explore')"><div class="gicon">${I.explore}</div><span class="glabel">Explore</span></button>`;
+
+  g2.innerHTML=`
+  <button class="gbtn" onclick="showScreen('rules')"><div class="gicon">${I.rules}</div><span class="glabel">Rules</span></button>
+  <button class="gbtn" onclick="window.open(CONFIG.instagramUrl,'_blank','noopener')"><div class="gicon">${I.instagram}</div><span class="glabel">Instagram</span></button>`;
 }
 
 function buildMenu(id, sections){
@@ -679,6 +666,54 @@ function buildMenu(id, sections){
         <button class="qty-btn plus" onclick="changeQty(this,1)">+</button>
       </div>
     </div>`).join('')}`).join('');
+}
+
+function buildDinnerMenu(sections){
+  document.getElementById('dinner-menu-content').innerHTML=sections.map(s=>`
+  <div class="slabel">${s.section}</div>
+  ${s.items.map(it=>`
+    <div class="mitem" data-item-name="${it.name}" data-item-price="${it.price}" data-menu="dinner">
+      <div class="mitem-left"><div class="mitem-name">${it.name}</div>${it.desc?`<div class="mitem-desc">${it.desc}</div>`:''}</div>
+      <div class="mitem-price">${it.price}</div>
+      <div class="mitem-qty">
+        <button class="qty-btn minus" onclick="changeQty(this,-1)">−</button>
+        <span class="qty-val">0</span>
+        <button class="qty-btn plus" onclick="changeQty(this,1)">+</button>
+      </div>
+    </div>`).join('')}`).join('');
+}
+
+function renderDinnerScreen(){
+  const notice=document.getElementById('dinner-closed-notice');
+  const content=document.getElementById('dinner-menu-content');
+  if(!isDinnerOrderOpen()){
+    notice.style.display='block';
+    content.style.display='none';
+  } else {
+    notice.style.display='none';
+    content.style.display='block';
+    updateDinnerLimitUI();
+  }
+}
+
+function getDinnerSelectedItemCount(){
+  let count=0;
+  document.querySelectorAll('.mitem[data-menu="dinner"] .qty-val').forEach(el=>{ if(parseInt(el.textContent)>0) count++; });
+  return count;
+}
+
+function updateDinnerLimitUI(){
+  const count=getDinnerSelectedItemCount();
+  document.querySelectorAll('.mitem[data-menu="dinner"]').forEach(el=>{
+    const qtyEl=el.querySelector('.qty-val');
+    const plusBtn=el.querySelector('.qty-btn.plus');
+    const qty=parseInt(qtyEl.textContent);
+    if(count>=DINNER_ITEM_LIMIT && qty===0){
+      plusBtn.disabled=true;
+    } else {
+      plusBtn.disabled=false;
+    }
+  });
 }
 
 function buildSpots(){
@@ -698,11 +733,22 @@ function buildActs(){
 function changeQty(btnEl,delta){
   const qtyEl=btnEl.parentElement.querySelector('.qty-val');
   const mitemEl=btnEl.closest('.mitem');
+  const isDinner=mitemEl.getAttribute('data-menu')==='dinner';
+
+  if(isDinner && delta>0){
+    const qty=parseInt(qtyEl.textContent);
+    if(qty===0){
+      const count=getDinnerSelectedItemCount();
+      if(count>=DINNER_ITEM_LIMIT) return;
+    }
+  }
+
   let val=Math.max(0,Math.min(99,parseInt(qtyEl.textContent)+delta));
   qtyEl.textContent=val;
   qtyEl.classList.toggle('has-qty',val>0);
   mitemEl.classList.toggle('has-items',val>0);
   updateFloatingCart();
+  if(isDinner) updateDinnerLimitUI();
 }
 
 function getCartItems(){
@@ -761,6 +807,7 @@ function clearCart(){
   document.querySelectorAll('.mitem .qty-val').forEach(el=>{ el.textContent='0'; el.classList.remove('has-qty'); });
   document.querySelectorAll('.mitem').forEach(el=>el.classList.remove('has-items'));
   updateFloatingCart(); closeOrderSummary();
+  updateDinnerLimitUI();
 }
 
 function selectRoom(r){
@@ -828,7 +875,7 @@ function sendCleanRequest(){
   document.getElementById('call-link').href='tel:'+CONFIG.phoneNumber;
   buildGrid();
   buildMenu('main-menu-body',CONFIG.mainMenu);
-  buildMenu('dinner-menu-body',CONFIG.dinnerMenu);
+  buildDinnerMenu(CONFIG.dinnerMenu);
   buildSpots();
   buildActs();
 })();
