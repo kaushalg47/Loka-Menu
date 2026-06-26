@@ -497,11 +497,16 @@
 
         .mitem {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
+            align-items: center;
             padding: 13px 0;
             border-bottom: 1px solid rgba(42, 67, 50, .07);
             gap: 16px;
+        }
+
+        /* Name container always grows to push price+qty to fixed right position */
+        .mitem>div:first-child,
+        .mitem-left {
+            flex: 1;
         }
 
         .mitem:last-child {
@@ -530,6 +535,9 @@
             white-space: nowrap;
             padding-top: 2px;
             font-weight: 500;
+            min-width: 54px;
+            text-align: right;
+            flex-shrink: 0;
         }
 
         /* Tourist Spots */
@@ -923,122 +931,13 @@
         /* ══════════════════════════════════════════
        ORDER SYSTEM
     ══════════════════════════════════════════ */
-        .order-btn {
-            margin-left: auto;
-            background: var(--gold);
-            color: var(--white);
-            border: none;
-            border-radius: 10px;
-            padding: 9px 18px;
-            font-family: var(--font-b);
-            font-size: .7rem;
-            font-weight: 700;
-            letter-spacing: .15em;
-            text-transform: uppercase;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            transition: all .25s cubic-bezier(.22, 1, .36, 1);
-            box-shadow: 0 4px 14px rgba(184, 148, 90, .35);
-            display: flex;
-            align-items: center;
-            gap: 7px;
-            flex-shrink: 0;
-        }
-
-        .order-btn:hover {
-            background: var(--gold-lt);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(184, 148, 90, .45);
-        }
-
-        .order-btn:active {
-            transform: translateY(0);
-        }
-
-        .order-btn.active {
-            background: rgba(255, 255, 255, .15);
-            color: var(--cream);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
-            border: 1.5px solid rgba(255, 255, 255, .25);
-        }
-
-        .order-btn.active:hover {
-            background: rgba(255, 255, 255, .22);
-        }
-
-        .order-btn svg {
-            flex-shrink: 0;
-        }
-
-        /* ── Ordering Mode Banner ── */
-        .order-banner {
-            width: 100%;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-lt) 100%);
-            color: var(--white);
-            text-align: center;
-            padding: 10px 20px;
-            font-family: var(--font-b);
-            font-size: .74rem;
-            font-weight: 600;
-            letter-spacing: .12em;
-            text-transform: uppercase;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            animation: bannerSlide .35s cubic-bezier(.22, 1, .36, 1);
-            box-shadow: 0 2px 12px rgba(184, 148, 90, .3);
-        }
-
-        .order-banner.visible {
-            display: flex;
-        }
-
-        @keyframes bannerSlide {
-            from {
-                opacity: 0;
-                transform: translateY(-100%);
-            }
-
-            to {
-                opacity: 1;
-                transform: none;
-            }
-        }
-
-        .order-banner .banner-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--white);
-            animation: dotPulse 1.4s ease-in-out infinite;
-        }
-
-        @keyframes dotPulse {
-
-            0%,
-            100% {
-                opacity: .5;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 1;
-                transform: scale(1.3);
-            }
-        }
-
         /* ── Quantity Controls ── */
         .mitem-qty {
-            display: none;
+            display: flex;
             align-items: center;
             gap: 0;
             flex-shrink: 0;
             margin-left: 10px;
-        }
-
-        .ordering-mode .mitem-qty {
-            display: flex;
         }
 
         .qty-btn {
@@ -1111,17 +1010,7 @@
             font-weight: 800;
         }
 
-        /* mitem in ordering mode */
-        .ordering-mode .mitem {
-            transition: background .2s;
-            border-radius: 10px;
-            padding: 13px 8px;
-            margin: 0 -8px;
-        }
 
-        .ordering-mode .mitem.has-items {
-            background: rgba(59, 94, 69, .06);
-        }
 
         /* ══════════════════════════════════════════
        FLOATING CART BAR
@@ -2128,7 +2017,7 @@
     <!-- MENU -->
     <div id="menu" class="screen inner">
         <div class="ihead">
-            <button class="bkbtn" onclick="exitOrderingMode('menu'); showScreen('home')">
+            <button class="bkbtn" onclick="showScreen('home')">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 12H5M12 5l-7 7 7 7" />
@@ -2138,19 +2027,6 @@
                 <div class="ihead-title">All Day Menu</div>
                 <div class="ihead-sub">Available all day</div>
             </div>
-            <button class="order-btn" id="order-btn-menu" onclick="toggleOrderingMode('menu')">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
-                </svg>
-                <span>Order</span>
-            </button>
-        </div>
-        <div class="order-banner" id="order-banner-menu">
-            <span class="banner-dot"></span>
-            Select items to order
         </div>
         <div class="mbody" id="main-menu-body"></div>
     </div>
@@ -2158,7 +2034,7 @@
     <!-- DINNER -->
     <div id="dinner" class="screen inner">
         <div class="ihead">
-            <button class="bkbtn" onclick="exitOrderingMode('dinner'); showScreen('home')">
+            <button class="bkbtn" onclick="showScreen('home')">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
                     stroke-linecap="round" stroke-linejoin="round">
                     <path d="M19 12H5M12 5l-7 7 7 7" />
@@ -2168,19 +2044,6 @@
                 <div class="ihead-title">Dinner Menu</div>
                 <div class="ihead-sub">Evening · Orders till 7 PM</div>
             </div>
-            <button class="order-btn" id="order-btn-dinner" onclick="toggleOrderingMode('dinner')">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
-                    <line x1="3" y1="6" x2="21" y2="6" />
-                    <path d="M16 10a4 4 0 0 1-8 0" />
-                </svg>
-                <span>Order</span>
-            </button>
-        </div>
-        <div class="order-banner" id="order-banner-dinner">
-            <span class="banner-dot"></span>
-            Select items to order
         </div>
         <div class="mbody" id="dinner-menu-body">
             <div class="rules-intro">Dinner orders are taken only until <strong>7:00 PM</strong>. You can choose up to
@@ -2492,77 +2355,27 @@
 
     <!-- FLOATING CART -->
     <div class="floating-cart" id="floating-cart">
-        <div class="cart-bar" onclick="openOrderSummary()">
+        <div class="cart-bar" style="background: #25d366; box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);"
+            onclick="sendWhatsAppOrder()">
             <div class="cart-left">
-                <div class="cart-badge" id="cart-badge">0</div>
-                <div>
-                    <div class="cart-label">View Cart</div>
-                    <div class="cart-label-sub">Tap to review order</div>
+                <div class="cart-badge" id="cart-badge" style="background: white; color: #25d366;">0</div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color: white;">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+                    </svg>
+                    <div>
+                        <div class="cart-label" style="color: white; font-size: 0.8rem;">Order via WhatsApp</div>
+                        <div class="cart-label-sub" style="color: rgba(255,255,255,0.8); font-size: 0.6rem;">Tap to send
+                            order</div>
+                    </div>
                 </div>
             </div>
-            <div class="cart-total" id="cart-total">₹0</div>
+            <div class="cart-total" id="cart-total" style="color: white;">₹0</div>
         </div>
     </div>
 
-    <!-- ORDER SUMMARY MODAL -->
-    <div class="order-summary-ovl" id="ovl-order-summary" onclick="if(event.target===this)closeOrderSummary()">
-        <div class="order-panel">
-            <div class="panel-handle"></div>
-            <div class="panel-header">
-                <div class="panel-title">Order Summary</div>
-                <button class="panel-close" onclick="closeOrderSummary()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                        stroke-linecap="round">
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                </button>
-            </div>
-            <div class="room-selector" id="room-selector">
-                <div class="room-selector-label">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                        <polyline points="9 22 9 12 15 12 15 22" />
-                    </svg>
-                    Select Your Room
-                </div>
-                <div class="room-chips" id="room-chips">
-                    <button class="room-chip" data-room="1" onclick="selectRoom(1)">1</button>
-                    <button class="room-chip" data-room="2" onclick="selectRoom(2)">2</button>
-                    <button class="room-chip" data-room="3" onclick="selectRoom(3)">3</button>
-                    <button class="room-chip" data-room="4" onclick="selectRoom(4)">4</button>
-                    <button class="room-chip" data-room="5" onclick="selectRoom(5)">5</button>
-                </div>
-                <div class="room-error" id="room-error">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                        stroke-linecap="round">
-                        <circle cx="12" cy="12" r="10" />
-                        <line x1="12" y1="8" x2="12" y2="12" />
-                        <line x1="12" y1="16" x2="12.01" y2="16" />
-                    </svg>
-                    Please select a room to place your order
-                </div>
-            </div>
-            <div class="panel-items" id="panel-items"></div>
-            <div class="panel-footer">
-                <div class="panel-total-row">
-                    <span class="panel-total-label">Grand Total</span>
-                    <span class="panel-total-val" id="panel-total">₹0</span>
-                </div>
-                <div class="panel-actions">
-                    <button class="btn-clear-cart" onclick="clearCart()">Clear</button>
-                    <button class="btn-whatsapp-order" id="btn-wa-order" onclick="sendWhatsAppOrder()">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
-                        </svg>
-                        Order via WhatsApp
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <script>
         let guestPhone = null;
@@ -2746,19 +2559,23 @@
                 const isSpecials = s.section === "Specials (Pre-Order Only)";
                 return `
     <div class="slabel">${s.section}</div>
-    ${s.items.map(it => `
-      <div class="mitem" data-item-name="${it.name}" data-item-price="${it.price}" ${!isSpecials ? 'data-menu="dinner"' : ''}>
+    ${s.items.map(it => {
+                    const isPreOrder = it.price === '₹-';
+                    return `
+      <div class="mitem" data-item-name="${it.name}" data-item-price="${it.price}" ${(!isSpecials && !isPreOrder) ? 'data-menu="dinner"' : ''}>
         <div class="mitem-left">
           <div class="mitem-name">${it.name}</div>
-          ${isSpecials ? `<div class="mitem-desc" style="color:var(--gold);font-weight:600;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;">Pre-Order Only · Contact Reception</div>` : ''}
+          ${(isSpecials || isPreOrder) ? `<div class="mitem-desc" style="color:var(--gold);font-weight:600;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;">Pre-Order Only · Contact Reception</div>` : ''}
         </div>
-        ${!isSpecials ? `
+        ${(!isSpecials && !isPreOrder) ? `
+        <div class="mitem-price">${it.price}</div>
         <div class="mitem-qty">
           <button class="qty-btn minus" onclick="changeQty(this,-1)">−</button>
           <span class="qty-val">0</span>
           <button class="qty-btn plus" onclick="changeQty(this,1)">+</button>
         </div>` : ''}
-      </div>`).join('')}`;
+      </div>`;
+                }).join('')}`;
             }).join('');
         }
 
@@ -2781,43 +2598,6 @@
         }
 
         /* ── Ordering Mode Logic ── */
-        function toggleOrderingMode(menuId) {
-            const screenEl = document.getElementById(menuId);
-            const bodyId = menuId === 'menu' ? 'main-menu-body' : 'dinner-menu-body';
-            const bodyEl = document.getElementById(bodyId);
-            const banner = document.getElementById('order-banner-' + menuId);
-            const btn = document.getElementById('order-btn-' + menuId);
-            const isActive = bodyEl.classList.contains('ordering-mode');
-
-            if (isActive) {
-                exitOrderingMode(menuId);
-            } else {
-                bodyEl.classList.add('ordering-mode');
-                banner.classList.add('visible');
-                btn.classList.add('active');
-                btn.querySelector('span').textContent = 'Cancel';
-            }
-        }
-
-        function exitOrderingMode(menuId) {
-            const bodyId = menuId === 'menu' ? 'main-menu-body' : 'dinner-menu-body';
-            const bodyEl = document.getElementById(bodyId);
-            const banner = document.getElementById('order-banner-' + menuId);
-            const btn = document.getElementById('order-btn-' + menuId);
-
-            bodyEl.classList.remove('ordering-mode');
-            banner.classList.remove('visible');
-            btn.classList.remove('active');
-            btn.querySelector('span').textContent = 'Order';
-
-            // Reset all quantities
-            bodyEl.querySelectorAll('.qty-val').forEach(el => {
-                el.textContent = '0';
-                el.classList.remove('has-qty');
-            });
-            bodyEl.querySelectorAll('.mitem').forEach(el => el.classList.remove('has-items'));
-            updateFloatingCart();
-        }
 
         function changeQty(btnEl, delta) {
             const qtyEl = btnEl.parentElement.querySelector('.qty-val');
@@ -2845,13 +2625,16 @@
         /* ── Floating Cart ── */
         function getCartItems() {
             const items = [];
-            document.querySelectorAll('.ordering-mode .mitem').forEach(el => {
+            document.querySelectorAll('.mitem').forEach(el => {
                 const qtyEl = el.querySelector('.qty-val');
+                if (!qtyEl) return;
                 const qty = parseInt(qtyEl.textContent);
                 if (qty > 0) {
                     const name = el.getAttribute('data-item-name');
                     const priceStr = el.getAttribute('data-item-price');
+                    if (!name || !priceStr) return;
                     const price = parseInt(priceStr.replace(/[^0-9]/g, ''));
+                    if (isNaN(price)) return;
                     items.push({ name, qty, price, subtotal: qty * price });
                 }
             });
@@ -2871,86 +2654,20 @@
                 badgeEl.textContent = totalQty;
                 totalEl.textContent = '₹' + totalPrice;
                 // add bottom padding to active menu body
-                document.querySelectorAll('.mbody.ordering-mode').forEach(el => el.classList.add('has-cart'));
+                document.querySelectorAll('.mbody').forEach(el => el.classList.add('has-cart'));
             } else {
                 cartEl.classList.remove('visible');
                 document.querySelectorAll('.mbody').forEach(el => el.classList.remove('has-cart'));
             }
         }
-
-        /* ── Order Summary ── */
-        function openOrderSummary() {
-            const items = getCartItems();
-            const panelItems = document.getElementById('panel-items');
-            const panelTotal = document.getElementById('panel-total');
-            const waBtn = document.getElementById('btn-wa-order');
-
-            if (items.length === 0) {
-                panelItems.innerHTML = `
-          <div class="panel-empty">
-            <div class="panel-empty-icon">🛒</div>
-            <div class="panel-empty-text">Your cart is empty</div>
-          </div>`;
-                panelTotal.textContent = '₹0';
-                waBtn.classList.add('disabled');
-            } else {
-                const totalPrice = items.reduce((s, i) => s + i.subtotal, 0);
-                panelItems.innerHTML = items.map(i => `
-          <div class="summary-item">
-            <div class="summary-item-info">
-              <div class="summary-item-name">${i.name}</div>
-              <div class="summary-item-meta">₹${i.price} × ${i.qty}</div>
-            </div>
-            <div class="summary-item-subtotal">₹${i.subtotal}</div>
-          </div>`).join('');
-                panelTotal.textContent = '₹' + totalPrice;
-                // Enable button only if room is also selected
-                if (selectedRoom) {
-                    waBtn.classList.remove('disabled');
-                } else {
-                    waBtn.classList.add('disabled');
-                }
-            }
-
-            document.getElementById('ovl-order-summary').classList.add('active');
-        }
-
-        function closeOrderSummary() {
-            document.getElementById('ovl-order-summary').classList.remove('active');
-        }
-
         function clearCart() {
-            // Reset quantities in all ordering-mode menus
-            document.querySelectorAll('.ordering-mode .qty-val').forEach(el => {
+            // Reset quantities in all menus
+            document.querySelectorAll('.qty-val').forEach(el => {
                 el.textContent = '0';
                 el.classList.remove('has-qty');
             });
-            document.querySelectorAll('.ordering-mode .mitem').forEach(el => el.classList.remove('has-items'));
+            document.querySelectorAll('.mitem').forEach(el => el.classList.remove('has-items'));
             updateFloatingCart();
-            closeOrderSummary();
-        }
-
-        /* ── Room Selector ── */
-        let selectedRoom = null;
-
-        function selectRoom(roomNum) {
-            selectedRoom = roomNum;
-            document.querySelectorAll('.room-chip').forEach(chip => {
-                chip.classList.toggle('selected', parseInt(chip.getAttribute('data-room')) === roomNum);
-            });
-            // Hide error and update button state
-            document.getElementById('room-error').classList.remove('visible');
-            updateWhatsAppButton();
-        }
-
-        function updateWhatsAppButton() {
-            const items = getCartItems();
-            const waBtn = document.getElementById('btn-wa-order');
-            if (items.length > 0 && selectedRoom) {
-                waBtn.classList.remove('disabled');
-            } else {
-                waBtn.classList.add('disabled');
-            }
         }
 
         /* ── WhatsApp Order ── */
@@ -2958,15 +2675,7 @@
             const items = getCartItems();
             if (items.length === 0) return;
 
-            if (!selectedRoom) {
-                const errorEl = document.getElementById('room-error');
-                errorEl.classList.remove('visible');
-                void errorEl.offsetWidth;
-                errorEl.classList.add('visible');
-                document.getElementById('room-selector').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                return;
-            }
-
+            const roomToUse = guestRoomNumber || "Not Specified";
             const totalPrice = items.reduce((s, i) => s + i.subtotal, 0);
 
             // Save order to database
@@ -2976,7 +2685,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         phone: guestPhone,
-                        roomNumber: guestRoomNumber,
+                        roomNumber: roomToUse,
                         guestName: guestName,
                         items: items.map(i => ({ name: i.name, qty: i.qty, price: i.price })),
                         totalAmount: totalPrice
@@ -2986,9 +2695,10 @@
                 console.error('Failed to save order:', err);
             }
 
-            // Send WhatsApp message as before
+            // Send WhatsApp message
             let msg = '*New Order - Lokavana*\n';
-            msg += `Room: ${selectedRoom}\n`;
+            msg += `Room: ${roomToUse}\n`;
+            if (guestName) msg += `Name: ${guestName}\n`;
             msg += '-------------------\n';
             items.forEach(i => { msg += `${i.name} x${i.qty} - Rs.${i.subtotal}\n`; });
             msg += '-------------------\n';
@@ -2997,6 +2707,8 @@
             const encoded = encodeURIComponent(msg);
             const url = `https://api.whatsapp.com/send/?phone=${CONFIG.whatsappNumber}&text=${encoded}`;
             window.open(url, '_blank', 'noopener');
+
+            clearCart();
         }
 
         let waterTemp = null, waterRoom = null, waterQty = 1;
@@ -3060,6 +2772,8 @@
             buildDinnerMenu(CONFIG.dinnerMenu);
             buildSpots();
             buildActs();
+            document.getElementById('main-menu-body').classList.add('ordering-mode');
+            document.getElementById('dinner-menu-content').classList.add('ordering-mode');
         })();
     </script>
 </body>
