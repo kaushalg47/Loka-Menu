@@ -2742,22 +2742,23 @@
         }
 
         function buildDinnerMenu(sections) {
-            document.getElementById('dinner-menu-content').innerHTML = sections.map((s, idx) => {
-                const displayItems = s.items.map(it => {
-                    const displayPrice = (it.price && it.price !== '₹-') ? it.price : '';
-                    return `
-    <div class="mitem" data-item-name="${it.name}" data-item-price="${it.price}" data-menu="dinner">
-      <div class="mitem-left"><div class="mitem-name">${it.name}</div></div>
-      <div class="mitem-price">${displayPrice}</div>
-      <div class="mitem-qty">
-        <button class="qty-btn minus" onclick="changeQty(this,-1)">−</button>
-        <span class="qty-val">0</span>
-        <button class="qty-btn plus" onclick="changeQty(this,1)">+</button>
-      </div>
-    </div>`;
-                }).join('');
-                const note = idx === 0 ? `<div class="preorder-note">Note: Pre-orders should be ordered for more than 5 plates and should be informed 1 day prior.</div>` : '';
-                return `<div class="slabel">${s.section}</div>${note}${displayItems}`;
+            document.getElementById('dinner-menu-content').innerHTML = sections.map(s => {
+                const isSpecials = s.section === "Specials (Pre-Order Only)";
+                return `
+    <div class="slabel">${s.section}</div>
+    ${s.items.map(it => `
+      <div class="mitem" data-item-name="${it.name}" data-item-price="${it.price}" ${!isSpecials ? 'data-menu="dinner"' : ''}>
+        <div class="mitem-left">
+          <div class="mitem-name">${it.name}</div>
+          ${isSpecials ? `<div class="mitem-desc" style="color:var(--gold);font-weight:600;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;">Pre-Order Only · Contact Reception</div>` : ''}
+        </div>
+        ${!isSpecials ? `
+        <div class="mitem-qty">
+          <button class="qty-btn minus" onclick="changeQty(this,-1)">−</button>
+          <span class="qty-val">0</span>
+          <button class="qty-btn plus" onclick="changeQty(this,1)">+</button>
+        </div>` : ''}
+      </div>`).join('')}`;
             }).join('');
         }
 
