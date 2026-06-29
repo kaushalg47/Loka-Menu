@@ -1860,6 +1860,8 @@
                         { name: "Coffee", price: "₹50" },
                         { name: "Hot Milk", price: "₹50" },
                         { name: "Badam Milk", price: "₹80" },
+                        { name: "Maggie", price: "₹100" },
+                        { name: "Cheese Maggie", price: "₹150" },
                     ]
                 },
             ],
@@ -2045,14 +2047,11 @@
             </button>
             <div>
                 <div class="ihead-title">Dinner Menu</div>
-                <div class="ihead-sub">Evening · Orders till 7 PM</div>
+                <div class="ihead-sub">Evening Menu</div>
             </div>
         </div>
         <div class="mbody" id="dinner-menu-body">
-            <div class="rules-intro">Dinner orders are taken only until <strong>7:00 PM</strong>.
-            </div>
-            <div id="dinner-closed-notice" class="dinner-closed-notice" style="display:none">Dinner orders are taken
-                until 7:00 PM. Please contact us directly via WhatsApp or call for any late requests.</div>
+            <div id="dinner-closed-notice" class="dinner-closed-notice" style="display:none"></div>
             <div id="dinner-menu-content"></div>
         </div>
     </div>
@@ -2482,17 +2481,14 @@
         }
 
         function isDinnerOrderOpen() {
-            const now = new Date(), mins = now.getHours() * 60 + now.getMinutes();
-            return mins < (19 * 60);
+            return true;
         }
 
         function buildGrid() {
             const g = document.getElementById('home-grid');
             const g2 = document.getElementById('home-grid-row2');
             const open = isDinnerOrderOpen();
-            const dinnerBadge = open
-                ? `<span class="dinner-time-badge open">🟢 Orders open until 7 PM</span>`
-                : `<span class="dinner-time-badge">Orders closed for today</span>`;
+            const dinnerBadge = `<span class="dinner-time-badge open">🟢 Orders open</span>`;
 
             g.innerHTML = `
             <button class="gbtn-contact" onclick="openOvl('ovl-contact')">
